@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PhysicalRecon CHETAM</title>
+  <style>
+    :root {
+      --bg: #020617;
+      --surface: #0f172a;
+      --surface-soft: #18233d;
+      --surface-alt: #111c34;
+      --line: rgba(148, 163, 184, 0.18);
+      --text: #ffffff;
+      --muted: #94a3b8;
+      --brand: #2fd4dc;
+      --button: #2563eb;
+    }
+
+    .pr-chetam,
+    .pr-chetam * {
+      box-sizing: border-box;
+      font-family: Arial, sans-serif !important;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+    }
+
+    .pr-chetam {
+      width: 100%;
+      background: var(--bg);
+      color: var(--text);
+      padding-bottom: 96px;
+    }
+
+    .pr-chetam a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .pr-chetam .content-inner {
+      width: 100%;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding-left: 28px;
+      padding-right: 28px;
+    }
+
+    .pr-chetam .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 24px 0 18px;
+      background: var(--bg);
+    }
+
+    .pr-chetam .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(47, 212, 220, 0.06) 0%, transparent 65%);
+      pointer-events: none;
+    }
+
+    .pr-chetam .hero-layout {
+      position: relative;
+      z-index: 1;
+      display: block;
+    }
+
+    .hero-home {
+      position: absolute;
+      top: 0;
+      right: 0;
+      z-index: 2;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 46px;
+      height: 46px;
+      padding: 0;
+      border: 1px solid rgba(148, 163, 184, 0.18);
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.78);
+      color: #f8fafc !important;
+      backdrop-filter: blur(8px);
+      transition: background-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .hero-home:hover {
+      background: rgba(37, 99, 235, 0.88);
+      transform: translateY(-1px);
+    }
+
+    .hero-home svg {
+      width: 20px;
+      height: 20px;
+      stroke: currentColor;
+    }
+
+    .pr-chetam .hero-intro {
+      max-width: none;
+      padding-left: 24px;
+      border-left: 4px solid rgba(47, 212, 220, 0.78);
+    }
+
+    .pr-chetam .hero-kicker {
+      display: inline-flex;
+      align-items: center;
+      margin-bottom: 16px;
+      color: #7dd3fc;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .pr-chetam .hero-title-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .pr-chetam .hero-title-badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 6px 12px;
+      border: 1px solid rgba(148, 163, 184, 0.2);
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.48);
+      color: #e2e8f0;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .pr-chetam .hero h1 {
+      margin: 0;
+      font-size: 48px;
+      line-height: 1.12;
+      letter-spacing: -0.04em;
+      font-weight: 800;
+    }
+
+    .pr-chetam .hero p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1.8;
+      white-space: normal;
+    }
+
+    .pr-chetam .section {
+      padding: 68px 0 0;
+    }
+
+    .pr-chetam .section-heading {
+      margin-bottom: 30px;
+    }
+
+    .pr-chetam .section-heading h2 {
+      margin: 0 0 12px;
+      font-size: 38px;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+    }
+
+    .pr-chetam .section-heading p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.75;
+    }
+
+    .pr-chetam .visual-image {
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+      min-height: 0;
+      aspect-ratio: 1275 / 761;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: #081121 url("https://cdn.imweb.me/thumbnail/20260507/d01ad64248eea.png") center / contain no-repeat;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    }
+
+    .pr-chetam .visual-image::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(2, 6, 23, 0.02) 0%, rgba(2, 6, 23, 0.46) 100%);
+      pointer-events: none;
+    }
+
+    .pr-chetam .overview-card,
+    .pr-chetam .feature-card {
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, var(--surface) 0%, var(--surface-alt) 100%);
+    }
+
+    .pr-chetam .overview-card {
+      position: relative;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 22px;
+      align-items: stretch;
+      padding: 24px;
+      border-radius: 22px;
+    }
+
+    .pr-chetam .overview-card.process-card {
+      padding: 14px;
+      gap: 0;
+      border-radius: 24px;
+    }
+
+    .pr-chetam .overview-card.process-card .visual-image {
+      aspect-ratio: auto;
+      height: clamp(240px, 28vw, 340px);
+      min-height: 0;
+      border: 1px solid rgba(148, 163, 184, 0.12);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: none;
+    }
+
+    .pr-chetam .overview-copy {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .pr-chetam .overview-kicker,
+    .pr-chetam .card-kicker {
+      display: inline-flex;
+      align-items: center;
+      width: fit-content;
+      padding: 6px 12px;
+      margin-bottom: 14px;
+      border-radius: 999px;
+      background: rgba(47, 212, 220, 0.12);
+      color: var(--brand);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .pr-chetam .overview-card h3,
+    .pr-chetam .feature-card h3 {
+      margin: 0;
+      color: #f8fafc;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+    }
+
+    .pr-chetam .overview-card h3 {
+      margin-bottom: 14px;
+      font-size: 30px;
+      line-height: 1.35;
+    }
+
+    .pr-chetam .overview-card p,
+    .pr-chetam .feature-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.8;
+    }
+
+    .pr-chetam .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .pr-chetam .feature-card {
+      padding: 22px;
+      border-radius: 18px;
+    }
+
+    .pr-chetam .feature-card h3 {
+      margin-bottom: 10px;
+      font-size: 22px;
+    }
+
+    .pr-chetam .service-heading {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .pr-chetam .service-heading>div {
+      min-width: 0;
+    }
+
+    .pr-chetam .service-heading p {
+      max-width: none;
+      white-space: nowrap;
+    }
+
+    .pr-chetam .demo-link-button {
+      flex: 0 0 auto;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 46px;
+      padding: 0 18px;
+      border: 1px solid rgba(47, 212, 220, 0.38);
+      border-radius: 999px;
+      background: linear-gradient(135deg, rgba(47, 212, 220, 0.18), rgba(37, 99, 235, 0.28));
+      color: #ffffff;
+      font-size: 14px;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+      box-shadow: 0 18px 44px rgba(37, 99, 235, 0.2);
+    }
+
+    .pr-chetam .demo-service-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .pr-chetam .demo-service-card {
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      background: linear-gradient(180deg, var(--surface) 0%, var(--surface-alt) 100%);
+    }
+
+    .pr-chetam .demo-service-visual {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      aspect-ratio: 2.62 / 1;
+      padding: 14px;
+      background: #ffffff;
+      border-bottom: 1px solid rgba(148, 163, 184, 0.14);
+    }
+
+    .pr-chetam .demo-service-image {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .pr-chetam .demo-service-body {
+      padding: 20px;
+    }
+
+    .pr-chetam .demo-service-body h3 {
+      margin: 0 0 10px;
+      color: #f8fafc;
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+    }
+
+    .pr-chetam .demo-service-body p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.75;
+    }
+
+    .pr-chetam .process-tool-card {
+      grid-column: 1 / -1;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      background: linear-gradient(180deg, var(--surface) 0%, var(--surface-soft) 100%);
+      padding: 12px;
+    }
+
+    .pr-chetam .process-tool-head {
+      padding: 10px 10px 8px;
+    }
+
+    .pr-chetam .process-tool-tag {
+      display: inline-flex;
+      align-items: center;
+      padding: 6px 12px;
+      margin-bottom: 14px;
+      border-radius: 999px;
+      background: rgba(47, 212, 220, 0.12);
+      color: var(--brand);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .pr-chetam .process-tool-card h3 {
+      margin: 0 0 8px;
+      color: #f8fafc;
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+    }
+
+    .pr-chetam .process-tool-card p {
+      margin: 14px 0 0;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.75;
+    }
+
+    .pr-chetam .process-tool-image {
+      position: relative;
+      overflow: hidden;
+      width: calc(100% - 20px);
+      margin: 0 10px 10px;
+      height: clamp(224px, 24vw, 288px);
+      border-radius: 16px;
+      border: 1px solid rgba(148, 163, 184, 0.14);
+      background: #ffffff url("https://cdn.imweb.me/thumbnail/20260507/d01ad64248eea.png") center / 103% auto no-repeat;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    }
+
+    @media (max-width: 1100px) {
+
+      .pr-chetam .overview-card,
+      .pr-chetam .feature-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .pr-chetam .overview-copy {
+        justify-content: flex-start;
+      }
+
+    }
+
+    @media (max-width: 900px) {
+      .pr-chetam .demo-service-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .pr-chetam .service-heading {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .pr-chetam .service-heading p {
+        white-space: normal;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .hero-home {
+        position: static;
+        margin-bottom: 18px;
+      }
+
+      .pr-chetam .content-inner {
+        padding-left: 18px;
+        padding-right: 18px;
+      }
+
+      .pr-chetam .hero {
+        padding-top: 34px;
+      }
+
+      .pr-chetam .hero h1 {
+        font-size: 38px;
+      }
+
+    }
+  </style>
+</head>
+
+<body>
+  <div class="pr-chetam">
+    <section class="hero">
+      <div class="content-inner">
+        <div class="hero-layout">
+          <a class="hero-home" href="/" aria-label="홈으로">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M3 10.5 12 3l9 7.5"></path>
+              <path d="M5.5 9.5V21h13V9.5"></path>
+              <path d="M10 21v-6h4v6"></path>
+            </svg>
+          </a>
+          <div class="hero-intro">
+            <div class="hero-kicker">Platform Development</div>
+            <div class="hero-title-row">
+              <h1>CHETAM</h1>
+              <span class="hero-title-badge">Platform Service</span>
+            </div>
+            <p>CHETAM은 PTI(Physical Threat Intelligence)를 기반으로 물리적 공간의 위협 정보를 수집·분석하고, 사용자에게 실시간 안전 정보를 제공하는 모바일 App 환경의 지능형 플랫폼입니다.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="content-inner">
+        <div class="section-heading service-heading">
+          <div>
+            <h2>서비스 소개</h2>
+            <p>CHETAM 모바일 App에서 사용자가 직접 위협 정보를 제보하고, 제보데이터 바탕으로 위치기반 SOS 등의 부가서비스를 제공합니다.</p>
+          </div>
+          <a class="demo-link-button" href="https://www.youtube.com/shorts/g10xRsnv34Q" target="_blank" rel="noopener" aria-label="CHETAM 시연 영상 새 창에서 보기">시연 영상 바로보기</a>
+        </div>
+        <div class="demo-service-grid">
+          <article class="demo-service-card">
+            <div class="demo-service-visual">
+              <img class="demo-service-image" src="https://cdn.imweb.me/thumbnail/20260428/a5d8a4be41067.png" alt="CHETAM 주요 서비스 화면">
+            </div>
+            <div class="demo-service-body">
+              <div class="card-kicker">Main Service</div>
+              <h3>위협정보 제보</h3>
+              <p>사용자가 모바일 App에서 주변 위협 상황을 직접 제보하는 기능입니다. 위치 기반으로 위협 정보를 등록하고, 텍스트와 이미지 등 현장 정보를 함께 전달할 수 있습니다.</p>
+            </div>
+          </article>
+          <article class="demo-service-card">
+            <div class="demo-service-visual">
+              <img class="demo-service-image" src="https://cdn.imweb.me/thumbnail/20260428/0efaf08c1e1dd.png" alt="CHETAM 멤버십 서비스 화면">
+            </div>
+            <div class="demo-service-body">
+              <div class="card-kicker">Membership Service</div>
+              <h3>SOS 위치 공유</h3>
+              <p>친구로 등록된 멤버 사이에서 SOS 요청을 보내면, 요청자의 위치가 보호그룹에 표출되는 기능입니다. 위험 상황에서 빠르게 위치를 공유하고 도움을 요청할 수 있습니다.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="content-inner">
+        <div class="section-heading">
+          <h2>플랫폼 구성</h2>
+          <p>모바일 App 환경에서 위협 정보를 수집하고 분석한 뒤, 사용자에게 경보와 행동 정보를 제공하는 구조로 구성됩니다.</p>
+        </div>
+        <div class="feature-grid">
+          <article class="feature-card">
+            <div class="card-kicker">Module 01</div>
+            <h3>위협정보 수집</h3>
+            <p>OSINT, HUMINT, SOCMINT와 사용자 위치 기반 제보를 결합해 주변 위협 데이터를 수집합니다.</p>
+          </article>
+          <article class="feature-card">
+            <div class="card-kicker">Module 02</div>
+            <h3>다층 AI 분석</h3>
+            <p>범죄, 사고, 재해 이력과 실시간 데이터를 계층별로 분석해 위협 위치와 심각도를 도출합니다.</p>
+          </article>
+          <article class="feature-card">
+            <div class="card-kicker">Module 03</div>
+            <h3>모바일 경보 표출</h3>
+            <p>지도 기반 위협 경보, 알림 팝업, 보호자 위치 공유, 주변 사용자 도움요청 기능을 제공합니다.</p>
+          </article>
+          <article class="process-tool-card">
+            <div class="process-tool-head">
+              <div class="process-tool-tag">Process</div>
+              <h3>CHETAM 프로세스</h3>
+            </div>
+            <div class="process-tool-image" role="img" aria-label="CHETAM 프로세스 이미지"></div>
+          </article>
+        </div>
+      </div>
+    </section>
+  </div>
+</body>
+
+</html>

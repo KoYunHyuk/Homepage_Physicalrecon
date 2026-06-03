@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PhysicalRecon Research & Development</title>
+  <style>
+    :root {
+      --bg: #020617;
+      --surface: #0f172a;
+      --surface-soft: #18233d;
+      --surface-alt: #111c34;
+      --line: rgba(148, 163, 184, 0.18);
+      --text: #ffffff;
+      --muted: #94a3b8;
+      --brand: #2fd4dc;
+      --button: #2563eb;
+    }
+
+    .pr-research,
+    .pr-research * {
+      box-sizing: border-box;
+      font-family: Arial, sans-serif !important;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+    }
+
+    .pr-research {
+      width: 100%;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    .pr-research a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .pr-research .content-inner {
+      width: 100%;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding-left: 28px;
+      padding-right: 28px;
+    }
+
+    .pr-research .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 24px 0 18px;
+      background: var(--bg);
+    }
+
+    .pr-research .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(47, 212, 220, 0.06) 0%, transparent 65%);
+      pointer-events: none;
+    }
+
+    .pr-research .hero-layout {
+      position: relative;
+      z-index: 1;
+      display: block;
+    }
+
+    .hero-home {
+      position: absolute;
+      top: 0;
+      right: 0;
+      z-index: 2;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 46px;
+      height: 46px;
+      padding: 0;
+      border: 1px solid rgba(148, 163, 184, 0.18);
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.78);
+      color: #f8fafc !important;
+      backdrop-filter: blur(8px);
+      transition: background-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .hero-home:hover {
+      background: rgba(37, 99, 235, 0.88);
+      transform: translateY(-1px);
+    }
+
+    .hero-home svg {
+      width: 20px;
+      height: 20px;
+      stroke: currentColor;
+    }
+
+    .pr-research .hero-intro {
+      max-width: none;
+      padding-left: 24px;
+      border-left: 4px solid rgba(47, 212, 220, 0.78);
+    }
+
+    .pr-research .hero-kicker {
+      display: inline-flex;
+      align-items: center;
+      margin-bottom: 16px;
+      color: #7dd3fc;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .pr-research .hero-title-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .pr-research .hero-title-badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 6px 12px;
+      border: 1px solid rgba(148, 163, 184, 0.2);
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.48);
+      color: #e2e8f0;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .pr-research .hero h1 {
+      margin: 0;
+      font-size: 48px;
+      line-height: 1.12;
+      letter-spacing: -0.04em;
+      font-weight: 800;
+    }
+
+    .pr-research .hero p {
+      margin: 0;
+      max-width: 100%;
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1.8;
+      overflow-wrap: break-word;
+      white-space: normal;
+    }
+
+    .pr-research .section {
+      padding: 68px 0 0;
+    }
+
+    .pr-research .section-heading {
+      margin-bottom: 30px;
+    }
+
+    .pr-research .section-heading h2 {
+      margin: 0 0 12px;
+      font-size: 38px;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+    }
+
+    .pr-research .section-heading p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.75;
+    }
+
+    .pr-research .project-meta h4,
+    .pr-research .project-point h4,
+    .pr-research .highlight-box strong {
+      margin: 0;
+      color: #f8fafc;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+    }
+
+    .pr-research input[name="project-status"],
+    .pr-research input[name$="-project-slide"] {
+      position: absolute;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .pr-research .status-tabs {
+      display: flex !important;
+      flex-direction: row !important;
+      flex-wrap: wrap !important;
+      align-items: center !important;
+      justify-content: flex-start !important;
+      gap: 12px !important;
+      width: auto !important;
+      max-width: 100% !important;
+      margin: 0 0 20px !important;
+    }
+
+    .pr-research .status-tabs > label.status-tab {
+      display: inline-flex !important;
+      flex: 0 0 auto !important;
+      align-items: center !important;
+      justify-content: center !important;
+      gap: 8px !important;
+      width: auto !important;
+      min-width: 0 !important;
+      max-width: none !important;
+      height: auto !important;
+      min-height: 0 !important;
+      margin: 0 !important;
+      padding: 12px 18px !important;
+      border: 1px solid rgba(148, 163, 184, 0.18) !important;
+      border-radius: 999px !important;
+      background: rgba(15, 23, 42, 0.76) !important;
+      color: #cbd5e1 !important;
+      font-size: 14px !important;
+      font-weight: 800 !important;
+      line-height: 1.2 !important;
+      letter-spacing: 0.01em !important;
+      text-align: center !important;
+      white-space: nowrap !important;
+      cursor: pointer;
+      box-shadow: none !important;
+      transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+    }
+
+    .pr-research .status-tabs > label.status-tab::before {
+      content: "";
+      display: inline-block !important;
+      width: 9px !important;
+      height: 9px !important;
+      border-radius: 50% !important;
+      background: rgba(148, 163, 184, 0.7);
+      box-shadow: 0 0 0 4px rgba(148, 163, 184, 0.12);
+      flex-shrink: 0;
+    }
+
+    .pr-research .status-tab.status-active::before {
+      background: #22c55e !important;
+      box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.18) !important;
+    }
+
+    .pr-research .status-tab.status-done::before {
+      background: #3b82f6 !important;
+      box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.18) !important;
+    }
+
+    .pr-research .status-tab.status-upcoming::before {
+      background: #f59e0b !important;
+      box-shadow: 0 0 0 4px rgba(245, 158, 11, 0.18) !important;
+    }
+
+    .pr-research .status-tab:hover {
+      background: rgba(37, 99, 235, 0.18) !important;
+      border-color: rgba(47, 212, 220, 0.28) !important;
+      color: #f8fafc !important;
+    }
+
+    .pr-research #status-upcoming:checked ~ .status-tabs label[for="status-upcoming"],
+    .pr-research #status-active:checked ~ .status-tabs label[for="status-active"],
+    .pr-research #status-done:checked ~ .status-tabs label[for="status-done"] {
+      background: rgba(47, 212, 220, 0.14) !important;
+      border-color: rgba(47, 212, 220, 0.34) !important;
+      color: #f8fafc !important;
+    }
+
+    .pr-research .status-panels {
+      position: relative;
+    }
+
+    .pr-research .status-panel {
+      display: none;
+      position: relative;
+    }
+
+    .pr-research #status-upcoming:checked ~ .status-panels .status-panel[data-status="upcoming"],
+    .pr-research #status-active:checked ~ .status-panels .status-panel[data-status="active"],
+    .pr-research #status-done:checked ~ .status-panels .status-panel[data-status="done"] {
+      display: block;
+    }
+
+    .pr-research .project-slider {
+      overflow: hidden;
+      border-radius: 22px;
+    }
+
+    .pr-research .project-track {
+      display: flex;
+      width: 200%;
+      transition: transform 0.45s ease;
+    }
+
+    .pr-research .project-card {
+      position: relative;
+      overflow: hidden;
+      width: 50%;
+      padding: 28px;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      background: linear-gradient(180deg, var(--surface) 0%, var(--surface-soft) 100%);
+    }
+
+    .pr-research .project-card::before {
+      content: "";
+      position: absolute;
+      top: -60px;
+      right: -40px;
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(47, 212, 220, 0.14) 0%, rgba(47, 212, 220, 0) 70%);
+      pointer-events: none;
+    }
+
+    .pr-research .status-panel.is-empty .project-track {
+      width: 100%;
+    }
+
+    .pr-research .status-panel.is-empty .project-card {
+      width: 100%;
+      min-height: 420px;
+    }
+
+    .pr-research .status-panel.is-empty .project-card {
+      border-color: rgba(148, 163, 184, 0.1);
+      background: linear-gradient(180deg, rgba(15, 23, 42, 0.78) 0%, rgba(15, 23, 42, 0.58) 100%);
+    }
+
+    .pr-research .status-panel.is-empty .project-card::before {
+      background: radial-gradient(circle, rgba(148, 163, 184, 0.1) 0%, rgba(148, 163, 184, 0) 72%);
+    }
+
+    .pr-research .status-panel.is-empty .project-head,
+    .pr-research .status-panel.is-empty .project-grid,
+    .pr-research .status-panel.is-empty .project-meta,
+    .pr-research .status-panel.is-empty .project-point {
+      opacity: 0.82;
+    }
+
+    .pr-research .status-panel.is-empty .project-card h3 {
+      color: #dbe4ee;
+    }
+
+    .pr-research .status-panel.is-empty .project-card p,
+    .pr-research .status-panel.is-empty .project-point p,
+    .pr-research .status-panel.is-empty .project-meta p {
+      color: #91a1b5;
+    }
+
+    .pr-research .status-panel.is-empty .project-meta,
+    .pr-research .status-panel.is-empty .project-point {
+      border-style: dashed;
+      border-color: rgba(148, 163, 184, 0.12);
+      background: rgba(15, 23, 42, 0.34);
+    }
+
+    .pr-research .status-panel.is-empty .project-meta small,
+    .pr-research .status-panel.is-empty .project-point small {
+      color: #aebdcd;
+    }
+
+    .pr-research .status-panel.is-empty .project-status.upcoming {
+      background: rgba(148, 163, 184, 0.1);
+      color: #c7d1dc;
+      border-color: rgba(148, 163, 184, 0.18);
+    }
+
+    .pr-research #upcoming-project-1:checked ~ .project-slider .project-track,
+    .pr-research #active-project-1:checked ~ .project-slider .project-track,
+    .pr-research #done-project-1:checked ~ .project-slider .project-track {
+      transform: translateX(0);
+    }
+
+    .pr-research #upcoming-project-2:checked ~ .project-slider .project-track,
+    .pr-research #active-project-2:checked ~ .project-slider .project-track,
+    .pr-research #done-project-2:checked ~ .project-slider .project-track {
+      transform: translateX(-50%);
+    }
+
+    .pr-research .project-controls {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      z-index: 3;
+    }
+
+    .pr-research .project-dots {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 12px;
+      border: 1px solid rgba(148, 163, 184, 0.16);
+      border-radius: 999px;
+      background: rgba(2, 6, 23, 0.72);
+      backdrop-filter: blur(10px);
+    }
+
+    .pr-research .project-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: rgba(148, 163, 184, 0.34);
+      box-shadow: 0 0 0 5px rgba(148, 163, 184, 0.08);
+      cursor: pointer;
+      transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .pr-research .project-dot:hover {
+      transform: scale(1.08);
+    }
+
+    .pr-research #upcoming-project-1:checked ~ .project-controls .project-dots label[for="upcoming-project-1"],
+    .pr-research #upcoming-project-2:checked ~ .project-controls .project-dots label[for="upcoming-project-2"],
+    .pr-research #active-project-1:checked ~ .project-controls .project-dots label[for="active-project-1"],
+    .pr-research #active-project-2:checked ~ .project-controls .project-dots label[for="active-project-2"],
+    .pr-research #done-project-1:checked ~ .project-controls .project-dots label[for="done-project-1"],
+    .pr-research #done-project-2:checked ~ .project-controls .project-dots label[for="done-project-2"] {
+      background: var(--brand);
+      box-shadow: 0 0 0 5px rgba(47, 212, 220, 0.12);
+    }
+
+    .pr-research .project-head {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      gap: 18px;
+      margin-bottom: 22px;
+    }
+
+    .pr-research .project-card h3 {
+      margin: 0 0 12px;
+      font-size: 30px;
+      line-height: 1.3;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+    }
+
+    .pr-research .project-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.85;
+    }
+
+    .pr-research .project-meta {
+      padding: 18px 20px;
+      border: 1px solid rgba(148, 163, 184, 0.14);
+      border-radius: 18px;
+      background: rgba(8, 17, 33, 0.42);
+    }
+
+    .pr-research .project-meta small {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--brand);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .pr-research .project-meta h4 {
+      margin-bottom: 6px;
+      font-size: 20px;
+    }
+
+    .pr-research .project-status {
+      display: inline-flex;
+      align-items: center;
+      width: fit-content;
+      padding: 7px 12px;
+      margin-bottom: 14px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .pr-research .project-status.upcoming {
+      background: rgba(245, 158, 11, 0.18);
+      color: #fcd34d;
+      border: 1px solid rgba(245, 158, 11, 0.34);
+    }
+
+    .pr-research .project-status.active {
+      background: rgba(34, 197, 94, 0.18);
+      color: #86efac;
+      border: 1px solid rgba(34, 197, 94, 0.34);
+    }
+
+    .pr-research .project-status.done {
+      background: rgba(59, 130, 246, 0.18);
+      color: #93c5fd;
+      border: 1px solid rgba(59, 130, 246, 0.34);
+    }
+
+    .pr-research .project-grid {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .pr-research .project-grid.single {
+      grid-template-columns: 1fr;
+    }
+
+    .pr-research .project-point {
+      padding: 18px;
+      border: 1px solid rgba(148, 163, 184, 0.14);
+      border-radius: 18px;
+      background: rgba(8, 17, 33, 0.34);
+    }
+
+    .pr-research .project-point small {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--brand);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .pr-research .project-point h4 {
+      margin-bottom: 8px;
+      font-size: 20px;
+    }
+
+    .pr-research .project-point p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.75;
+    }
+
+    .pr-research .highlight-box {
+      padding: 18px 20px;
+      border-left: 4px solid var(--brand);
+      border-radius: 0 16px 16px 0;
+      background: rgba(47, 212, 220, 0.08);
+    }
+
+    .pr-research .highlight-box strong {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 18px;
+    }
+
+    .pr-research .highlight-box p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.8;
+    }
+
+    .pr-research .cta-band {
+      padding: 68px 0 84px;
+    }
+
+    .pr-research .cta-box {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      padding: 28px;
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      background: linear-gradient(180deg, var(--surface) 0%, var(--surface-alt) 100%);
+    }
+
+    .pr-research .cta-box h3 {
+      margin: 0 0 8px;
+      font-size: 30px;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+    }
+
+    .pr-research .cta-box p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.75;
+    }
+
+    .pr-research .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 150px;
+      padding: 14px 24px;
+      border-radius: 12px;
+      background: var(--button);
+      color: #ffffff !important;
+      font-size: 16px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    @media (max-width: 1100px) {
+
+      .pr-research .project-head,
+      .pr-research .project-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .pr-research .project-track {
+        width: 100%;
+        display: grid;
+        gap: 20px;
+        transform: none !important;
+      }
+
+      .pr-research .project-card {
+        width: 100%;
+      }
+
+      .pr-research .project-controls {
+        top: 14px;
+        right: 14px;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .hero-home {
+        position: static;
+        margin-bottom: 18px;
+      }
+
+      .pr-research .content-inner {
+        padding-left: 18px;
+        padding-right: 18px;
+      }
+
+      .pr-research .hero {
+        padding-top: 34px;
+      }
+
+      .pr-research .hero h1 {
+        font-size: 38px;
+      }
+
+      .pr-research .cta-box {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="pr-research">
+    <section class="hero">
+      <div class="content-inner">
+        <div class="hero-layout">
+          <a class="hero-home" href="/" aria-label="홈으로">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M3 10.5 12 3l9 7.5"></path>
+              <path d="M5.5 9.5V21h13V9.5"></path>
+              <path d="M10 21v-6h4v6"></path>
+            </svg>
+          </a>
+          <div class="hero-intro">
+            <div class="hero-kicker">Research & Development</div>
+            <div class="hero-title-row">
+              <h1>연구과제 (R&amp;D)</h1>
+              <span class="hero-title-badge">Cunsulting Service</span>
+            </div>
+            <p>피지컬리콘은 물리보안 분야 관련 연구과제를 수행하며, 플랫폼 개발 과정에서도 연구개발 과제를 진행합니다.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="content-inner">
+        <div class="section-heading">
+          <h2>수행 연구과제</h2>
+          <p>본사는 다음과 같은 연구과제를 수행해가고 있습니다.</p>
+        </div>
+        <input type="radio" name="project-status" id="status-upcoming">
+        <input type="radio" name="project-status" id="status-active" checked>
+        <input type="radio" name="project-status" id="status-done">
+        <div class="status-tabs" aria-label="연구사업 상태 탭">
+          <label class="status-tab status-active" for="status-active">수행중</label>
+          <label class="status-tab status-done" for="status-done">수행완료</label>
+          <label class="status-tab status-upcoming" for="status-upcoming">수행예정</label>
+        </div>
+        <div class="status-panels">
+          <section class="status-panel is-empty" data-status="upcoming">
+            <input type="radio" name="upcoming-project-slide" id="upcoming-project-1" checked>
+            <div class="project-slider">
+              <div class="project-track">
+                <article class="project-card">
+                  <div class="project-head">
+                    <div>
+                      <span class="project-status upcoming">수행예정</span>
+                      <h3>연구과제를 준비중입니다</h3>
+                      <p>현재 이 상태에 등록된 연구과제는 아직 없습니다. 신규 과제가 확정되면 이 영역에 순차적으로 반영됩니다.</p>
+                    </div>
+                    <div class="project-meta">
+                      <small>Current Status</small>
+                      <h4>준비중</h4>
+                      <p>연구 범위와 협력 기관이 확정되는 시점에 맞춰 실제 과제 정보를 업데이트합니다.</p>
+                    </div>
+                  </div>
+                  <div class="project-grid single">
+                    <article class="project-point">
+                      <small>Notice</small>
+                      <h4>새로운 과제가 확정되면 이곳에 추가됩니다</h4>
+                      <p>수행예정 과제는 주제, 관련 기관, 기대 성과가 정리된 이후 공개할 예정입니다.</p>
+                    </article>
+                  </div>
+                </article>
+              </div>
+            </div>
+          </section>
+
+          <section class="status-panel" data-status="active">
+            <input type="radio" name="active-project-slide" id="active-project-1" checked>
+            <input type="radio" name="active-project-slide" id="active-project-2">
+            <div class="project-slider">
+              <div class="project-track">
+                <article class="project-card">
+                  <div class="project-head">
+                    <div>
+                      <span class="project-status active">수행중</span>
+                      <h3>SMR(소형모듈원자로) 전주기 물리적방호 체계 개발</h3>
+                      <p>SMR의 기획, 설계, 구축, 운영 전주기에 걸쳐 필요한 물리적방호 체계를 검토하고, 적용 가능한 보호 개념과 기준, 통합 운영 방향을 정리하는 연구사업입니다.</p>
+                    </div>
+                    <div class="project-meta">
+                      <small>Related Organization</small>
+                      <h4>KINAC</h4>
+                      <p>한국원자력통제기술원과 연계된 연구 수행 경험을 바탕으로 원자력 시설 특성에 맞는 물리적방호 관점의 연구 내용을 정리합니다.</p>
+                    </div>
+                  </div>
+                  <div class="project-grid">
+                    <article class="project-point">
+                      <small>Research Focus</small>
+                      <h4>전주기 보호체계 검토</h4>
+                      <p>SMR 사업의 초기 기획부터 운영 단계까지 이어지는 물리적방호 요구사항과 적용 체계를 검토합니다.</p>
+                    </article>
+                    <article class="project-point">
+                      <small>Application</small>
+                      <h4>시설 특화 기준 정리</h4>
+                      <p>원자력 시설의 특성과 규제 환경을 반영해 보호구역, 출입통제, 감시체계, 운영 기준 방향을 정리합니다.</p>
+                    </article>
+                    <article class="project-point">
+                      <small>Expected Value</small>
+                      <h4>설계·운영 연계 기반 마련</h4>
+                      <p>연구 결과가 후속 설계 기준과 운영체계 수립으로 이어질 수 있도록 물리적방호 프레임을 구조화합니다.</p>
+                    </article>
+                  </div>
+                </article>
+                <!-- <article class="project-card">
+                  <div class="project-head">
+                    <div>
+                      <span class="project-status active">수행중</span>
+                      <h3>물리보안 데이터 연계 연구과제</h3>
+                      <p>수행중인 연구과제가 추가될 경우를 가정한 더미 카드로, 현장 데이터와 서비스 기능 연계를 검토하는 연구 방향 예시입니다.</p>
+                    </div>
+                    <div class="project-meta">
+                      <small>Related Organization</small>
+                      <h4>협업 기관 협의중</h4>
+                      <p>복수 기관과의 협업 또는 후속 과제 연계를 고려해 적용 범위와 기대 산출물을 정리하는 형태를 보여줍니다.</p>
+                    </div>
+                  </div>
+                  <div class="project-grid">
+                    <article class="project-point">
+                      <small>Research Focus</small>
+                      <h4>현장 데이터 구조 검토</h4>
+                      <p>공간, 자산, 위협 데이터를 통합적으로 다룰 수 있는 연구 프레임과 활용 체계를 검토합니다.</p>
+                    </article>
+                    <article class="project-point">
+                      <small>Application</small>
+                      <h4>서비스 연계성 강화</h4>
+                      <p>연구 결과가 플랫폼 기능 및 후속 서비스에 연결될 수 있도록 기능 구조를 함께 구상합니다.</p>
+                    </article>
+                    <article class="project-point">
+                      <small>Expected Value</small>
+                      <h4>확장형 연구 기반</h4>
+                      <p>현재 수행중인 연구가 후속 과제와 서비스 고도화로 자연스럽게 이어질 수 있는 구조를 만듭니다.</p>
+                    </article>
+                  </div>
+                </article> -->
+              </div>
+            </div>
+            <div class="project-controls" aria-label="수행중 카드 이동">
+              <div class="project-dots" aria-label="수행중 카드 위치">
+                <label class="project-dot" for="active-project-1" aria-label="첫 번째 카드"></label>
+                <label class="project-dot" for="active-project-2" aria-label="두 번째 카드"></label>
+              </div>
+            </div>
+          </section>
+
+          <section class="status-panel" data-status="done">
+            <input type="radio" name="done-project-slide" id="done-project-1" checked>
+            <input type="radio" name="done-project-slide" id="done-project-2">
+            <div class="project-slider">
+              <div class="project-track">
+                <article class="project-card">
+                  <div class="project-head">
+                    <div>
+                      <span class="project-status done">수행완료</span>
+                      <h3>AI기반 공간위협인텔리전스플랫폼(CHETAM) 개발</h3>
+                      <p>공간과 위협 정보를 결합해 위험을 분석하고 대응 방향을 도출하는 AI기반 플랫폼을 개발하는 연구개발 과제로, 물리보안 데이터와 서비스 기능을 함께 구조화한 사례입니다.</p>
+                    </div>
+                    <div class="project-meta">
+                      <small>Related Organization</small>
+                      <h4>중소벤처기업부</h4>
+                      <p>플랫폼 개발 당시 연구개발 과제를 수행하며, 기능 정의와 데이터 체계, 서비스 확장 가능성을 함께 검토해온 경험을 담고 있습니다.</p>
+                    </div>
+                  </div>
+                  <div class="project-grid">
+                    <article class="project-point">
+                      <small>Research Focus</small>
+                      <h4>AI 기반 위협 분석</h4>
+                      <p>공간 데이터와 위협 정보를 연계해 위험도를 해석하고, 물리보안 의사결정에 활용할 수 있는 구조를 검토합니다.</p>
+                    </article>
+                    <article class="project-point">
+                      <small>Platform Design</small>
+                      <h4>데이터·기능 체계 기획</h4>
+                      <p>플랫폼 서비스에 필요한 데이터 구조와 기능 흐름, 활용 시나리오를 연구개발 과제 안에서 구체화합니다.</p>
+                    </article>
+                    <article class="project-point">
+                      <small>Expected Value</small>
+                      <h4>서비스 고도화 기반 확보</h4>
+                      <p>연구 결과를 바탕으로 향후 플랫폼 기능 고도화와 후속 서비스 확장을 위한 기반을 정리합니다.</p>
+                    </article>
+                  </div>
+                </article>
+                <article class="project-card">
+                  <div class="project-head">
+                    <div>
+                      <span class="project-status done">수행완료</span>
+                      <h3>물리보안 서비스 모델 연구 완료</h3>
+                      <p>수행완료 연구과제가 추가될 경우를 보여주는 더미 카드로, 실제 적용 결과와 서비스 반영 경험을 정리하는 형태의 예시입니다.</p>
+                    </div>
+                    <div class="project-meta">
+                      <small>Related Organization</small>
+                      <h4>완료 과제 예시</h4>
+                      <p>완료된 연구는 결과 정리뿐 아니라 서비스 적용 경험과 고도화 방향까지 함께 소개할 수 있습니다.</p>
+                    </div>
+                  </div>
+                  <div class="project-grid">
+                    <article class="project-point">
+                      <small>Research Focus</small>
+                      <h4>적용 결과 정리</h4>
+                      <p>연구가 실제 서비스 구조나 제안 체계에 어떻게 반영되었는지 결과 중심으로 정리합니다.</p>
+                    </article>
+                    <article class="project-point">
+                      <small>Application</small>
+                      <h4>성과 및 확산 검토</h4>
+                      <p>연구성과가 후속 사업, 플랫폼 기능, 추가 제안 활동으로 이어질 수 있도록 확산 방향을 검토합니다.</p>
+                    </article>
+                    <article class="project-point">
+                      <small>Expected Value</small>
+                      <h4>후속 활용 기반 확보</h4>
+                      <p>완료된 연구의 축적 결과를 차기 서비스 개발과 사업화 검토에 다시 활용할 수 있는 기반으로 남깁니다.</p>
+                    </article>
+                  </div>
+                </article>
+              </div>
+            </div>
+            <div class="project-controls" aria-label="수행완료 카드 이동">
+              <div class="project-dots" aria-label="수행완료 카드 위치">
+                <label class="project-dot" for="done-project-1" aria-label="첫 번째 카드"></label>
+                <label class="project-dot" for="done-project-2" aria-label="두 번째 카드"></label>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-band">
+      <div class="content-inner">
+        <div class="cta-box">
+          <div>
+            <h3>물리보안 첨단기술 개발을 위한 국가R&D를 선도합니다.</h3>
+            <p>조달 연계 연구, 정책 및 기술 조사, 플랫폼 고도화 과제까지 상담을 통해 함께 정리해드립니다.</p>
+          </div>
+          <a class="cta-btn" href="">상담문의</a>
+        </div>
+      </div>
+    </section>
+  </div>
+</body>
+
+</html>

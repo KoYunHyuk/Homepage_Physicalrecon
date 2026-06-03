@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PhysicalRecon Risk Assessment</title>
+  <style>
+    :root {
+      --bg: #020617;
+      --surface: #0f172a;
+      --surface-soft: #111c34;
+      --surface-alt: #18233d;
+      --line: rgba(148, 163, 184, 0.18);
+      --text: #ffffff;
+      --muted: #94a3b8;
+      --brand: #2fd4dc;
+      --brand-soft: rgba(47, 212, 220, 0.12);
+      --button: #2563eb;
+      --button-hover: #1d4ed8;
+    }
+
+    .pr-risk,
+    .pr-risk * {
+      box-sizing: border-box;
+      font-family: Arial, sans-serif !important;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+    }
+
+    .pr-risk {
+      width: 100%;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    .pr-risk a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .pr-risk .content-inner {
+      width: 100%;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding-left: 28px;
+      padding-right: 28px;
+    }
+
+    .pr-risk .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 24px 0 18px;
+      background: var(--bg);
+    }
+
+    .pr-risk .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(47, 212, 220, 0.06) 0%, transparent 65%);
+      pointer-events: none;
+    }
+
+    .pr-risk .hero-layout {
+      position: relative;
+      z-index: 1;
+      display: block;
+    }
+
+    .pr-risk .hero-home {
+      position: absolute;
+      top: 0;
+      right: 0;
+      z-index: 2;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 46px;
+      height: 46px;
+      padding: 0;
+      border: 1px solid rgba(148, 163, 184, 0.18);
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.78);
+      color: #f8fafc !important;
+      backdrop-filter: blur(8px);
+      transition: background-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .pr-risk .hero-home svg {
+      width: 20px;
+      height: 20px;
+      stroke: currentColor;
+    }
+
+    .pr-risk .hero-home:hover {
+      background: rgba(37, 99, 235, 0.88);
+      transform: translateY(-1px);
+    }
+
+    .pr-risk .hero-kicker {
+      display: inline-flex;
+      align-items: center;
+      padding: 0;
+      margin-bottom: 16px;
+      background: transparent;
+      color: #7dd3fc;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .pr-risk .hero-intro {
+      max-width: 900px;
+      padding-left: 24px;
+      border-left: 4px solid rgba(47, 212, 220, 0.78);
+    }
+
+    .pr-risk .hero-title-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .pr-risk .hero-title-badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 6px 12px;
+      border: 1px solid rgba(148, 163, 184, 0.2);
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.48);
+      color: #e2e8f0;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .pr-risk .hero h1 {
+      margin: 0;
+      font-size: 48px;
+      line-height: 1.12;
+      letter-spacing: -0.04em;
+      font-weight: 800;
+    }
+
+    .pr-risk .hero p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1.8;
+    }
+
+    .pr-risk .section {
+      padding: 68px 0 0;
+    }
+
+    .pr-risk .section-heading {
+      margin-bottom: 30px;
+    }
+
+    .pr-risk .section-heading h2 {
+      margin: 0 0 12px;
+      font-size: 38px;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+    }
+
+    .pr-risk .section-heading p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.75;
+    }
+
+    .pr-risk .deliverable-flow {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .pr-risk .risk-framework {
+      display: grid;
+      grid-template-columns: minmax(320px, 0.88fr) minmax(0, 1.12fr);
+      gap: 24px;
+      align-items: stretch;
+    }
+
+    .pr-risk .risk-visual,
+    .pr-risk .risk-copy {
+      padding: 24px;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      background: linear-gradient(180deg, var(--surface) 0%, var(--surface-alt) 100%);
+    }
+
+    .pr-risk .risk-image {
+      display: block;
+      width: 100%;
+      border-radius: 18px;
+      background: #ffffff;
+    }
+
+    .pr-risk .risk-copy>p {
+      margin: 0 0 20px;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.8;
+    }
+
+    .pr-risk .risk-pillars {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+
+    .pr-risk .risk-pillar {
+      padding: 16px;
+      border: 1px solid rgba(148, 163, 184, 0.14);
+      border-radius: 16px;
+      background: rgba(8, 17, 33, 0.48);
+    }
+
+    .pr-risk .risk-pillar small {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--brand);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .pr-risk .risk-pillar h3 {
+      margin: 0 0 8px;
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+    }
+
+    .pr-risk .risk-pillar p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .pr-risk .risk-conclusion {
+      padding: 18px 20px;
+      border-left: 4px solid var(--brand);
+      border-radius: 0 16px 16px 0;
+      background: rgba(47, 212, 220, 0.08);
+    }
+
+    .pr-risk .risk-conclusion strong {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 18px;
+      font-weight: 800;
+      color: #f8fafc;
+    }
+
+    .pr-risk .risk-conclusion p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.8;
+    }
+
+    .pr-risk .tool-layout {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .pr-risk .tool-image-wrap {
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      background: linear-gradient(180deg, var(--surface) 0%, var(--surface-soft) 100%);
+      padding: 22px;
+    }
+
+    .pr-risk .tool-image {
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: flex-end;
+      padding: 18px;
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      min-height: 300px;
+      border-radius: 16px;
+      border: 1px solid rgba(148, 163, 184, 0.14);
+      background-color: #081121;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+
+    .pr-risk .tool-image::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(2, 6, 23, 0.04) 0%, rgba(2, 6, 23, 0.58) 100%);
+      pointer-events: none;
+    }
+
+    .pr-risk .tool-image::after {
+      position: relative;
+      z-index: 1;
+      display: inline-flex;
+      align-items: center;
+      padding: 10px 14px;
+      border-radius: 12px;
+      background: rgba(2, 6, 23, 0.72);
+      border: 1px solid rgba(148, 163, 184, 0.2);
+      color: #e2e8f0;
+      font-size: 14px;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+    }
+
+    .pr-risk .tool-image.threat-tool {
+      background-image: url('https://cdn.imweb.me/thumbnail/20260507/ad22003337f94.png');
+    }
+
+    .pr-risk .tool-image.threat-tool::after {
+      content: "Threat / Asset / Vulnerability";
+    }
+
+    .pr-risk .tool-image.effectiveness-tool {
+      background-image: url('https://cdn.imweb.me/thumbnail/20260507/2024f20315445.png');
+    }
+
+    .pr-risk .tool-image.effectiveness-tool::after {
+      content: "Coverage / Route / Checkpoint";
+    }
+
+    .pr-risk .tool-tag {
+      display: inline-flex;
+      align-items: center;
+      padding: 6px 12px;
+      margin-bottom: 14px;
+      border-radius: 999px;
+      background: rgba(47, 212, 220, 0.12);
+      color: var(--brand);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .pr-risk .tool-image-wrap h3 {
+      margin: 0 0 10px;
+      font-size: 22px;
+      font-weight: 800;
+    }
+
+    .pr-risk .tool-image-wrap p {
+      margin: 14px 0 0;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.75;
+    }
+
+    .pr-risk .process-flow {
+      display: grid;
+      gap: 14px;
+    }
+
+    .pr-risk .process-card {
+      display: grid;
+      grid-template-columns: 170px minmax(0, 1fr);
+      gap: 18px;
+      align-items: center;
+      padding: 20px 22px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: var(--surface);
+    }
+
+    .pr-risk .process-no {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 54px;
+      border-radius: 14px;
+      background: linear-gradient(180deg, rgba(47, 212, 220, 0.14) 0%, rgba(37, 99, 235, 0.16) 100%);
+      color: #dbeafe;
+      font-size: 15px;
+      font-weight: 800;
+    }
+
+    .pr-risk .process-body h3 {
+      margin: 0 0 8px;
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+    }
+
+    .pr-risk .process-body p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.75;
+    }
+
+    .pr-risk .process-arrow {
+      display: flex;
+      justify-content: center;
+      color: rgba(148, 163, 184, 0.7);
+      font-size: 26px;
+      line-height: 1;
+    }
+
+    .pr-risk .criteria-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .pr-risk .criteria-card {
+      padding: 22px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: linear-gradient(180deg, var(--surface) 0%, var(--surface-alt) 100%);
+    }
+
+    .pr-risk .criteria-card h3 {
+      margin: 0 0 12px;
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+    }
+
+    .pr-risk .criteria-card ul {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--muted);
+    }
+
+    .pr-risk .criteria-card li {
+      margin-bottom: 8px;
+      font-size: 15px;
+      line-height: 1.7;
+    }
+
+    .pr-risk .deliverable-card {
+      position: relative;
+      padding: 22px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: linear-gradient(180deg, var(--surface) 0%, var(--surface-alt) 100%);
+    }
+
+    .pr-risk .deliverable-card:not(:last-child)::after {
+      content: "→";
+      position: absolute;
+      top: 50%;
+      right: -16px;
+      transform: translateY(-50%);
+      color: rgba(148, 163, 184, 0.72);
+      font-size: 22px;
+      font-weight: 800;
+      z-index: 1;
+    }
+
+    .pr-risk .deliverable-card strong {
+      display: block;
+      margin-bottom: 10px;
+      color: var(--brand);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .pr-risk .deliverable-card h3 {
+      margin: 0 0 8px;
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+    }
+
+    .pr-risk .deliverable-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.75;
+    }
+
+    .pr-risk .cta-band {
+      padding: 68px 0 84px;
+    }
+
+    .pr-risk .cta-box {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      padding: 28px;
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      background: linear-gradient(180deg, var(--surface) 0%, var(--surface-alt) 100%);
+    }
+
+    .pr-risk .cta-box h3 {
+      margin: 0 0 8px;
+      font-size: 30px;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+    }
+
+    .pr-risk .cta-box p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.75;
+    }
+
+    .pr-risk .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 150px;
+      padding: 14px 24px;
+      border-radius: 12px;
+      background: var(--button);
+      color: #ffffff !important;
+      font-size: 16px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    @media (max-width: 1100px) {
+
+      .pr-risk .hero-layout,
+      .pr-risk .tool-layout,
+      .pr-risk .deliverable-flow,
+      .pr-risk .risk-framework,
+      .pr-risk .criteria-grid,
+      .pr-risk .process-card {
+        grid-template-columns: 1fr;
+      }
+
+      .pr-risk .risk-pillars {
+        grid-template-columns: 1fr;
+      }
+
+      .pr-risk .deliverable-card:not(:last-child)::after {
+        content: "↓";
+        top: auto;
+        right: 50%;
+        bottom: -18px;
+        transform: translateX(50%);
+      }
+    }
+
+    @media (max-width: 760px) {
+      .pr-risk .content-inner {
+        padding-left: 18px;
+        padding-right: 18px;
+      }
+
+      .pr-risk .hero {
+        padding-top: 34px;
+      }
+
+      .pr-risk .hero h1 {
+        font-size: 38px;
+      }
+
+      .pr-risk .hero-home {
+        position: static;
+        margin-bottom: 18px;
+      }
+
+      .pr-risk .tool-image {
+        min-height: 220px;
+      }
+
+      .pr-risk .process-no {
+        height: 48px;
+      }
+
+      .pr-risk .cta-box {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="pr-risk">
+    <section class="hero">
+      <div class="content-inner">
+        <div class="hero-layout">
+          <a class="hero-home" href="/" aria-label="홈으로">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M3 10.5 12 3l9 7.5"></path>
+              <path d="M5.5 9.5V21h13V9.5"></path>
+              <path d="M10 21v-6h4v6"></path>
+            </svg>
+          </a>
+          <div class="hero-intro">
+            <div class="hero-kicker">Vulnerability Assessment</div>
+            <div class="hero-title-row">
+              <h1>취약점 진단</h1>
+              <span class="hero-title-badge">Consulting Service</span>
+            </div>
+            <p>
+              물리보안 설계와 운영 기준 수립에 앞서, 대상 시설의 위험 수준과 통제 필요 수준을 반영하여 구조적으로 취약점을 진단합니다.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="content-inner">
+        <div class="section-heading">
+          <h2>주요 산출물</h2>
+          <p>취약점 진단은 현황 파악에 머무르지 않고, 진단평가 시트와 위험도 평가결과, 후속 설계 및 운영 요구사항까지 실제 적용이 가능한 산출물로 정리됩니다.</p>
+        </div>
+        <div class="deliverable-flow">
+          <article class="deliverable-card">
+            <strong>산출물 01</strong>
+            <h3>물리보안 진단평가 시트</h3>
+            <p>현장 환경, 주요 자산, 예상 위협, 사건 이력, 보안 현황을 구조화하여 물리보안 진단 항목별 평가 시트로 정리합니다.</p>
+          </article>
+          <article class="deliverable-card">
+            <strong>산출물 02</strong>
+            <h3>위험도 평가결과서</h3>
+            <p>위협 수준과 자산 중요도를 교차 평가해 우선순위와 중점 통제 구간을 도출하고, 위험도 결과를 문서화합니다.</p>
+          </article>
+          <article class="deliverable-card">
+            <strong>산출물 03</strong>
+            <h3>취약점 분석 결과서</h3>
+            <p>구조, 출입통제, 감시체계, 운영 절차 등 영역별 취약 지점을 종합 분석하여 제시합니다.</p>
+          </article>
+          <article class="deliverable-card">
+            <strong>산출물 04</strong>
+            <h3>설계 / 운영요구서</h3>
+            <p>우선 조치가 필요한 항목과 향후 설계 및 운영에 반영할 요구사항을 정리해 후속 단계와 연결합니다.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="content-inner">
+        <div class="section-heading">
+          <h2>개 요</h2>
+          <p>취약점 진단은 위험(Risk)의 3요소인 위협(Threat), 자산(Asset), 취약점(Vulnerability)을 함께 분석하여 대상 시설의 위험 수준을 평가하고, 그에 따른 통제
+            필요 수준을 도출하는 과정입니다.</p>
+        </div>
+        <div class="risk-framework">
+          <div class="risk-visual">
+            <img class="risk-image"
+              src="https://img.freepik.com/premium-vector/risk-assessment-risk-analysis-risk-management-threat-vulnerability-asset_518018-2755.jpg"
+              alt="위험의 3요소 Threat Asset Vulnerability">
+          </div>
+          <div class="risk-copy">
+            <p>취약점 진단은 단일 항목 점검이 아니라, 어떤 위협이 존재하는지, 무엇을 보호해야 하는지, 그리고 그 위협이 자산에 도달할 수 있는 취약 지점이 무엇인지를 함께 보아야 실질적인 위험 수준을
+              판단할 수 있습니다.</p>
+            <div class="risk-pillars">
+              <article class="risk-pillar">
+                <small>Threat</small>
+                <h3>위협</h3>
+                <p>사건 이력, 지역 특성, 예상 침해 시나리오를 바탕으로 발생 가능한 위협 양상과 강도를 식별합니다.</p>
+              </article>
+              <article class="risk-pillar">
+                <small>Asset</small>
+                <h3>자산</h3>
+                <p>보호 대상의 중요도와 위치, 운영 영향도를 구분해 우선적으로 보호해야 할 핵심 자산을 정리합니다.</p>
+              </article>
+              <article class="risk-pillar">
+                <small>Vulnerability</small>
+                <h3>취약점</h3>
+                <p>구조, 출입통제, 감시체계, 운영 절차에서 위협이 실제로 침투할 수 있는 약점을 분석합니다.</p>
+              </article>
+            </div>
+            <div class="risk-conclusion">
+              <strong>3가지 요소를 함께 분석해 통제 필요 수준을 판단합니다</strong>
+              <p>피지컬리콘은 Threat, Asset, Vulnerability의 교차 분석을 통해 대상 사이트의 위험 수준을 구조적으로 평가하고, 그 결과를 바탕으로 어느 수준의 물리보안 통제가
+                필요한지 우선순위 중심으로 도출합니다.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="content-inner">
+        <div class="section-heading">
+          <h2>진단 도구</h2>
+          <p>취약점 진단 단계에서는 위험 수준을 구조적으로 파악하는 진단 도구와, 통제 체계의 적합성을 검토하는 유효성 평가 도구를 중심으로 활용합니다.</p>
+        </div>
+        <div class="tool-layout">
+          <div class="tool-image-wrap">
+            <div class="tool-tag">Assessment Tool</div>
+            <h3>취약점 진단 Tool</h3>
+            <div class="tool-image threat-tool" role="img" aria-label="취약점 진단 Tool 이미지"></div>
+            <p>사건·사고 현황, 주변 위협 환경, 자산 중요도, 예상 침해 시나리오를 정량화하여 위험 수준과 우선 검토 대상을 빠르게 도출합니다.</p>
+          </div>
+          <div class="tool-image-wrap">
+            <div class="tool-tag">Evaluation Tool</div>
+            <h3>유효성 평가 Tool</h3>
+            <div class="tool-image effectiveness-tool" role="img" aria-label="유효성 평가 Tool 이미지"></div>
+            <p>시설 배치, 접근 동선, 통제 지점, 감시 구역을 시각적으로 분석하여 현재 통제 체계가 실제 위협에 대응 가능한지 검토합니다.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="content-inner">
+        <div class="section-heading">
+          <h2>진단 프로세스</h2>
+          <p>진단 절차는 자료조사, 인터뷰, 현장실사, 필요 시 설문조사를 통해 위험을 식별하고 평가한 뒤, 적용 기준과 통제 방향으로 연결되는 순서로 수행합니다.</p>
+        </div>
+        <div class="process-flow">
+          <article class="process-card">
+            <div class="process-no">01. 위험 식별</div>
+            <div class="process-body">
+              <h3>자료조사 · 인터뷰 · 현장실사 · 설문조사</h3>
+              <p>환경과 사업 특성, 주요 자산의 형태와 위치, 예상 위협 양상, 빈도 통계, 현장 보안 취약점을 종합적으로 확인합니다.</p>
+            </div>
+          </article>
+          <div class="process-arrow" aria-hidden="true">↓</div>
+          <article class="process-card">
+            <div class="process-no">02. 위험 평가</div>
+            <div class="process-body">
+              <h3>위험종합 평가 / 취약점 분석평가</h3>
+              <p>수집된 자료를 기준으로 위협 수준과 자산 영향도를 교차 평가하고, 취약점의 우선순위와 위험도를 구조화합니다.</p>
+            </div>
+          </article>
+          <div class="process-arrow" aria-hidden="true">↓</div>
+          <article class="process-card">
+            <div class="process-no">03. 요구사항 반영</div>
+            <div class="process-body">
+              <h3>법규 및 지침, 이해관계자 요구사항 확인</h3>
+              <p>대상 사이트에 적용되는 법규와 지침, 그리고 이해관계자 요구사항을 확인한 뒤 이를 진단 항목과 통제 방향에 반영합니다.</p>
+            </div>
+          </article>
+          <div class="process-arrow" aria-hidden="true">↓</div>
+          <article class="process-card">
+            <div class="process-no">04. 통제 방향 도출</div>
+            <div class="process-body">
+              <h3>물리보안 통제요구 도출</h3>
+              <p>진단 결과를 바탕으로 설계와 운영에 반영할 통제기준을 정리하고, 후속 설계 및 개선안 검토의 기반을 마련합니다.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="content-inner">
+        <div class="section-heading">
+          <h2>적용 기준</h2>
+          <p>취약점 진단은 대상 사이트의 용도와 중요도, 보호 대상, 운영 특성을 먼저 파악하여 어떤 법규와 표준이 적용되는지 확인한 뒤 그 기준에 맞춰 수행합니다.</p>
+        </div>
+        <div class="criteria-grid">
+          <article class="criteria-card">
+            <h3>적용 대상 기준 파악</h3>
+            <ul>
+              <li>시설 용도와 사업 특성, 보호 대상 자산을 기준으로 적용 가능한 기준을 먼저 식별합니다.</li>
+              <li>국가중요시설, 연구시설, 산업시설, 민간 사업장 등 사이트 성격에 따라 검토 범위를 달리 설정합니다.</li>
+              <li>고객 요구사항과 내부 정책을 함께 반영해 실제 적용 기준을 확정합니다.</li>
+            </ul>
+          </article>
+          <article class="criteria-card">
+            <h3>법규 / 지침</h3>
+            <ul>
+              <li>보안업무규정 및 국가보안시설 지침</li>
+              <li>원자력시설 물리적방호 규제 법령</li>
+              <li>청원경찰법, 경비업법</li>
+              <li>산업기술보호 관련 법률 및 지침</li>
+              <li>테러방지법 및 유관 지침</li>
+            </ul>
+          </article>
+          <article class="criteria-card">
+            <h3>관리적 요소</h3>
+            <ul>
+              <li>ISO 31000 Risk Management</li>
+              <li>ISO 27001 Information Security Management</li>
+              <li>ISO 28000 Supply Chain Security Management</li>
+              <li>ISO 22301 Business Continuity Management</li>
+              <li>ISO 18788 Private Security Operations</li>
+              <li>ISO 22341 Crime Prevention through Environmental Design</li>
+              <li>ISO 22361 Security and resilience — Crisis management — Guidelines</li>
+              <li>KS표준(예고고시) 주요기반시설 보호를 위한 시설보안 관리체계</li>
+            </ul>
+          </article>
+          <article class="criteria-card">
+            <h3>구조적 요소</h3>
+            <ul>
+              <li>UFC 4-022-02 Vehicle Barriers </li>
+              <li>UFC 4-022-03 Security Fences and Gates</li>
+              <li>FEMA-426 Mitigate Potential Terrorist Attacks Against Buildings</li>
+              <li>IESNA G-1-03 Guideline for Security Lighting</li>
+            </ul>
+          </article>
+          <article class="criteria-card">
+            <h3>전자적 요소</h3>
+            <ul>
+              <li>IEC 60839-11 Electronic Access Control Systems</li>
+              <li>IEC 62463 Radiation protection instrumentation - X-ray systems for the security screening of persons</li>
+              <li>KS C IEC 62642 Intrusion and Hold-up Alarm Systems</li>
+              <li>KS C IEC 62676 Video Surveillance Systems</li>
+              <li>UFC 4-021-02 Electronic Security Systems</li>
+            </ul>
+          </article>
+          <article class="criteria-card">
+            <h3>인적 요소</h3>
+            <ul>
+              <li>ISO 18788 Management System for Private Security Operations</li>
+              <li>ANSI/ASIS PSC. 1 Management System or Quality of Private Security Operations</li>
+              <li>ASIS, ASIS GDL PSO-2010 Private Security Officer Selection and Traning</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-band">
+      <div class="content-inner">
+        <div class="cta-box">
+          <div>
+            <h3>취약점 진단 범위와 방식을 고객과 협의하여 최적화합니다.</h3>
+            <p>시설 특성과 보호 대상에 맞는 조사 범위, 진단 항목, 산출물 수준을 상담을 통해 함께 정리해드립니다.</p>
+          </div>
+          <a class="cta-btn" href="./contactus">상담문의</a>
+        </div>
+      </div>
+    </section>
+  </div>
+</body>
+
+</html>

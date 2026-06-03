@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Education Enroll Top</title>
+  <style>
+    :root {
+      --bg: #020617;
+      --surface: #0f172a;
+      --surface-soft: #18233d;
+      --text: #ffffff;
+      --muted: #94a3b8;
+      --brand: #38bdf8;
+      --line: rgba(148, 163, 184, 0.18);
+      --button: #2563eb;
+    }
+
+    .pr-edu-enroll-top,
+    .pr-edu-enroll-top * {
+      box-sizing: border-box;
+      font-family: Arial, sans-serif !important;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+    }
+
+    .pr-edu-enroll-top {
+      width: 100%;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    .pr-edu-enroll-top .content-inner {
+      width: 100%;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 24px 28px 18px;
+    }
+
+    .pr-edu-enroll-top section {
+      position: relative;
+    }
+
+    .pr-edu-enroll-top .hero-home {
+      position: absolute;
+      top: 0;
+      right: 0;
+      z-index: 2;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 46px;
+      height: 46px;
+      padding: 0;
+      border: 1px solid rgba(148, 163, 184, 0.18);
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.78);
+      color: #f8fafc !important;
+      backdrop-filter: blur(8px);
+      transition: background-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .pr-edu-enroll-top .hero-home:hover {
+      background: rgba(37, 99, 235, 0.88);
+      transform: translateY(-1px);
+    }
+
+    .pr-edu-enroll-top .hero-home svg {
+      width: 20px;
+      height: 20px;
+      stroke: currentColor;
+    }
+
+    .pr-edu-enroll-top .section-head {
+      max-width: 940px;
+      padding: 0 0 18px 24px;
+      border-left: 4px solid rgba(56, 189, 248, 0.78);
+    }
+
+    .pr-edu-enroll-top .section-kicker {
+      display: inline-flex;
+      align-items: center;
+      margin: 0 0 16px;
+      color: #7dd3fc;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .pr-edu-enroll-top .section-title-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .pr-edu-enroll-top .section-head h2 {
+      margin: 0;
+      font-size: 42px;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+    }
+
+    .pr-edu-enroll-top .section-badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 6px 12px;
+      border: 1px solid rgba(148, 163, 184, 0.2);
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.48);
+      color: #e2e8f0;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .pr-edu-enroll-top .section-head p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.8;
+    }
+
+    .pr-edu-enroll-top .guide-box {
+      margin-top: 18px;
+      padding: 18px 20px;
+      border-left: 4px solid rgba(56, 189, 248, 0.72);
+      border-radius: 0 16px 16px 0;
+      background: rgba(56, 189, 248, 0.08);
+    }
+
+    .pr-edu-enroll-top .guide-box strong {
+      display: block;
+      margin-bottom: 8px;
+      color: #f8fafc;
+      font-size: 18px;
+      font-weight: 800;
+    }
+
+    .pr-edu-enroll-top .guide-box p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.75;
+    }
+
+    .pr-edu-enroll-top .form-card {
+      margin-top: 26px;
+      padding: 28px;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      background: linear-gradient(180deg, rgba(8, 17, 33, 0.92), rgba(11, 20, 39, 0.96));
+    }
+
+    .pr-edu-enroll-top .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .pr-edu-enroll-top .field {
+      display: grid;
+      gap: 8px;
+    }
+
+    .pr-edu-enroll-top .field.full {
+      grid-column: 1 / -1;
+    }
+
+    .pr-edu-enroll-top label {
+      color: #f8fafc;
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .pr-edu-enroll-top input,
+    .pr-edu-enroll-top select,
+    .pr-edu-enroll-top textarea {
+      width: 100%;
+      min-height: 52px;
+      padding: 14px 16px;
+      border: 1px solid rgba(148, 163, 184, 0.22);
+      border-radius: 12px;
+      background: #081121;
+      color: #ffffff;
+      font-size: 15px;
+      outline: none;
+    }
+
+    .pr-edu-enroll-top textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    .pr-edu-enroll-top input::placeholder,
+    .pr-edu-enroll-top textarea::placeholder {
+      color: #64748b;
+    }
+
+    .pr-edu-enroll-top .consent-box {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-top: 18px;
+      padding: 16px 18px;
+      border: 1px solid rgba(148, 163, 184, 0.14);
+      border-radius: 16px;
+      background: rgba(15, 23, 42, 0.5);
+    }
+
+    .pr-edu-enroll-top .consent-box input[type="checkbox"] {
+      width: 18px;
+      min-height: 18px;
+      margin-top: 2px;
+      padding: 0;
+      accent-color: var(--button);
+    }
+
+    .pr-edu-enroll-top .consent-box span {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .pr-edu-enroll-top .form-actions {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 20px;
+    }
+
+    .pr-edu-enroll-top .submit-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 160px;
+      min-height: 52px;
+      padding: 14px 24px;
+      border: none;
+      border-radius: 12px;
+      background: var(--button);
+      color: #ffffff;
+      font-size: 15px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    @media (max-width: 760px) {
+      .pr-edu-enroll-top .hero-home {
+        position: static;
+        margin-bottom: 18px;
+      }
+
+      .pr-edu-enroll-top .content-inner {
+        padding: 24px 18px 18px;
+      }
+
+      .pr-edu-enroll-top .section-head {
+        padding-left: 18px;
+      }
+
+      .pr-edu-enroll-top .section-head h2 {
+        font-size: 34px;
+      }
+
+      .pr-edu-enroll-top .form-card {
+        padding: 22px;
+      }
+
+      .pr-edu-enroll-top .form-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="pr-edu-enroll-top">
+    <div class="content-inner">
+      <section>
+        <a class="hero-home" href="/" aria-label="홈으로">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M3 10.5 12 3l9 7.5"></path>
+            <path d="M5.5 9.5V21h13V9.5"></path>
+            <path d="M10 21v-6h4v6"></path>
+          </svg>
+        </a>
+        <div class="section-head">
+          <div class="section-kicker">Education Enrollment</div>
+          <div class="section-title-row">
+            <h2>인적사항 등록</h2>
+          </div>
+          <p>결제 완료 후 아래 정보를 작성해주시면 최종 접수가 진행됩니다. 해당 정보를 바탕으로 수료증이 발급됩니다.</p>
+        </div>
+        <div class="guide-box">
+          <strong>결제를 먼저 완료해주세요</strong>
+          <p>실무과정 및 표준과정은 결제 완료 후 인적사항 등록까지 마쳐야 접수가 완료됩니다.</p>
+        </div>
+    </div>
+    </section>
+  </div>
+  </div>
+</body>
+
+</html>

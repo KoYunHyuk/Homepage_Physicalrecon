@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PhysicalRecon Education</title>
+  <style>
+    :root {
+      --bg: #020617;
+      --surface: #0f172a;
+      --surface-soft: #18233d;
+      --surface-alt: #111c34;
+      --line: rgba(148, 163, 184, 0.18);
+      --text: #ffffff;
+      --muted: #94a3b8;
+      --brand: #2fd4dc;
+      --button: #2563eb;
+      --button-soft: rgba(37, 99, 235, 0.12);
+    }
+
+    .pr-education,
+    .pr-education * {
+      box-sizing: border-box;
+      font-family: Arial, sans-serif !important;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+    }
+
+    .pr-education {
+      width: 100%;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    .pr-education a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .pr-education .content-inner {
+      width: 100%;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding-left: 28px;
+      padding-right: 28px;
+    }
+
+    .pr-education .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 24px 0 18px;
+      background: var(--bg);
+    }
+
+    .pr-education .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(47, 212, 220, 0.06) 0%, transparent 65%);
+      pointer-events: none;
+    }
+
+    .pr-education .hero-layout {
+      position: relative;
+      z-index: 1;
+      display: block;
+    }
+
+    .hero-home {
+      position: absolute;
+      top: 0;
+      right: 0;
+      z-index: 2;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 46px;
+      height: 46px;
+      padding: 0;
+      border: 1px solid rgba(148, 163, 184, 0.18);
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.78);
+      color: #f8fafc !important;
+      backdrop-filter: blur(8px);
+      transition: background-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .hero-home:hover {
+      background: rgba(37, 99, 235, 0.88);
+      transform: translateY(-1px);
+    }
+
+    .hero-home svg {
+      width: 20px;
+      height: 20px;
+      stroke: currentColor;
+    }
+
+    .pr-education .hero-intro {
+      max-width: 980px;
+      padding-left: 24px;
+      border-left: 4px solid rgba(47, 212, 220, 0.78);
+    }
+
+    .pr-education .hero-kicker {
+      display: inline-flex;
+      align-items: center;
+      margin-bottom: 16px;
+      color: #7dd3fc;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .pr-education .hero-title-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .pr-education .hero-title-badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 6px 12px;
+      border: 1px solid rgba(148, 163, 184, 0.2);
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.48);
+      color: #e2e8f0;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .pr-education .hero h1 {
+      margin: 0;
+      font-size: 48px;
+      line-height: 1.12;
+      letter-spacing: -0.04em;
+      font-weight: 800;
+    }
+
+    .pr-education .hero p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1.8;
+      white-space: nowrap;
+    }
+
+    .pr-education .section {
+      padding: 68px 0 0;
+    }
+
+    .pr-education .section-heading {
+      margin-bottom: 30px;
+    }
+
+    .pr-education .section-heading h2 {
+      margin: 0 0 12px;
+      font-size: 38px;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+    }
+
+    .pr-education .section-heading p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.75;
+    }
+
+    .pr-education .course-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .pr-education .payment-guide {
+      margin-bottom: 22px;
+      padding: 18px 20px;
+      border-left: 4px solid rgba(47, 212, 220, 0.78);
+      border-radius: 0 16px 16px 0;
+      background: rgba(47, 212, 220, 0.08);
+    }
+
+    .pr-education .payment-guide strong {
+      display: block;
+      margin-bottom: 8px;
+      color: #f8fafc;
+      font-size: 18px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    .pr-education .payment-guide p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.75;
+    }
+
+    .pr-education .course-card {
+      position: relative;
+      display: grid;
+      align-content: start;
+      gap: 18px;
+      padding: 24px;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      background: linear-gradient(180deg, var(--surface) 0%, var(--surface-alt) 100%);
+    }
+
+    .pr-education .course-label {
+      display: inline-flex;
+      align-items: center;
+      width: fit-content;
+      padding: 7px 12px;
+      border-radius: 999px;
+      background: rgba(47, 212, 220, 0.12);
+      color: var(--brand);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .pr-education .course-card h3 {
+      margin: 0;
+      padding-right: 56px;
+      font-size: 28px;
+      line-height: 1.3;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+    }
+
+    .pr-education .course-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.8;
+    }
+
+    .pr-education .info-table {
+      width: 100%;
+      border-collapse: collapse;
+      overflow: hidden;
+      border: 1px solid rgba(148, 163, 184, 0.14);
+      border-radius: 16px;
+      background: rgba(8, 17, 33, 0.42);
+    }
+
+    .pr-education .info-table th,
+    .pr-education .info-table td {
+      padding: 14px 16px;
+      border-bottom: 1px solid rgba(148, 163, 184, 0.12);
+      text-align: left;
+      vertical-align: top;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .pr-education .info-table tr:last-child th,
+    .pr-education .info-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .pr-education .info-table th {
+      width: 112px;
+      color: #cbd5e1;
+      font-weight: 800;
+      background: rgba(15, 23, 42, 0.62);
+    }
+
+    .pr-education .info-table td {
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .pr-education .button-row {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .pr-education .button-row.single {
+      grid-template-columns: 1fr;
+    }
+
+    .pr-education .action-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 12px 16px;
+      border-radius: 12px;
+      border: 1px solid rgba(47, 212, 220, 0.18);
+      background: var(--button-soft);
+      color: #e2e8f0 !important;
+      font-size: 15px;
+      font-weight: 800;
+      text-align: center;
+    }
+
+    .pr-education .action-btn.is-primary {
+      border-color: rgba(37, 99, 235, 0.24);
+      background: var(--button);
+      color: #ffffff !important;
+    }
+
+    .pr-education .transfer-box {
+      display: grid;
+      gap: 8px;
+      padding: 16px 18px;
+      margin-bottom: 26px;
+      border: 1px solid rgba(47, 212, 220, 0.18);
+      border-radius: 16px;
+      background: rgba(47, 212, 220, 0.06);
+    }
+
+    .pr-education .transfer-box strong {
+      color: #f8fafc;
+      font-size: 15px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    .pr-education .transfer-box p {
+      color: #dbeafe;
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .pr-education .transfer-box span {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    .pr-education .detail-toggle {
+      position: absolute;
+      top: 22px;
+      right: 22px;
+      z-index: 2;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      appearance: none;
+      cursor: pointer;
+      padding: 0;
+      border: 1px solid rgba(47, 212, 220, 0.18);
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.82);
+    }
+
+    .pr-education .detail-toggle::after {
+      content: "+";
+      color: var(--brand);
+      font-size: 22px;
+      line-height: 1;
+    }
+
+    .pr-education .detail-toggle.is-open::after {
+      content: "-";
+    }
+
+    .pr-education .detail-subtitle {
+      margin: 0 0 12px;
+      color: #f8fafc;
+      font-size: 16px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    .pr-education .detail-layout {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+      align-items: start;
+    }
+
+    .pr-education .detail-image {
+      width: 100%;
+      max-width: 100%;
+      border-radius: 14px;
+      border: 1px solid rgba(148, 163, 184, 0.14);
+      background: #081121;
+    }
+
+    .pr-education .detail-image-stack {
+      display: grid;
+      gap: 14px;
+    }
+
+    .pr-education .detail-image-svg {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 14px;
+      border: 1px solid rgba(148, 163, 184, 0.14);
+      background: #081121;
+    }
+
+    .pr-education .details-stack {
+      display: grid;
+      gap: 18px;
+      margin-top: 24px;
+    }
+
+    .pr-education .detail-panel {
+      display: none;
+      padding: 20px;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      background: linear-gradient(180deg, var(--surface) 0%, var(--surface-alt) 100%);
+    }
+
+    .pr-education .detail-panel.is-active {
+      display: block;
+    }
+
+    .pr-education .detail-panel-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 12px;
+    }
+
+    .pr-education .detail-panel-header h3 {
+      margin: 0;
+      font-size: 26px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+    }
+
+    .pr-education .detail-close {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border: 1px solid rgba(148, 163, 184, 0.18);
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.82);
+      color: #cbd5e1;
+      font-size: 20px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .pr-education .detail-info {
+      display: grid;
+      gap: 8px;
+    }
+
+    .pr-education .detail-item {
+      padding: 12px 14px;
+      border: 1px solid rgba(148, 163, 184, 0.14);
+      border-radius: 14px;
+      background: rgba(15, 23, 42, 0.48);
+    }
+
+    .pr-education .detail-item strong {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--brand);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .pr-education .detail-item span {
+      color: #f8fafc;
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .pr-education .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    .pr-education .section-foot {
+      padding-bottom: 84px;
+    }
+
+    @media (max-width: 1100px) {
+      .pr-education .course-grid {
+        grid-template-columns: 1fr;
+      }
+
+    }
+
+    @media (max-width: 760px) {
+      .hero-home {
+        position: static;
+        margin-bottom: 18px;
+      }
+
+      .pr-education .content-inner {
+        padding-left: 18px;
+        padding-right: 18px;
+      }
+
+      .pr-education .hero {
+        padding-top: 34px;
+      }
+
+      .pr-education .hero h1 {
+        font-size: 38px;
+      }
+
+      .pr-education .hero p {
+        white-space: normal;
+      }
+
+      .pr-education .button-row {
+        grid-template-columns: 1fr;
+      }
+
+      .pr-education .detail-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="pr-education">
+    <section class="hero">
+      <div class="content-inner">
+        <div class="hero-layout">
+          <a class="hero-home" href="/" aria-label="홈으로">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M3 10.5 12 3l9 7.5"></path>
+              <path d="M5.5 9.5V21h13V9.5"></path>
+              <path d="M10 21v-6h4v6"></path>
+            </svg>
+          </a>
+          <div class="hero-intro">
+            <div class="hero-kicker">Physical Security Education</div>
+            <div class="hero-title-row">
+              <h1>물리보안 교육</h1>
+              <span class="hero-title-badge">Education Service</span>
+            </div>
+            <p>실무과정, 표준과정, 외부 출강교육을 목적에 맞게 선택할 수 있도록 핵심 정보만 간결하게 정리했습니다.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-foot">
+      <div class="content-inner">
+        <div class="section-heading">
+          <h2>교육 과정</h2>
+          <!-- <p>기존 교육 페이지 구성을 바탕으로, 현재 운영 기준에 맞는 수강료와 기간만 남겨 바로 비교할 수 있게 구성했습니다.</p> -->
+        </div>
+
+        <div class="payment-guide">
+          <strong>결제 완료 후 인적사항 등록을 진행해주세요</strong>
+          <p>실무과정과 표준과정은 결제링크를 통한 카드결제 또는 계좌이체 중 선택할 수 있으며, 결제 후 인적사항등록 페이지에서 신청 정보를 반드시 작성해주셔야 최종 접수가 완료됩니다.</p>
+        </div>
+
+        <div class="transfer-box">
+          <strong>계좌이체 안내</strong>
+          <p>예금주 : 주식회사 피지컬리콘<br>우리은행 1005-904-430188</p>
+          <span>계좌이체 후에도 인적사항등록 페이지에서 신청 정보를 작성해주셔야 최종 접수가 완료됩니다.</span>
+        </div>
+
+        <div class="course-grid">
+          <article class="course-card">
+            <span class="course-label">Course 01</span>
+            <h3>물리보안 실무과정</h3>
+            <table class="info-table">
+              <tbody>
+                <tr>
+                  <th>교육과정</th>
+                  <td>물리보안 실무과정</td>
+                </tr>
+                <tr>
+                  <th>기간</th>
+                  <td>2 Days</td>
+                </tr>
+                <tr>
+                  <th>수강료</th>
+                  <td>880,000원</td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="button-row">
+              <a class="action-btn is-primary" href="https://cpay.payple.kr/php/link/?SID=Nzk2Ojc3ODEyMTA2MjUwNzA3">카드결제</a>
+              <a class="action-btn" href="./register">인적사항등록</a>
+            </div>
+            <button class="detail-toggle" type="button" data-target="detail-practical" aria-expanded="false" aria-controls="detail-practical">
+              <span class="sr-only">상세정보 보기</span>
+            </button>
+          </article>
+
+          <article class="course-card">
+            <span class="course-label">Course 02</span>
+            <h3>물리보안 표준과정</h3>
+            <table class="info-table">
+              <tbody>
+                <tr>
+                  <th>교육과정</th>
+                  <td>물리보안 표준과정</td>
+                </tr>
+                <tr>
+                  <th>기간</th>
+                  <td>2 Days</td>
+                </tr>
+                <tr>
+                  <th>수강료</th>
+                  <td>880,000원</td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="button-row">
+              <a class="action-btn is-primary" href="https://cpay.payple.kr/php/link/?SID=Nzk2Ojc3ODEyMTA2MjUwNzA3">카드결제</a>
+              <a class="action-btn" href="./register">인적사항등록</a>
+            </div>
+            <button class="detail-toggle" type="button" data-target="detail-standard" aria-expanded="false" aria-controls="detail-standard">
+              <span class="sr-only">상세정보 보기</span>
+            </button>
+          </article>
+
+          <article class="course-card">
+            <span class="course-label">Course 03</span>
+            <h3>외부 출강교육</h3>
+            <table class="info-table">
+              <tbody>
+                <tr>
+                  <th>교육과정</th>
+                  <td>외부 출강교육</td>
+                </tr>
+                <tr>
+                  <th>기간</th>
+                  <td>협의</td>
+                </tr>
+                <tr>
+                  <th>수강료</th>
+                  <td>협의</td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="button-row single">
+              <a class="action-btn is-primary" href="./contactus">상담문의</a>
+            </div>
+          </article>
+        </div>
+
+        <div class="details-stack">
+          <article class="detail-panel" id="detail-practical">
+            <div class="detail-panel-header">
+              <h3>물리보안 실무과정</h3>
+              <button class="detail-close" type="button" data-close="detail-practical" aria-label="상세정보 닫기">×</button>
+            </div>
+            <p class="detail-subtitle">상세일정</p>
+            <div class="detail-layout">
+              <img class="detail-image" src="https://cdn.imweb.me/thumbnail/20260430/1ce72c8535c22.png" alt="물리보안 실무과정 교육과정 표">
+              <div class="detail-info">
+                <div class="detail-item">
+                  <strong>기간</strong>
+                  <span>2 Days (16H)</span>
+                </div>
+                <div class="detail-item">
+                  <strong>수강료</strong>
+                  <span>880,000원</span>
+                </div>
+                <div class="detail-item">
+                  <strong>장소</strong>
+                  <span>경기 성남시 수정구 대왕판교로 815, 경기창조경제혁신센터 6F 교육장</span>
+                </div>
+                <div class="detail-item">
+                  <strong>교육방식</strong>
+                  <span>초청강의 또는 현장방문</span>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="detail-panel" id="detail-standard">
+            <div class="detail-panel-header">
+              <h3>물리보안 표준과정</h3>
+              <button class="detail-close" type="button" data-close="detail-standard" aria-label="상세정보 닫기">×</button>
+            </div>
+            <p class="detail-subtitle">상세일정</p>
+            <div class="detail-layout">
+              <img class="detail-image" src="https://cdn.imweb.me/thumbnail/20260507/09a2c63e1020e.png" alt="물리보안 표준과정 교육과정 표">
+              <div class="detail-info">
+                <div class="detail-item">
+                  <strong>기간</strong>
+                  <span>2 Days (16H)</span>
+                </div>
+                <div class="detail-item">
+                  <strong>수강료</strong>
+                  <span>880,000원</span>
+                </div>
+                <div class="detail-item">
+                  <strong>장소</strong>
+                  <span>경기 성남시 수정구 대왕판교로 815, 경기창조경제혁신센터 6F 교육장</span>
+                </div>
+                <div class="detail-item">
+                  <strong>교육방식</strong>
+                  <span>초청강의 또는 현장방문</span>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+
+      </div>
+    </section>
+  </div>
+  <script>
+    (function () {
+      const toggles = document.querySelectorAll('.detail-toggle');
+      const panels = document.querySelectorAll('.detail-panel');
+      const closes = document.querySelectorAll('.detail-close');
+
+      function closeAll() {
+        panels.forEach(function (panel) {
+          panel.classList.remove('is-active');
+        });
+        toggles.forEach(function (toggle) {
+          toggle.classList.remove('is-open');
+          toggle.setAttribute('aria-expanded', 'false');
+        });
+      }
+
+      toggles.forEach(function (toggle) {
+        toggle.addEventListener('click', function () {
+          const targetId = toggle.getAttribute('data-target');
+          const panel = document.getElementById(targetId);
+          const willOpen = panel && !panel.classList.contains('is-active');
+
+          closeAll();
+
+          if (willOpen) {
+            panel.classList.add('is-active');
+            toggle.classList.add('is-open');
+            toggle.setAttribute('aria-expanded', 'true');
+            panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        });
+      });
+
+      closes.forEach(function (button) {
+        button.addEventListener('click', function () {
+          closeAll();
+        });
+      });
+    })();
+  </script>
+</body>
+
+</html>

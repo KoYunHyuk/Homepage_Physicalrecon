@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PhysicalRecon Expert</title>
+  <style>
+    :root {
+      --bg: #020617;
+      --surface: #0f172a;
+      --surface-soft: #111c34;
+      --surface-alt: #18233d;
+      --line: rgba(148, 163, 184, 0.18);
+      --text: #ffffff;
+      --muted: #94a3b8;
+      --brand: #2fd4dc;
+      --brand-soft: rgba(47, 212, 220, 0.12);
+    }
+
+    .pr-expert,
+    .pr-expert * {
+      box-sizing: border-box;
+      font-family: Arial, sans-serif !important;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+    }
+
+    .pr-expert {
+      width: 100%;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    .pr-expert .content-inner {
+      width: 100%;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding-left: 28px;
+      padding-right: 28px;
+    }
+
+    .pr-expert .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 24px 0 18px;
+      background: var(--bg);
+    }
+
+    .pr-expert .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(47, 212, 220, 0.06) 0%, transparent 65%);
+      pointer-events: none;
+    }
+
+    .pr-expert .hero-layout {
+      position: relative;
+      z-index: 1;
+      display: block;
+    }
+
+    .hero-home {
+      position: absolute;
+      top: 0;
+      right: 0;
+      z-index: 2;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 46px;
+      height: 46px;
+      padding: 0;
+      border: 1px solid rgba(148, 163, 184, 0.18);
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.78);
+      color: #f8fafc !important;
+      backdrop-filter: blur(8px);
+      transition: background-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .hero-home:hover {
+      background: rgba(37, 99, 235, 0.88);
+      transform: translateY(-1px);
+    }
+
+    .hero-home svg {
+      width: 20px;
+      height: 20px;
+      stroke: currentColor;
+    }
+
+    .pr-expert .hero-intro {
+      max-width: 980px;
+      padding-left: 24px;
+      border-left: 4px solid rgba(47, 212, 220, 0.78);
+    }
+
+    .pr-expert .hero-kicker {
+      display: inline-flex;
+      align-items: center;
+      margin-bottom: 16px;
+      color: #7dd3fc;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .pr-expert .hero-title-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .pr-expert .hero-title-badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 6px 12px;
+      border: 1px solid rgba(148, 163, 184, 0.2);
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.48);
+      color: #e2e8f0;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .pr-expert .hero h1 {
+      margin: 0;
+      font-size: 48px;
+      line-height: 1.12;
+      letter-spacing: -0.04em;
+      font-weight: 800;
+    }
+
+    .pr-expert .hero p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1.8;
+    }
+
+    .pr-expert .section {
+      padding: 68px 0 84px;
+    }
+
+    .pr-expert .section-heading {
+      margin-bottom: 30px;
+    }
+
+    .pr-expert .section-heading h2 {
+      margin: 0 0 12px;
+      font-size: 38px;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+    }
+
+    .pr-expert .section-heading p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.75;
+    }
+
+    .pr-expert .org-board {
+      padding: 22px;
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      background: linear-gradient(180deg, var(--surface) 0%, var(--surface-alt) 100%);
+      margin-bottom: 24px;
+    }
+
+    .pr-expert .org-tag {
+      display: inline-flex;
+      align-items: center;
+      width: fit-content;
+      padding: 6px 12px;
+      margin-bottom: 18px;
+      border-radius: 999px;
+      background: var(--brand-soft);
+      color: var(--brand);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .pr-expert .org-head {
+      display: grid;
+      justify-items: center;
+      margin-bottom: 28px;
+    }
+
+    .pr-expert .leader-card {
+      width: min(680px, 100%);
+      padding: 22px 24px;
+      border: 1px solid rgba(148, 163, 184, 0.18);
+      border-radius: 20px;
+      background: linear-gradient(180deg, rgba(24, 35, 61, 0.96) 0%, rgba(17, 28, 52, 0.98) 100%);
+      text-align: left;
+    }
+
+    .pr-expert .leader-card small {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--brand);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .pr-expert .leader-card h3 {
+      margin: 0 0 6px;
+      font-size: 34px;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      color: #f8fafc;
+    }
+
+    .pr-expert .leader-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .pr-expert .leader-subtitle {
+      margin: 0 0 18px !important;
+      color: #dbeafe !important;
+      font-size: 16px !important;
+      font-weight: 700;
+    }
+
+    .pr-expert .leader-history {
+      display: grid;
+      gap: 6px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      color: #cbd5e1;
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .pr-expert .leader-role {
+      color: var(--brand);
+      font-size: 0.8em;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+      vertical-align: middle;
+    }
+
+    .pr-expert .org-connector {
+      display: none;
+    }
+
+    .pr-expert .team-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 22px 24px;
+      position: relative;
+    }
+
+    .pr-expert .team-grid::before {
+      display: none;
+    }
+
+    .pr-expert .team-column {
+      position: relative;
+      display: grid;
+      gap: 14px;
+      align-content: start;
+    }
+
+    .pr-expert .team-column::before {
+      display: none;
+    }
+
+    .pr-expert .team-title {
+      margin: 0;
+      display: flex;
+      align-items: flex-start;
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      color: #f8fafc;
+    }
+
+    .pr-expert .member-card {
+      padding: 20px 20px 18px;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      background: linear-gradient(180deg, var(--surface) 0%, var(--surface-soft) 100%);
+    }
+
+    .pr-expert .member-card h3 {
+      margin: 0 0 14px;
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: #7dd3fc;
+    }
+
+    .pr-expert .member-subtitle {
+      margin: 0 0 16px;
+      color: #dbeafe;
+      font-size: 15px;
+      font-weight: 700;
+      line-height: 1.6;
+    }
+
+    .pr-expert .member-history {
+      display: grid;
+      gap: 5px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      color: #cbd5e1;
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .pr-expert .simple-card {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 96px;
+      text-align: center;
+    }
+
+    .pr-expert .simple-card strong {
+      display: block;
+      color: #f8fafc;
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+    }
+
+    .pr-expert .org-copy {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .pr-expert .dept-card {
+      padding: 20px 22px;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      background: linear-gradient(180deg, var(--surface) 0%, var(--surface-soft) 100%);
+    }
+
+    .pr-expert .dept-card h3 {
+      margin: 0 0 10px;
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: #7dd3fc;
+    }
+
+    .pr-expert .dept-meta {
+      margin: 0 0 10px;
+      color: #dbeafe;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .pr-expert .dept-text {
+      margin: 0;
+      color: #f8fafc;
+      font-size: 15px;
+      line-height: 1.8;
+    }
+
+    @media (max-width: 760px) {
+      .hero-home {
+        position: static;
+        margin-bottom: 18px;
+      }
+
+      .pr-expert .content-inner {
+        padding-left: 18px;
+        padding-right: 18px;
+      }
+
+      .pr-expert .hero {
+        padding-top: 34px;
+      }
+
+      .pr-expert .hero h1 {
+        font-size: 38px;
+      }
+
+      .pr-expert .org-board {
+        padding: 18px;
+      }
+    }
+
+    @media (max-width: 1080px) {
+      .pr-expert .org-copy,
+      .pr-expert .team-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .pr-expert .team-grid::before,
+      .pr-expert .team-column::before {
+        display: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="pr-expert">
+    <section class="hero">
+      <div class="content-inner">
+        <div class="hero-layout">
+          <a class="hero-home" href="/" aria-label="홈으로">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M3 10.5 12 3l9 7.5"></path>
+              <path d="M5.5 9.5V21h13V9.5"></path>
+              <path d="M10 21v-6h4v6"></path>
+            </svg>
+          </a>
+          <div class="hero-intro">
+            <div class="hero-kicker">Expert Team</div>
+            <div class="hero-title-row">
+              <h1>전문인력</h1>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="content-inner">
+        <div class="section-heading">
+          <h2>조직 구성</h2>
+          <p>피지컬리콘은 대표와 각 팀 리더를 중심으로 연구, 컨설팅, 엔지니어링 기능을 유기적으로 운영하고 있습니다.</p>
+        </div>
+
+        <div class="org-board">
+          <div class="org-tag">Organization Chart</div>
+          <div class="org-head">
+            <div class="leader-card">
+              <small>Representative</small>
+              <h3>이상희 / <span class="leader-role">CEO</span></h3>
+              <p class="leader-subtitle">PhD of Security Management</p>
+              <ul class="leader-history">
+                <li>융합보안학 박사, 美 PSP</li>
+                <li>중앙대학교 산업보안학과 겸임교수</li>
+                <li>국가보안정책위원</li>
+                <li>前 SK쉴더스 융합보안컨설팅 팀장</li>
+                <li>前 LG그룹 보안사무국 진단위원</li>
+              </ul>
+            </div>
+            <div class="org-connector"></div>
+          </div>
+          <div class="team-grid">
+            <div class="team-column">
+              <h3 class="team-title">보안컨설팅사업팀 (3)</h3>
+              <article class="member-card">
+                <h3>유창현 / Team Leader</h3>
+                <p class="member-subtitle">Master of Security Consulting (UK)</p>
+                <ul class="member-history">
+                  <li>美 보안관리학 석사, CPOI(IFPO)</li>
+                  <li>ISO TC 292(보안 및 회복력) 전문위원</li>
+                  <li>前 SK쉴더스 보안컨설턴트</li>
+                </ul>
+              </article>
+              <article class="member-card simple-card">
+                <strong>+ 2 Consultants</strong>
+              </article>
+            </div>
+
+            <div class="team-column">
+              <h3 class="team-title">보안엔지니어링사업팀 (3)</h3>
+              <article class="member-card">
+                <h3>허상훈 / Team Leader</h3>
+                <p class="member-subtitle">Master of Engineering</p>
+                <ul class="member-history">
+                  <li>정보통신 특급기술자</li>
+                  <li>동국대학교 MBA 석사</li>
+                  <li>前 에스원 보안엔지니어</li>
+                </ul>
+              </article>
+              <article class="member-card simple-card">
+                <strong>+ 2 Engineer</strong>
+              </article>
+            </div>
+
+            <div class="team-column">
+              <h3 class="team-title">부설연구소 (1)</h3>
+              <article class="member-card">
+                <h3>S/W Engineer</h3>
+                <p class="member-subtitle">AI대학원 석사 在</p>
+              </article>
+            </div>
+          </div>
+        </div>
+
+        <div class="org-copy">
+          <article class="dept-card">
+            <h3>보안컨설팅사업팀</h3>
+            <p class="dept-text">보안진단, 취약점 분석, 보호전략 수립을 중심으로 고객 환경에 맞는 보안방호 방향과 운영 기준을 제안합니다.</p>
+          </article>
+
+          <article class="dept-card">
+            <h3>보안엔지니어링사업팀</h3>
+            <p class="dept-text">물리보안 설계와 구축 연계를 담당하며, 진단과 기획 결과를 실제 적용 가능한 엔지니어링 체계로 구체화합니다.</p>
+          </article>
+
+          <article class="dept-card">
+            <h3>부설연구소</h3>
+            <p class="dept-text">물리보안 연구, 기술개발, 표준화 검토를 수행하며 신규 방법론 정립과 제도화 기반 업무를 담당합니다.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+  </div>
+</body>
+
+</html>

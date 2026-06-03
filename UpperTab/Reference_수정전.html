@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PhysicalRecon Reference</title>
+  <style>
+    :root {
+      --bg: #020617;
+      --surface: #0f172a;
+      --surface-alt: #18233d;
+      --surface-soft: #111c34;
+      --line: rgba(148, 163, 184, 0.18);
+      --text: #ffffff;
+      --muted: #94a3b8;
+      --brand: #2fd4dc;
+      --brand-soft: rgba(47, 212, 220, 0.12);
+      --done: #cbd5e1;
+      --active: #1d4ed8;
+      --planned: #facc15;
+      --chip: #0b1222;
+    }
+
+    .pr-reference,
+    .pr-reference * {
+      box-sizing: border-box;
+      font-family: Arial, sans-serif !important;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+    }
+
+    .pr-reference {
+      width: 100%;
+      background: var(--bg);
+      color: var(--text);
+      padding-bottom: 84px;
+    }
+
+    .pr-reference button {
+      font: inherit;
+    }
+
+    .pr-reference .content-inner {
+      width: 100%;
+      max-width: 1360px;
+      margin: 0 auto;
+      padding-left: 28px;
+      padding-right: 28px;
+    }
+
+    .pr-reference .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 48px 0 18px;
+      background: var(--bg);
+    }
+
+    .pr-reference .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, rgba(47, 212, 220, 0.06) 0%, transparent 60%),
+        radial-gradient(circle at right top, rgba(29, 78, 216, 0.14), transparent 24%);
+      pointer-events: none;
+    }
+
+    .pr-reference .hero-layout {
+      position: relative;
+      z-index: 1;
+      display: block;
+    }
+
+    .hero-home {
+      position: absolute;
+      top: 0;
+      right: 0;
+      z-index: 2;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 46px;
+      height: 46px;
+      padding: 0;
+      border: 1px solid rgba(148, 163, 184, 0.18);
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.78);
+      color: #f8fafc !important;
+      backdrop-filter: blur(8px);
+      transition: background-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .hero-home:hover {
+      background: rgba(37, 99, 235, 0.88);
+      transform: translateY(-1px);
+    }
+
+    .hero-home svg {
+      width: 20px;
+      height: 20px;
+      stroke: currentColor;
+    }
+
+    .pr-reference .hero-intro {
+      max-width: 1080px;
+      padding-left: 24px;
+      border-left: 4px solid rgba(47, 212, 220, 0.78);
+    }
+
+    .pr-reference .hero-kicker {
+      display: inline-flex;
+      align-items: center;
+      margin-bottom: 16px;
+      color: #7dd3fc;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .pr-reference .hero-title-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .pr-reference .hero-title-badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 6px 12px;
+      border: 1px solid rgba(148, 163, 184, 0.2);
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.48);
+      color: #e2e8f0;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .pr-reference .hero h1 {
+      margin: 0;
+      font-size: 48px;
+      line-height: 1.12;
+      letter-spacing: -0.04em;
+      font-weight: 800;
+    }
+
+    .pr-reference .hero p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1.8;
+      max-width: 980px;
+      white-space: nowrap;
+    }
+
+    .pr-reference .scope-strip {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 28px;
+    }
+
+    .pr-reference .scope-chip {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 14px;
+      border: 1px solid rgba(148, 163, 184, 0.16);
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.78);
+      color: #dbeafe;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 1.4;
+    }
+
+    .pr-reference .section {
+      padding: 58px 0 0;
+    }
+
+    .pr-reference .section-heading {
+      margin-bottom: 26px;
+    }
+
+    .pr-reference .section-heading h2 {
+      margin: 0 0 12px;
+      font-size: 38px;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+    }
+
+    .pr-reference .section-heading p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.8;
+      max-width: 980px;
+    }
+
+    .pr-reference .reference-shell {
+      padding: 24px;
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      background: linear-gradient(180deg, rgba(15, 23, 42, 0.88) 0%, rgba(11, 17, 32, 0.95) 100%);
+    }
+
+    .pr-reference .control-bar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 22px;
+    }
+
+    .pr-reference .control-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .pr-reference .control-label {
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .pr-reference .filter-chip {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 14px;
+      border: 1px solid rgba(148, 163, 184, 0.16);
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.78);
+      color: #cbd5e1;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+    }
+
+    .pr-reference .filter-chip.is-active {
+      background: rgba(47, 212, 220, 0.14);
+      border-color: rgba(47, 212, 220, 0.42);
+      color: #ecfeff;
+    }
+
+    .pr-reference .lane-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .pr-reference .lane {
+      display: grid;
+      align-content: start;
+      gap: 14px;
+      min-height: 100%;
+      padding: 18px;
+      border-radius: 22px;
+      border: 1px solid rgba(148, 163, 184, 0.14);
+      background: rgba(8, 17, 33, 0.6);
+    }
+
+    .pr-reference .lane-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid rgba(148, 163, 184, 0.14);
+    }
+
+    .pr-reference .lane-title {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: #f8fafc;
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+    }
+
+    .pr-reference .lane-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 999px;
+      flex-shrink: 0;
+    }
+
+    .pr-reference .lane[data-lane="done"] .lane-dot {
+      background: var(--done);
+    }
+
+    .pr-reference .lane[data-lane="active"] .lane-dot {
+      background: var(--active);
+    }
+
+    .pr-reference .lane[data-lane="planned"] .lane-dot {
+      background: var(--planned);
+    }
+
+    .pr-reference .lane-count {
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .pr-reference .project-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .pr-reference .project-card {
+      display: grid;
+      gap: 12px;
+      padding: 18px;
+      border-radius: 18px;
+      border: 1px solid rgba(148, 163, 184, 0.12);
+      background: linear-gradient(180deg, rgba(15, 23, 42, 0.96) 0%, rgba(19, 31, 55, 0.94) 100%);
+    }
+
+    .pr-reference .project-card.is-hidden {
+      display: none;
+    }
+
+    .pr-reference .project-top {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .pr-reference .project-client {
+      display: inline-flex;
+      align-items: center;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: var(--chip);
+      color: #bfdbfe;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .pr-reference .project-year {
+      color: #7dd3fc;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .pr-reference .project-card h3 {
+      margin: 0;
+      color: #f8fafc;
+      font-size: 20px;
+      line-height: 1.45;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+    }
+
+    .pr-reference .project-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.75;
+    }
+
+    .pr-reference .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .pr-reference .project-tag {
+      display: inline-flex;
+      align-items: center;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(148, 163, 184, 0.1);
+      color: #cbd5e1;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    @media (max-width: 1120px) {
+      .pr-reference .lane-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 760px) {
+      .pr-reference .content-inner {
+        padding-left: 18px;
+        padding-right: 18px;
+      }
+
+      .pr-reference .hero {
+        padding-top: 34px;
+      }
+
+      .pr-reference .hero h1 {
+        font-size: 38px;
+      }
+
+      .pr-reference .hero p {
+        white-space: normal;
+      }
+
+      .pr-reference .section-heading h2 {
+        font-size: 32px;
+      }
+
+      .pr-reference .lane-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .pr-reference .reference-shell {
+        padding: 18px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="pr-reference">
+    <section class="hero">
+      <div class="content-inner">
+        <div class="hero-layout">
+          <a class="hero-home" href="/" aria-label="홈으로">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M3 10.5 12 3l9 7.5"></path>
+              <path d="M5.5 9.5V21h13V9.5"></path>
+              <path d="M10 21v-6h4v6"></path>
+            </svg>
+          </a>
+          <div class="hero-intro">
+            <div class="hero-kicker">Reference</div>
+            <div class="hero-title-row">
+              <h1>레퍼런스</h1>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="content-inner">
+        <div class="section-heading">
+          <h2>수행 실적 현황</h2>
+          <p>피지컬리콘의 주요 수행실적을 분야별로 빠르게 살펴볼 수 있습니다. 원하는 분야를 선택하면 해당 프로젝트만 정리해서 확인할 수 있습니다.</p>
+        </div>
+
+        <div class="reference-shell">
+          <div class="control-bar">
+            <div class="control-group">
+              <span class="control-label">분야 보기</span>
+              <button class="filter-chip is-active" type="button" data-category="all">전체</button>
+              <button class="filter-chip" type="button" data-category="consulting">컨설팅</button>
+              <button class="filter-chip" type="button" data-category="engineering">엔지니어링</button>
+              <button class="filter-chip" type="button" data-category="platform">플랫폼</button>
+              <button class="filter-chip" type="button" data-category="standard">표준</button>
+              <button class="filter-chip" type="button" data-category="education">교육</button>
+            </div>
+          </div>
+
+          <div class="lane-grid">
+            <section class="lane" data-lane="done">
+              <div class="lane-head">
+                <div class="lane-title">
+                  <span class="lane-dot"></span>
+                  수행완료
+                </div>
+                <span class="lane-count" data-count-for="done">0</span>
+              </div>
+
+              <div class="project-list">
+                <article class="project-card" data-status="done" data-category="standard" data-order="2025.90">
+                  <div class="project-top">
+                    <span class="project-client">자체</span>
+                    <span class="project-year">2025</span>
+                  </div>
+                  <h3>시설보안 관리체계 KS수립</h3>
+                  <p>시설보안 관리체계의 표준화 기반을 수립하고 예고고시까지 완료한 제도화 레퍼런스입니다.</p>
+                  <div class="project-tags">
+                    <span class="project-tag">표준화 기반</span>
+                    <span class="project-tag">KS</span>
+                  </div>
+                </article>
+
+                <article class="project-card" data-status="done" data-category="engineering" data-order="2025.80">
+                  <div class="project-top">
+                    <span class="project-client">한수원</span>
+                    <span class="project-year">2025</span>
+                  </div>
+                  <h3>외곽 통합방호설계</h3>
+                  <p>발전소 외곽 방호 체계를 실제 설계 기준으로 구체화한 방호설계 완료 프로젝트입니다.</p>
+                  <div class="project-tags">
+                    <span class="project-tag">방호설계</span>
+                    <span class="project-tag">엔지니어링</span>
+                  </div>
+                </article>
+
+                <article class="project-card" data-status="done" data-category="consulting" data-order="2026.75">
+                  <div class="project-top">
+                    <span class="project-client">한수원</span>
+                    <span class="project-year">2026</span>
+                  </div>
+                  <h3>OO원전 지연성능분석</h3>
+                  <p>보호체계의 지연 성능을 분석해 방호 설계 및 운영 기준으로 연계한 완료 프로젝트입니다.</p>
+                  <div class="project-tags">
+                    <span class="project-tag">성능분석</span>
+                    <span class="project-tag">한수원</span>
+                  </div>
+                </article>
+
+                <article class="project-card" data-status="done" data-category="consulting" data-order="2025.70">
+                  <div class="project-top">
+                    <span class="project-client">한수원</span>
+                    <span class="project-year">2025</span>
+                  </div>
+                  <h3>경비근무실태진단</h3>
+                  <p>운영실태 관점에서 경비근무 체계와 방호 운영 수준을 진단한 완료 실적입니다.</p>
+                  <div class="project-tags">
+                    <span class="project-tag">운영실태 진단</span>
+                    <span class="project-tag">보안방호</span>
+                  </div>
+                </article>
+
+                <article class="project-card" data-status="done" data-category="consulting" data-order="2025.60">
+                  <div class="project-top">
+                    <span class="project-client">항우연</span>
+                    <span class="project-year">2025</span>
+                  </div>
+                  <h3>물리보안 진단·기획</h3>
+                  <p>대상 시설의 취약점 진단과 보호전략 기획을 연계 수행한 선행 컨설팅 프로젝트입니다.</p>
+                  <div class="project-tags">
+                    <span class="project-tag">진단·기획</span>
+                    <span class="project-tag">컨설팅</span>
+                  </div>
+                </article>
+
+                <article class="project-card" data-status="done" data-category="platform" data-order="2025.50">
+                  <div class="project-top">
+                    <span class="project-client">중소벤처기업부</span>
+                    <span class="project-year">2024~2025</span>
+                  </div>
+                  <h3>AI기반 공간위협인텔리전스 플랫폼 개발</h3>
+                  <p>위험정보와 공간 데이터를 결합한 AI 기반 플랫폼을 개발해 플랫폼형 물리보안 레퍼런스를 확보했습니다.</p>
+                  <div class="project-tags">
+                    <span class="project-tag">플랫폼 개발</span>
+                    <span class="project-tag">특허 출원</span>
+                  </div>
+                </article>
+
+                <article class="project-card" data-status="done" data-category="consulting" data-order="2024.40">
+                  <div class="project-top">
+                    <span class="project-client">산업기술보호협회</span>
+                    <span class="project-year">2024</span>
+                  </div>
+                  <h3>산업기술보호협회 중소기업 보안진단</h3>
+                  <p>산업기술보호협회 연계 중소기업을 대상으로 현장 보안 수준을 점검하고 개선과제를 도출한 진단 프로젝트입니다.</p>
+                  <div class="project-tags">
+                    <span class="project-tag">보안진단</span>
+                    <span class="project-tag">중소기업</span>
+                  </div>
+                </article>
+
+                <article class="project-card" data-status="done" data-category="consulting" data-order="2026.60">
+                  <div class="project-top">
+                    <span class="project-client">42dot</span>
+                    <span class="project-year">2025~2026</span>
+                  </div>
+                  <h3>42dot 국가핵심기술 수출승인</h3>
+                  <p>기술보호 관점에서 국가핵심기술 수출승인 절차를 완료한 프로젝트입니다.</p>
+                  <div class="project-tags">
+                    <span class="project-tag">기술보호</span>
+                    <span class="project-tag">42dot</span>
+                  </div>
+                </article>
+
+                <article class="project-card" data-status="done" data-category="consulting" data-order="2024.30">
+                  <div class="project-top">
+                    <span class="project-client">한수원</span>
+                    <span class="project-year">2023~2024</span>
+                  </div>
+                  <h3>전사 보안방호진단</h3>
+                  <p>전 사업소를 대상으로 물리보안 취약점과 방호 운영 수준을 종합 점검한 전사 단위 진단 실적입니다.</p>
+                  <div class="project-tags">
+                    <span class="project-tag">보안방호 진단</span>
+                    <span class="project-tag">전사 프로젝트</span>
+                  </div>
+                </article>
+              </div>
+            </section>
+
+            <section class="lane" data-lane="active">
+              <div class="lane-head">
+                <div class="lane-title">
+                  <span class="lane-dot"></span>
+                  수행중
+                </div>
+                <span class="lane-count" data-count-for="active">0</span>
+              </div>
+
+              <div class="project-list">
+                <article class="project-card" data-status="active" data-category="engineering" data-order="2026.80">
+                  <div class="project-top">
+                    <span class="project-client">항우연</span>
+                    <span class="project-year">2026</span>
+                  </div>
+                  <h3>물리보안 전 사업소 설계</h3>
+                  <p>전 사업소 적용을 위한 물리보안 설계를 수행 중인 엔지니어링 프로젝트입니다.</p>
+                  <div class="project-tags">
+                    <span class="project-tag">물리보안 설계</span>
+                    <span class="project-tag">엔지니어링</span>
+                  </div>
+                </article>
+
+                <article class="project-card" data-status="active" data-category="standard" data-order="2026.70">
+                  <div class="project-top">
+                    <span class="project-client">자체</span>
+                    <span class="project-year">수행중</span>
+                  </div>
+                  <h3>물리보안 엔지니어링 프로세스 KS수립</h3>
+                  <p>설계와 구축, 운영 단계로 이어지는 물리보안 엔지니어링 프로세스를 KS 표준으로 정리하고 있습니다.</p>
+                  <div class="project-tags">
+                    <span class="project-tag">표준화</span>
+                    <span class="project-tag">KS</span>
+                  </div>
+                </article>
+
+                <article class="project-card" data-status="active" data-category="consulting" data-order="2026.50">
+                  <div class="project-top">
+                    <span class="project-client">한수원</span>
+                    <span class="project-year">2025~2026</span>
+                  </div>
+                  <h3>전사 보안방호진단</h3>
+                  <p>완료된 전사 진단 실적을 바탕으로 후속 사업소 대상 보안방호진단을 연속 수행 중입니다.</p>
+                  <div class="project-tags">
+                    <span class="project-tag">보안방호 진단</span>
+                    <span class="project-tag">연속 과업</span>
+                  </div>
+                </article>
+
+                <article class="project-card" data-status="active" data-category="consulting" data-order="2027.40">
+                  <div class="project-top">
+                    <span class="project-client">원자력안전위원회-RMAS</span>
+                    <span class="project-year">2024~2027</span>
+                  </div>
+                  <h3>소형모듈원자로 물리적방호 규제체계 개발</h3>
+                  <p>SMR 물리적방호의 규제체계와 평가 프레임을 장기 과제로 구축 중인 원전 분야 핵심 레퍼런스입니다.</p>
+                  <div class="project-tags">
+                    <span class="project-tag">규제체계 개발</span>
+                    <span class="project-tag">SMR</span>
+                  </div>
+                </article>
+              </div>
+            </section>
+
+            <section class="lane" data-lane="planned">
+              <div class="lane-head">
+                <div class="lane-title">
+                  <span class="lane-dot"></span>
+                  수행예정
+                </div>
+                <span class="lane-count" data-count-for="planned">0</span>
+              </div>
+
+              <div class="project-list">
+                <article class="project-card" data-status="planned" data-category="platform" data-order="2026.95">
+                  <div class="project-top">
+                    <span class="project-client">자체</span>
+                    <span class="project-year">기획 단계</span>
+                  </div>
+                  <h3>위험정보·성능기반의 물리보안 플랫폼</h3>
+                  <p>기존 플랫폼 개발 실적을 바탕으로 위험정보와 성능평가를 결합한 차세대 플랫폼으로 확장 예정입니다.</p>
+                  <div class="project-tags">
+                    <span class="project-tag">플랫폼 고도화</span>
+                    <span class="project-tag">기획 단계</span>
+                  </div>
+                </article>
+
+                <article class="project-card" data-status="planned" data-category="standard" data-order="2026.85">
+                  <div class="project-top">
+                    <span class="project-client">자체</span>
+                    <span class="project-year">추진 예정</span>
+                  </div>
+                  <h3>물리보안 KS 인증사업 추진</h3>
+                  <p>관리체계 및 프로세스 표준 실적을 기반으로 인증사업 단계까지 확장하는 계획 항목입니다.</p>
+                  <div class="project-tags">
+                    <span class="project-tag">인증사업</span>
+                    <span class="project-tag">표준화</span>
+                  </div>
+                </article>
+
+                <article class="project-card" data-status="planned" data-category="consulting" data-order="2026.75">
+                  <div class="project-top">
+                    <span class="project-client">SK쉴더스</span>
+                    <span class="project-year">2026</span>
+                  </div>
+                  <h3>SKT 물리보안진단 체크리스트 개발</h3>
+                  <p>현장 적용 가능한 진단체계를 체크리스트로 구조화해 진단 도구 체계로 확장할 예정입니다.</p>
+                  <div class="project-tags">
+                    <span class="project-tag">진단체계 개발</span>
+                    <span class="project-tag">체크리스트</span>
+                  </div>
+                </article>
+
+                <article class="project-card" data-status="planned" data-category="engineering" data-order="2026.65">
+                  <div class="project-top">
+                    <span class="project-client">항우연</span>
+                    <span class="project-year">2026</span>
+                  </div>
+                  <h3>물리보안 구축</h3>
+                  <p>진단과 설계 실적을 기반으로 실제 물리보안 구축 단계까지 연결되는 후속 프로젝트입니다.</p>
+                  <div class="project-tags">
+                    <span class="project-tag">물리보안 구축</span>
+                    <span class="project-tag">항우연</span>
+                  </div>
+                </article>
+
+                <article class="project-card" data-status="planned" data-category="engineering" data-order="2026.55">
+                  <div class="project-top">
+                    <span class="project-client">한수원</span>
+                    <span class="project-year">2026</span>
+                  </div>
+                  <h3>SBD기반 물리보안설계 가이드</h3>
+                  <p>설계 기준과 가이드 체계까지 확장하는 한수원 대상 후속 설계가이드 프로젝트입니다.</p>
+                  <div class="project-tags">
+                    <span class="project-tag">설계가이드</span>
+                    <span class="project-tag">SBD</span>
+                  </div>
+                </article>
+
+                <article class="project-card" data-status="planned" data-category="consulting" data-order="2026.45">
+                  <div class="project-top">
+                    <span class="project-client">KINAC</span>
+                    <span class="project-year">2026</span>
+                  </div>
+                  <h3>SMR 물리보안평가 가이드</h3>
+                  <p>SMR 규제체계 개발 실적을 기반으로 실제 평가와 적용 기준을 정리하는 후속 가이드 프로젝트입니다.</p>
+                  <div class="project-tags">
+                    <span class="project-tag">SMR 평가체계</span>
+                    <span class="project-tag">가이드</span>
+                  </div>
+                </article>
+              </div>
+            </section>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </div>
+
+  <script>
+    (function () {
+      const root = document.querySelector('.pr-reference');
+      if (!root) return;
+
+      const categoryButtons = Array.from(root.querySelectorAll('[data-category]')).filter(function (button) {
+        return button.classList.contains('filter-chip');
+      });
+      const lanes = Array.from(root.querySelectorAll('.lane .project-list'));
+      const cards = Array.from(root.querySelectorAll('.project-card'));
+
+      let currentCategory = 'all';
+
+      lanes.forEach(function (lane) {
+        const sortedCards = Array.from(lane.querySelectorAll('.project-card')).sort(function (a, b) {
+          const aOrder = parseFloat(a.getAttribute('data-order') || '0');
+          const bOrder = parseFloat(b.getAttribute('data-order') || '0');
+          return bOrder - aOrder;
+        });
+
+        sortedCards.forEach(function (card) {
+          lane.appendChild(card);
+        });
+      });
+
+      function updateCounts() {
+        ['done', 'active', 'planned'].forEach(function (lane) {
+          const count = cards.filter(function (card) {
+            const visible = !card.classList.contains('is-hidden');
+            return visible && card.getAttribute('data-status') === lane;
+          }).length;
+          const target = root.querySelector('[data-count-for="' + lane + '"]');
+          if (target) target.textContent = count + '건';
+        });
+      }
+
+      function render() {
+        cards.forEach(function (card) {
+          const categoryMatch = currentCategory === 'all' || card.getAttribute('data-category') === currentCategory;
+          card.classList.toggle('is-hidden', !categoryMatch);
+        });
+        updateCounts();
+      }
+
+      categoryButtons.forEach(function (button) {
+        button.addEventListener('click', function () {
+          currentCategory = button.getAttribute('data-category') || 'all';
+          categoryButtons.forEach(function (chip) {
+            chip.classList.toggle('is-active', chip === button);
+          });
+          render();
+        });
+      });
+
+      render();
+    })();
+  </script>
+</body>
+
+</html>

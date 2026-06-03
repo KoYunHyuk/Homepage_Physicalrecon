@@ -1,0 +1,488 @@
+<style>
+  :root {
+    --pr-form-bg: #081121;
+    --pr-form-line: rgba(148, 163, 184, 0.22);
+    --pr-form-line-strong: rgba(56, 189, 248, 0.48);
+    --pr-form-text: #ffffff;
+    --pr-form-muted: #94a3b8;
+    --pr-form-placeholder: #999999;
+    --pr-form-button: #2563eb;
+    --pr-form-button-hover: #1d4ed8;
+  }
+
+  input,
+  textarea,
+  select,
+  button,
+  label,
+  .form-control,
+  .control-label,
+  .form-label,
+  .form_label {
+    font-family: Arial, sans-serif !important;
+  }
+
+  .form-group,
+  .form-row,
+  .input_block,
+  .form_field,
+  .input-wrap {
+    margin-bottom: 18px !important;
+  }
+
+  .pr-phone-inline {
+    display: flex !important;
+    align-items: flex-start !important;
+    gap: 8px !important;
+    flex-wrap: nowrap !important;
+    width: auto !important;
+  }
+
+  .pr-phone-inline .pr-phone-part {
+    display: inline-block !important;
+    margin: 0 !important;
+    vertical-align: middle !important;
+  }
+
+  .pr-phone-inline .pr-phone-part input {
+    margin: 0 !important;
+    vertical-align: middle !important;
+  }
+
+  label,
+  .control-label,
+  .form-label,
+  .form_label {
+    display: inline-block;
+    margin-bottom: 8px !important;
+    color: var(--pr-form-text) !important;
+    font-size: 14px !important;
+    font-weight: 800 !important;
+    letter-spacing: 0 !important;
+  }
+
+  .form-control,
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="number"],
+  input[type="password"],
+  input[type="url"],
+  textarea,
+  select {
+    width: 100% !important;
+    min-height: 52px !important;
+    padding: 14px 16px !important;
+    border: 1px solid var(--pr-form-line) !important;
+    border-radius: 12px !important;
+    background: var(--pr-form-bg) !important;
+    color: var(--pr-form-text) !important;
+    font-size: 15px !important;
+    line-height: 1.5 !important;
+    box-shadow: none !important;
+    outline: none !important;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease !important;
+  }
+
+  textarea {
+    min-height: 140px !important;
+    resize: vertical !important;
+  }
+
+  .form-control:focus,
+  input:focus,
+  textarea:focus,
+  select:focus {
+    border-color: var(--pr-form-line-strong) !important;
+    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.16) !important;
+  }
+
+  .form-control::placeholder,
+  input::placeholder,
+  textarea::placeholder {
+    color: var(--pr-form-placeholder) !important;
+    opacity: 1 !important;
+  }
+
+  select {
+    appearance: none !important;
+    -webkit-appearance: none !important;
+    background-image:
+      linear-gradient(45deg, transparent 50%, #94a3b8 50%),
+      linear-gradient(135deg, #94a3b8 50%, transparent 50%);
+    background-position:
+      calc(100% - 20px) calc(50% - 3px),
+      calc(100% - 14px) calc(50% - 3px);
+    background-size: 6px 6px, 6px 6px;
+    background-repeat: no-repeat;
+    padding-right: 42px !important;
+  }
+
+  input[type="checkbox"],
+  input[type="radio"] {
+    width: 18px !important;
+    height: 18px !important;
+    min-height: 18px !important;
+    margin-right: 8px !important;
+    accent-color: var(--pr-form-button) !important;
+  }
+
+  .checkbox label,
+  .radio label,
+  .agree_txt,
+  .privacy_txt,
+  .help-block,
+  .form-text {
+    color: var(--pr-form-muted) !important;
+    font-size: 13px !important;
+    line-height: 1.7 !important;
+    font-weight: 500 !important;
+  }
+
+  .modal_site_alert .modal-dialog .btn-group.justified,
+  [role="dialog"] .btn-group,
+  [role="dialog"] .button-group,
+  [role="dialog"] .button_wrap,
+  [role="dialog"] .btn_wrap
+  {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    text-align: center !important;
+    width: 100% !important;
+  }
+
+
+  .modal_site_alert .modal-dialog .btn-group.justified .btn.right,
+  .modal_site_alert .modal-dialog .btn-group.justified .btn,
+  .modal_site_alert .modal-dialog .btn-group.justified button,
+  [role="dialog"] button,
+  [role="dialog"] .btn {
+    margin-left: auto !important;
+    margin-right: auto !important;
+    float: none !important;
+    border : none !important;
+  }
+
+  button,
+  input[type="submit"],
+  .btn,
+  .btn-primary {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    min-height: 52px !important;
+    padding: 14px 24px !important;
+    border: none !important;
+    border-radius: 12px !important;
+    background: var(--pr-form-button) !important;
+    color: #ffffff !important;
+    font-size: 15px !important;
+    font-weight: 800 !important;
+    line-height: 1 !important;
+    box-shadow: none !important;
+    transition: background-color 0.2s ease, transform 0.2s ease !important;
+    cursor: pointer !important;
+  }
+
+  button:hover,
+  input[type="submit"]:hover,
+  .btn:hover,
+  .btn-primary:hover{
+    background: var(--pr-form-button-hover) !important;
+    transform: translateY(-1px);
+  }
+
+  @media (max-width: 767px) {
+    .form-control,
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    input[type="number"],
+    input[type="password"],
+    input[type="url"],
+    textarea,
+    select {
+      min-height: 48px !important;
+      padding: 13px 14px !important;
+      font-size: 14px !important;
+    }
+
+    textarea {
+      min-height: 120px !important;
+    }
+
+    button,
+    input[type="submit"],
+    .btn,
+    .btn-primary {
+      width: 100% !important;
+    }
+  }
+</style>
+
+<script>
+  (function () {
+    function normalizeLabelText(text) {
+      return text.replace(/\*/g, "").replace(/\s+/g, " ").trim();
+    }
+
+    function findFieldContainerByText(labelText) {
+      const labels = document.querySelectorAll("label, .control-label, .form-label, .form_label, strong, span, p");
+
+      for (const label of labels) {
+        const text = normalizeLabelText(label.innerText || label.textContent || "");
+
+        if (!text || !text.includes(labelText)) {
+          continue;
+        }
+
+        const formGroup = label.closest(".form-group, .form-row, .input_block, .form_field, .input-wrap, .col-sm-12, .col-md-12, div");
+
+        if (!formGroup) {
+          continue;
+        }
+
+        const input = formGroup.querySelector("textarea, input:not([type='checkbox']):not([type='radio'])");
+
+        if (input) {
+          return formGroup;
+        }
+      }
+
+      return null;
+    }
+
+    function setPhoneInlineLayout() {
+      const formGroup = findFieldContainerByText("연락처");
+
+      if (!formGroup) {
+        return;
+      }
+
+      formGroup.style.display = "block";
+      formGroup.style.width = "100%";
+      formGroup.style.maxWidth = "100%";
+      formGroup.style.float = "none";
+      formGroup.style.clear = "both";
+      formGroup.style.textAlign = "left";
+      formGroup.style.alignItems = "flex-start";
+      formGroup.style.justifyContent = "flex-start";
+
+      const phoneLabels = formGroup.querySelectorAll("label, .control-label, .form-label, .form_label");
+      phoneLabels.forEach(function (phoneLabel) {
+        const labelText = normalizeLabelText(phoneLabel.innerText || phoneLabel.textContent || "");
+
+        if (labelText.includes("연락처")) {
+          phoneLabel.style.display = "block";
+          phoneLabel.style.width = "100%";
+          phoneLabel.style.marginBottom = "12px";
+        }
+      });
+
+      const inputs = Array.from(formGroup.querySelectorAll("input:not([type='checkbox']):not([type='radio'])")).slice(0, 3);
+
+      if (inputs.length < 3) {
+        return;
+      }
+
+      inputs[0].setAttribute("placeholder", "010");
+      inputs[1].setAttribute("placeholder", "1234");
+      inputs[2].setAttribute("placeholder", "5678");
+
+      const wrappers = inputs.map(function (input) {
+        return input.parentElement;
+      }).filter(Boolean);
+
+      if (wrappers.length !== 3) {
+        return;
+      }
+
+      const sameParent = wrappers.every(function (wrapper) {
+        return wrapper.parentElement && wrapper.parentElement === wrappers[0].parentElement;
+      });
+
+      if (!sameParent) {
+        return;
+      }
+
+      const parent = wrappers[0].parentElement;
+
+      if (!parent) {
+        return;
+      }
+
+      const phoneLabel = Array.from(phoneLabels).find(function (label) {
+        const text = normalizeLabelText(label.innerText || label.textContent || "");
+        return text.includes("연락처");
+      });
+
+      const layoutParent = phoneLabel && phoneLabel.parentElement ? phoneLabel.parentElement : formGroup;
+      layoutParent.style.display = "flex";
+      layoutParent.style.flexDirection = "column";
+      layoutParent.style.alignItems = "flex-start";
+      layoutParent.style.justifyContent = "flex-start";
+      layoutParent.style.width = "100%";
+      layoutParent.style.maxWidth = "100%";
+      layoutParent.style.float = "none";
+      layoutParent.style.textAlign = "left";
+
+      if (phoneLabel) {
+        phoneLabel.style.display = "block";
+        phoneLabel.style.width = "100%";
+        phoneLabel.style.marginBottom = "12px";
+        phoneLabel.style.float = "none";
+        phoneLabel.style.clear = "both";
+        phoneLabel.style.textAlign = "left";
+
+        if (parent.parentElement === formGroup && phoneLabel.nextSibling !== parent) {
+          const nextNode = phoneLabel.nextSibling;
+          if (nextNode) {
+            formGroup.insertBefore(parent, nextNode);
+          } else {
+            formGroup.appendChild(parent);
+          }
+        }
+      }
+
+      parent.classList.add("pr-phone-inline");
+      parent.style.display = "flex";
+      parent.style.alignItems = "center";
+      parent.style.gap = "8px";
+      parent.style.flexWrap = "nowrap";
+      parent.style.width = "fit-content";
+      parent.style.maxWidth = "100%";
+      parent.style.marginTop = "0";
+      parent.style.marginBottom = "0";
+      parent.style.marginLeft = "0";
+      parent.style.marginRight = "auto";
+      parent.style.alignSelf = "flex-start";
+      parent.style.textAlign = "left";
+      parent.style.justifyContent = "flex-start";
+      parent.style.float = "none";
+      parent.style.clear = "both";
+      parent.style.position = "relative";
+      parent.style.left = "0";
+      parent.style.right = "auto";
+
+      wrappers.forEach(function (wrapper) {
+        wrapper.classList.add("pr-phone-part");
+      });
+
+      wrappers.forEach(function (wrapper, index) {
+        wrapper.style.display = "inline-block";
+        wrapper.style.width = "auto";
+        wrapper.style.minWidth = "0";
+        wrapper.style.margin = "0";
+
+        const separator = wrapper.nextSibling;
+
+        if (separator && separator.nodeType === Node.TEXT_NODE && separator.textContent.includes("-")) {
+          separator.textContent = " - ";
+        }
+
+        if (index < wrappers.length - 1) {
+          const nextElement = wrapper.nextElementSibling;
+          if (nextElement) {
+            const text = normalizeLabelText(nextElement.textContent || "");
+            if (text === "-") {
+              nextElement.style.display = "inline-block";
+              nextElement.style.margin = "0 2px";
+            }
+          }
+        }
+      });
+
+      inputs.forEach(function (input, index) {
+        input.style.display = "inline-block";
+        input.style.width = index === 0 ? "66px" : "88px";
+        input.style.minWidth = index === 0 ? "66px" : "88px";
+        input.style.maxWidth = index === 0 ? "66px" : "88px";
+        input.style.margin = "0";
+      });
+    }
+
+    function setPlaceholderByLabel(labelText, placeholderText) {
+      const formGroup = findFieldContainerByText(labelText);
+
+      if (!formGroup) {
+        return;
+      }
+
+      const input = formGroup.querySelector("textarea, input:not([type='checkbox']):not([type='radio'])");
+
+      if (input) {
+        input.setAttribute("placeholder", placeholderText);
+      }
+    }
+
+    function centerConfirmButtons() {
+      const buttons = document.querySelectorAll("button, .btn, a.btn, input[type='button'], input[type='submit']");
+
+      buttons.forEach(function (button) {
+        const text = normalizeLabelText(
+          button.innerText || button.textContent || button.value || ""
+        );
+
+        if (text !== "확인") {
+          return;
+        }
+
+        const row = button.closest(".btn-group.justified, .button-group, .button_wrap, .btn_wrap") || button.parentElement;
+
+        if (row) {
+          row.style.display = "flex";
+          row.style.justifyContent = "center";
+          row.style.alignItems = "center";
+          row.style.width = "100%";
+          row.style.textAlign = "center";
+        }
+
+        button.style.marginLeft = "auto";
+        button.style.marginRight = "auto";
+        button.style.float = "none";
+        button.style.border = "none";
+      });
+    }
+
+    function applyFormPlaceholders() {
+      setPlaceholderByLabel("소속 / 지역", "피지컬리콘 / 경기");
+      setPlaceholderByLabel("상담 요청사항", "요구사항 및 문의를 원하시는 내용을 작성해주세요.");
+      setPhoneInlineLayout();
+    }
+
+    let attempts = 0;
+    const maxAttempts = 30;
+    const interval = setInterval(function () {
+      applyFormPlaceholders();
+      centerConfirmButtons();
+      attempts += 1;
+
+      if (attempts >= maxAttempts) {
+        clearInterval(interval);
+      }
+    }, 400);
+
+    document.addEventListener("click", function (event) {
+      const target = event.target.closest("button, .btn, input[type='submit']");
+
+      if (!target) {
+        return;
+      }
+
+      const text = normalizeLabelText(
+        target.innerText || target.textContent || target.value || ""
+      );
+
+      if (text.includes("작성") || text.includes("접수") || text.includes("문의")) {
+        setTimeout(centerConfirmButtons, 200);
+        setTimeout(centerConfirmButtons, 600);
+        setTimeout(centerConfirmButtons, 1200);
+      }
+    });
+
+    window.addEventListener("load", applyFormPlaceholders);
+    window.addEventListener("load", centerConfirmButtons);
+    applyFormPlaceholders();
+  })();
+</script>

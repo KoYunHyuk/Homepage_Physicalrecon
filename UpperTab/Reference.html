@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PhysicalRecon Reference 2</title>
+  <style>
+    :root {
+      --bg: #020617;
+      --surface: #0f172a;
+      --surface-alt: #18233d;
+      --surface-soft: #111c34;
+      --line: rgba(148, 163, 184, 0.18);
+      --text: #ffffff;
+      --muted: #94a3b8;
+      --brand: #2fd4dc;
+      --brand-soft: rgba(47, 212, 220, 0.12);
+      --chip: #0b1222;
+    }
+
+    .pr-reference2,
+    .pr-reference2 * {
+      box-sizing: border-box;
+      font-family: Arial, sans-serif !important;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+    }
+
+    .pr-reference2 {
+      width: 100%;
+      background: var(--bg);
+      color: var(--text);
+      padding-bottom: 84px;
+    }
+
+    .pr-reference2 .content-inner {
+      width: 100%;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding-left: 28px;
+      padding-right: 28px;
+    }
+
+    .pr-reference2 .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 24px 0 18px;
+      background: var(--bg);
+    }
+
+    .pr-reference2 .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, rgba(47, 212, 220, 0.06) 0%, transparent 60%),
+        radial-gradient(circle at right top, rgba(29, 78, 216, 0.14), transparent 24%);
+      pointer-events: none;
+    }
+
+    .pr-reference2 .hero-layout {
+      position: relative;
+      z-index: 1;
+      display: block;
+    }
+
+    .hero-home {
+      position: absolute;
+      top: 0;
+      right: 0;
+      z-index: 2;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 46px;
+      height: 46px;
+      padding: 0;
+      border: 1px solid rgba(148, 163, 184, 0.18);
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.78);
+      color: #f8fafc !important;
+      backdrop-filter: blur(8px);
+      transition: background-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .hero-home:hover {
+      background: rgba(37, 99, 235, 0.88);
+      transform: translateY(-1px);
+    }
+
+    .hero-home svg {
+      width: 20px;
+      height: 20px;
+      stroke: currentColor;
+    }
+
+    .pr-reference2 .hero-intro {
+      max-width: 1080px;
+      padding-left: 24px;
+      border-left: 4px solid rgba(47, 212, 220, 0.78);
+    }
+
+    .pr-reference2 .hero-kicker {
+      display: inline-flex;
+      align-items: center;
+      margin-bottom: 16px;
+      color: #7dd3fc;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .pr-reference2 .hero h1 {
+      margin: 0 0 14px;
+      font-size: 48px;
+      line-height: 1.12;
+      letter-spacing: -0.04em;
+      font-weight: 800;
+    }
+
+    .pr-reference2 .hero p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1.8;
+      max-width: 980px;
+    }
+
+    .pr-reference2 .section {
+      padding-top: 58px;
+    }
+
+    .pr-reference2 .section-heading {
+      margin-bottom: 26px;
+    }
+
+    .pr-reference2 .section-heading h2 {
+      margin: 0 0 12px;
+      font-size: 38px;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+    }
+
+    .pr-reference2 .section-heading p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.8;
+      max-width: 980px;
+    }
+
+    .pr-reference2 .reference-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .pr-reference2 .flip-card {
+      perspective: 1400px;
+      min-height: 340px;
+      cursor: pointer;
+    }
+
+    .pr-reference2 .flip-card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      min-height: 340px;
+      transition: transform 0.8s ease;
+      transform-style: preserve-3d;
+    }
+
+    .pr-reference2 .flip-card:hover .flip-card-inner {
+      transform: rotateY(180deg);
+    }
+
+    .pr-reference2 .flip-side {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      padding: 24px;
+      border-radius: 16px;
+      border: 1px solid rgba(148, 163, 184, 0.18);
+      backface-visibility: hidden;
+    }
+
+    .pr-reference2 .flip-front {
+      background: #ffffff;
+      align-items: center;
+      justify-content: center;
+      padding: 14px;
+      overflow: hidden;
+    }
+
+    .pr-reference2 .flip-logo-panel {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      min-height: 220px;
+      height: 220px;
+      margin: 0;
+      padding: 0;
+    }
+
+    .pr-reference2 .flip-logo {
+      display: block;
+      width: 100%;
+      max-width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .pr-reference2 .flip-back {
+      align-items: stretch;
+      justify-content: flex-start;
+      background: linear-gradient(180deg, #1a2640 0%, #24324d 100%);
+      color: #f8fafc;
+      transform: rotateY(180deg);
+    }
+
+    .pr-reference2 .flip-back h3 {
+      margin: 16px 0 10px;
+      color: #f8fafc;
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: -0.04em;
+    }
+
+    .pr-reference2 .achievement-list {
+      display: grid;
+      gap: 8px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      color: #cbd5e1;
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    .pr-reference2 .achievement-list li {
+      padding-left: 12px;
+      border-left: 2px solid rgba(56, 189, 248, 0.45);
+    }
+
+    .pr-reference2 .achievement-list strong {
+      display: block;
+      margin-bottom: 2px;
+      color: #7dd3fc;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .pr-reference2 .partner-shell {
+      display: grid;
+      gap: 24px;
+    }
+
+    .pr-reference2 .partner-group {
+      padding: 22px;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      background: linear-gradient(180deg, rgba(15, 23, 42, 0.9) 0%, rgba(11, 17, 32, 0.96) 100%);
+    }
+
+    .pr-reference2 .partner-group-head {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .pr-reference2 .partner-group-head span {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: var(--brand-soft);
+      color: var(--brand);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .pr-reference2 .partner-group-head h3 {
+      margin: 0;
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+    }
+
+    .pr-reference2 .partner-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .pr-reference2 .partner-card {
+      display: grid;
+      gap: 12px;
+      padding: 16px;
+      border: 1px solid rgba(148, 163, 184, 0.14);
+      border-radius: 18px;
+      background: rgba(8, 17, 33, 0.62);
+    }
+
+    .pr-reference2 .partner-logo-panel {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 112px;
+      border: 1px solid rgba(148, 163, 184, 0.14);
+      border-radius: 16px;
+      background: #ffffff;
+      padding: 12px;
+    }
+
+    .pr-reference2 .partner-logo {
+      display: block;
+      width: 100%;
+      max-width: 100%;
+      height: 88px;
+      object-fit: contain;
+    }
+
+    .pr-reference2 .partner-card h4 {
+      margin: 0;
+      color: #f8fafc;
+      font-size: 20px;
+      line-height: 1.35;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+    }
+
+    .pr-reference2 .partner-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    @media (max-width: 1120px) {
+      .pr-reference2 .reference-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .pr-reference2 .partner-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 760px) {
+      .hero-home {
+        position: static;
+        margin-bottom: 18px;
+      }
+
+      .pr-reference2 .content-inner {
+        padding-left: 18px;
+        padding-right: 18px;
+      }
+
+      .pr-reference2 .hero {
+        padding-top: 34px;
+      }
+
+      .pr-reference2 .hero h1 {
+        font-size: 38px;
+      }
+
+      .pr-reference2 .section-heading h2 {
+        font-size: 32px;
+      }
+
+      .pr-reference2 .reference-grid,
+      .pr-reference2 .partner-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="pr-reference2">
+    <section class="hero">
+      <div class="content-inner">
+        <div class="hero-layout">
+          <a class="hero-home" href="/" aria-label="홈으로">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M3 10.5 12 3l9 7.5"></path>
+              <path d="M5.5 9.5V21h13V9.5"></path>
+              <path d="M10 21v-6h4v6"></path>
+            </svg>
+          </a>
+          <div class="hero-intro">
+            <div class="hero-kicker">Reference</div>
+            <h1>레퍼런스</h1>
+            <p>피지컬리콘이 수행해 온 주요 프로젝트와 협력 기관을 한눈에 살펴볼 수 있도록 정리했습니다.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="content-inner">
+        <div class="section-heading">
+          <h2>수행기관 및 수행실적</h2>
+          <p>주요 수행기관별로 어떤 프로젝트를 수행했는지 정리했습니다.</p>
+        </div>
+
+        <div class="reference-grid">
+          <article class="flip-card">
+            <div class="flip-card-inner">
+              <div class="flip-side flip-front">
+                <div class="flip-logo-panel">
+                  <img class="flip-logo" src="https://cdn.imweb.me/thumbnail/20260506/44af7e5e6b4eb.png" alt="소형모듈원자로규제연구추진단 로고">
+                </div>
+              </div>
+              <div class="flip-side flip-back">
+                <h3>소형모듈원자로규제연구추진단</h3>
+                <ul class="achievement-list">
+                  <li><strong>수행중 · 2024~2027</strong>소형모듈원자로 물리적방호 규제체계 개발</li>
+                </ul>
+              </div>
+            </div>
+          </article>
+
+          <article class="flip-card">
+            <div class="flip-card-inner">
+              <div class="flip-side flip-front">
+                <div class="flip-logo-panel">
+                  <img class="flip-logo" src="https://cdn.imweb.me/thumbnail/20260506/eaa745aa88123.jpg" alt="한국원자력통제기술원 로고">
+                </div>
+              </div>
+              <div class="flip-side flip-back">
+                <h3>한국원자력통제기술원</h3>
+                <ul class="achievement-list">
+                  <li><strong>안내</strong>현재 공개된 수행 실적은 없으며, 관련 프로젝트가 확정되는 대로 반영할 예정입니다.</li>
+                </ul>
+              </div>
+            </div>
+          </article>
+
+          <article class="flip-card">
+            <div class="flip-card-inner">
+              <div class="flip-side flip-front">
+                <div class="flip-logo-panel">
+                  <img class="flip-logo" src="https://cdn.imweb.me/thumbnail/20260506/7c446a9a9dcc9.png" alt="한국수력원자력 로고">
+                </div>
+              </div>
+              <div class="flip-side flip-back">
+                <h3>한국수력원자력</h3>
+                <ul class="achievement-list">
+                  <li><strong>수행중 · 2025~2026</strong>전사 보안방호진단</li>
+                  <li><strong>수행완료 · 2026</strong>OO원전 지연성능분석</li>
+                  <li><strong>수행완료 · 2025</strong>외곽 통합방호설계</li>
+                  <li><strong>수행완료 · 2025</strong>경비근무실태진단</li>
+                  <li><strong>수행완료 · 2023~2024</strong>전사 보안방호진단</li>
+                </ul>
+              </div>
+            </div>
+          </article>
+
+          <article class="flip-card">
+            <div class="flip-card-inner">
+              <div class="flip-side flip-front">
+                <div class="flip-logo-panel">
+                  <img class="flip-logo" src="https://cdn.imweb.me/thumbnail/20260506/69675051b4584.png" alt="항공우주연구원 로고">
+                </div>
+              </div>
+              <div class="flip-side flip-back">
+                <h3>한국항공우주연구원</h3>
+                <ul class="achievement-list">
+                  <!-- <li><strong>수행중 · 2026</strong>물리보안 전 사업소 설계</li> -->
+                  <li><strong>수행완료 · 2025</strong>물리보안 진단·기획</li>
+                </ul>
+              </div>
+            </div>
+          </article>
+
+          <article class="flip-card">
+            <div class="flip-card-inner">
+              <div class="flip-side flip-front">
+                <div class="flip-logo-panel">
+                  <img class="flip-logo" src="https://cdn.imweb.me/thumbnail/20260506/2d9cac409bda7.png" alt="SK쉴더스 로고">
+                </div>
+              </div>
+              <div class="flip-side flip-back">
+                <h3>SK쉴더스</h3>
+                <ul class="achievement-list">
+                  <li><strong>수행예정 · 2026</strong>SKT 물리보안진단 체크리스트 개발</li>
+                  <li><strong>수행완료 · 2025~2026</strong>42dot 국가핵심기술 수출승인</li>
+                </ul>
+              </div>
+            </div>
+          </article>
+
+          <article class="flip-card">
+            <div class="flip-card-inner">
+              <div class="flip-side flip-front">
+                <div class="flip-logo-panel">
+                  <img class="flip-logo" src="https://cdn.imweb.me/thumbnail/20260506/a116dd3815014.png" alt="표준화 로고">
+                </div>
+              </div>
+              <div class="flip-side flip-back">
+                <h3>표준화</h3>
+                <ul class="achievement-list">
+                  <li><strong>수행중 · 진행중</strong>물리보안 엔지니어링 프로세스 KS수립</li>
+                  <li><strong>수행완료 · 예고고시 완료</strong>시설보안 관리체계 KS수립</li>
+                </ul>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="content-inner">
+        <div class="section-heading">
+          <h2>주요 파트너</h2>
+          <p>피지컬리콘은 다양한 기업, 협회, 교육·연구기관과 협력하며 사업과 연구를 확장해 왔습니다. 주요 파트너사를 그룹별로 정리했습니다.</p>
+        </div>
+
+        <div class="partner-shell">
+          <section class="partner-group">
+            <div class="partner-group-head">
+              <span>Company</span>
+              <h3>기업</h3>
+            </div>
+            <div class="partner-grid">
+              <article class="partner-card">
+                <div class="partner-logo-panel">
+                  <img class="partner-logo" src="https://cdn.imweb.me/thumbnail/20260507/7529b29775066.png" alt="씨스윌 로고">
+                </div>
+                <h4>씨스윌</h4>
+              </article>
+              <article class="partner-card">
+                <div class="partner-logo-panel">
+                  <img class="partner-logo" src="https://cdn.imweb.me/thumbnail/20260507/864990a4aa6bc.png" alt="현대오토에버 로고">
+                </div>
+                <h4>현대오토에버</h4>
+              </article>
+              <article class="partner-card">
+                <div class="partner-logo-panel">
+                  <img class="partner-logo" src="https://cdn.imweb.me/thumbnail/20260507/afacd255acf97.png" alt="쿠팡CFS 로고">
+                </div>
+                <h4>쿠팡CFS</h4>
+              </article>
+            </div>
+          </section>
+
+          <section class="partner-group">
+            <div class="partner-group-head">
+              <span>Association</span>
+              <h3>협회</h3>
+            </div>
+            <div class="partner-grid">
+              <article class="partner-card">
+                <div class="partner-logo-panel">
+                  <img class="partner-logo" src="https://cdn.imweb.me/thumbnail/20260507/765aa40ee76dd.jpeg" alt="KAITS 로고">
+                </div>
+                <h4>산업기술보호협회</h4>
+              </article>
+            </div>
+          </section>
+
+          <section class="partner-group">
+            <div class="partner-group-head">
+              <span>University</span>
+              <h3>대학교</h3>
+            </div>
+            <div class="partner-grid">
+              <article class="partner-card">
+                <div class="partner-logo-panel">
+                  <img class="partner-logo" src="https://cdn.imweb.me/thumbnail/20260507/cacc061598845.jpeg" alt="중앙대학교 로고">
+                </div>
+                <h4>중앙대학교</h4>
+                <p>산업보안학과</p>
+              </article>
+              <article class="partner-card">
+                <div class="partner-logo-panel">
+                  <img class="partner-logo" src="https://cdn.imweb.me/thumbnail/20260507/9fc83fbfdbcea.png" alt="극동대학교 로고">
+                </div>
+                <h4>극동대학교</h4>
+                <p>해킹보안학과</p>
+              </article>
+              <article class="partner-card">
+                <div class="partner-logo-panel">
+                  <img class="partner-logo" src="https://cdn.imweb.me/thumbnail/20260507/c2c1bb7ba632f.png" alt="용인대학교 로고">
+                </div>
+                <h4>용인대학교</h4>
+                <p>범죄과학연구소</p>
+              </article>
+              <article class="partner-card">
+                <div class="partner-logo-panel">
+                  <img class="partner-logo" src="https://cdn.imweb.me/thumbnail/20260507/c14c251452504.png" alt="광주여자대학교 로고">
+                </div>
+                <h4>광주여자대학교</h4>
+                <p>항공보안학과</p>
+              </article>
+            </div>
+          </section>
+        </div>
+      </div>
+    </section>
+  </div>
+</body>
+
+</html>

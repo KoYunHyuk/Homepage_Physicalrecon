@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PhysicalRecon Masterplan</title>
+  <style>
+    :root {
+      --bg: #020617;
+      --surface: #0f172a;
+      --surface-soft: #18233d;
+      --surface-alt: #111c34;
+      --line: rgba(148, 163, 184, 0.18);
+      --text: #ffffff;
+      --muted: #94a3b8;
+      --brand: #2fd4dc;
+      --brand-soft: rgba(47, 212, 220, 0.12);
+      --button: #2563eb;
+    }
+
+    .pr-masterplan,
+    .pr-masterplan * {
+      box-sizing: border-box;
+      font-family: Arial, sans-serif !important;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+    }
+
+    .pr-masterplan {
+      width: 100%;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    .pr-masterplan a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .pr-masterplan .content-inner {
+      width: 100%;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding-left: 28px;
+      padding-right: 28px;
+    }
+
+    .pr-masterplan .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 24px 0 18px;
+      background: var(--bg);
+    }
+
+    .pr-masterplan .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(47, 212, 220, 0.06) 0%, transparent 65%);
+      pointer-events: none;
+    }
+
+    .pr-masterplan .hero-layout {
+      position: relative;
+      z-index: 1;
+      display: block;
+    }
+
+    .hero-home {
+      position: absolute;
+      top: 0;
+      right: 0;
+      z-index: 2;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 46px;
+      height: 46px;
+      padding: 0;
+      border: 1px solid rgba(148, 163, 184, 0.18);
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.78);
+      color: #f8fafc !important;
+      backdrop-filter: blur(8px);
+      transition: background-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .hero-home:hover {
+      background: rgba(37, 99, 235, 0.88);
+      transform: translateY(-1px);
+    }
+
+    .hero-home svg {
+      width: 20px;
+      height: 20px;
+      stroke: currentColor;
+    }
+
+    .pr-masterplan .hero-intro {
+      max-width: 920px;
+      padding-left: 24px;
+      border-left: 4px solid rgba(47, 212, 220, 0.78);
+    }
+
+    .pr-masterplan .hero-kicker {
+      display: inline-flex;
+      align-items: center;
+      margin-bottom: 16px;
+      color: #7dd3fc;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .pr-masterplan .hero-title-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .pr-masterplan .hero-title-badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 6px 12px;
+      border: 1px solid rgba(148, 163, 184, 0.2);
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.48);
+      color: #e2e8f0;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .pr-masterplan .hero h1 {
+      margin: 0;
+      font-size: 48px;
+      line-height: 1.12;
+      letter-spacing: -0.04em;
+      font-weight: 800;
+    }
+
+    .pr-masterplan .hero p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1.8;
+    }
+
+    .pr-masterplan .section {
+      padding: 68px 0 0;
+    }
+
+    .pr-masterplan .section-heading {
+      margin-bottom: 30px;
+    }
+
+    .pr-masterplan .section-heading h2 {
+      margin: 0 0 12px;
+      font-size: 38px;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+    }
+
+    .pr-masterplan .section-heading p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.75;
+    }
+
+    .pr-masterplan .deliverable-flow {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .pr-masterplan .deliverable-card {
+      position: relative;
+      padding: 22px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: linear-gradient(180deg, var(--surface) 0%, var(--surface-alt) 100%);
+    }
+
+    .pr-masterplan .deliverable-card:not(:last-child)::after {
+      content: "→";
+      position: absolute;
+      top: 50%;
+      right: -16px;
+      transform: translateY(-50%);
+      color: rgba(148, 163, 184, 0.72);
+      font-size: 22px;
+      font-weight: 800;
+      z-index: 1;
+    }
+
+    .pr-masterplan .deliverable-card strong {
+      display: block;
+      margin-bottom: 10px;
+      color: var(--brand);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .pr-masterplan .deliverable-card h3 {
+      margin: 0 0 8px;
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+    }
+
+    .pr-masterplan .deliverable-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.75;
+    }
+
+    .pr-masterplan .overview-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+      align-items: stretch;
+    }
+
+    .pr-masterplan .overview-visual,
+    .pr-masterplan .overview-copy {
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      background: linear-gradient(180deg, var(--surface) 0%, var(--surface-soft) 100%);
+    }
+
+    .pr-masterplan .overview-visual {
+      border: none;
+      border-radius: 0;
+      background: transparent;
+      padding: 0;
+    }
+
+    .pr-masterplan .overview-copy {
+      padding: 24px;
+    }
+
+    .pr-masterplan .overview-image {
+      display: block;
+      width: 100%;
+      border-radius: 16px;
+      background: #081121;
+      border: 1px solid rgba(125, 211, 252, 0.22);
+      box-shadow: 0 18px 40px rgba(2, 6, 23, 0.34);
+    }
+
+    .pr-masterplan .overview-copy>p {
+      margin: 0 0 20px;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.8;
+    }
+
+    .pr-masterplan .pillar-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+
+    .pr-masterplan .pillar-card {
+      padding: 16px;
+      border: 1px solid rgba(148, 163, 184, 0.14);
+      border-radius: 16px;
+      background: rgba(8, 17, 33, 0.48);
+    }
+
+    .pr-masterplan .pillar-card small {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--brand);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .pr-masterplan .pillar-card h3 {
+      margin: 0 0 8px;
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+    }
+
+    .pr-masterplan .pillar-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .pr-masterplan .highlight-box {
+      padding: 18px 20px;
+      border-left: 4px solid var(--brand);
+      border-radius: 0 16px 16px 0;
+      background: rgba(47, 212, 220, 0.08);
+    }
+
+    .pr-masterplan .highlight-box strong {
+      display: block;
+      margin-bottom: 8px;
+      color: #f8fafc;
+      font-size: 18px;
+      font-weight: 800;
+    }
+
+    .pr-masterplan .highlight-box p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.8;
+    }
+
+    .pr-masterplan .process-flow {
+      display: grid;
+      gap: 14px;
+    }
+
+    .pr-masterplan .process-card {
+      display: grid;
+      grid-template-columns: 180px minmax(0, 1fr);
+      gap: 18px;
+      align-items: center;
+      padding: 20px 22px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: var(--surface);
+    }
+
+    .pr-masterplan .process-no {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 54px;
+      border-radius: 14px;
+      background: linear-gradient(180deg, rgba(47, 212, 220, 0.14) 0%, rgba(37, 99, 235, 0.16) 100%);
+      color: #dbeafe;
+      font-size: 15px;
+      font-weight: 800;
+    }
+
+    .pr-masterplan .process-body h3 {
+      margin: 0 0 8px;
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+    }
+
+    .pr-masterplan .process-body p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.75;
+    }
+
+    .pr-masterplan .process-arrow {
+      display: flex;
+      justify-content: center;
+      color: rgba(148, 163, 184, 0.7);
+      font-size: 26px;
+      line-height: 1;
+    }
+
+    .pr-masterplan .criteria-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .pr-masterplan .criteria-card {
+      padding: 22px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: linear-gradient(180deg, var(--surface) 0%, var(--surface-alt) 100%);
+    }
+
+    .pr-masterplan .criteria-card h3 {
+      margin: 0 0 12px;
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+    }
+
+    .pr-masterplan .criteria-card ul {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--muted);
+    }
+
+    .pr-masterplan .criteria-card li {
+      margin-bottom: 8px;
+      font-size: 15px;
+      line-height: 1.7;
+    }
+
+    .pr-masterplan .cta-band {
+      padding: 68px 0 84px;
+    }
+
+    .pr-masterplan .cta-box {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      padding: 28px;
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      background: linear-gradient(180deg, var(--surface) 0%, var(--surface-alt) 100%);
+    }
+
+    .pr-masterplan .cta-box h3 {
+      margin: 0 0 8px;
+      font-size: 30px;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+    }
+
+    .pr-masterplan .cta-box p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.75;
+    }
+
+    .pr-masterplan .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 150px;
+      padding: 14px 24px;
+      border-radius: 12px;
+      background: var(--button);
+      color: #ffffff !important;
+      font-size: 16px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    @media (max-width: 1100px) {
+
+      .pr-masterplan .deliverable-flow,
+      .pr-masterplan .pillar-grid,
+      .pr-masterplan .criteria-grid,
+      .pr-masterplan .process-card {
+        grid-template-columns: 1fr;
+      }
+
+      .pr-masterplan .deliverable-card:not(:last-child)::after {
+        content: "↓";
+        top: auto;
+        right: 50%;
+        bottom: -18px;
+        transform: translateX(50%);
+      }
+    }
+
+    @media (max-width: 760px) {
+      .hero-home {
+        position: static;
+        margin-bottom: 18px;
+      }
+
+      .pr-masterplan .content-inner {
+        padding-left: 18px;
+        padding-right: 18px;
+      }
+
+      .pr-masterplan .hero {
+        padding-top: 34px;
+      }
+
+      .pr-masterplan .hero h1 {
+        font-size: 38px;
+      }
+
+      .pr-masterplan .cta-box {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="pr-masterplan">
+    <section class="hero">
+      <div class="content-inner">
+        <div class="hero-layout">
+          <a class="hero-home" href="/" aria-label="홈으로">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M3 10.5 12 3l9 7.5"></path>
+              <path d="M5.5 9.5V21h13V9.5"></path>
+              <path d="M10 21v-6h4v6"></path>
+            </svg>
+          </a>
+          <div class="hero-intro">
+            <div class="hero-kicker">Masterplanning</div>
+            <div class="hero-title-row">
+              <h1>종합 기획</h1>
+              <span class="hero-title-badge">Consulting Service</span>
+            </div>
+            <p>위험평가 결과와 규제 요구사항을 바탕으로 사업장의 구조, 시스템, 운영체계를 연결하는 물리보안 마스터플랜을 수립합니다.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="content-inner">
+        <div class="section-heading">
+          <h2>주요 산출물</h2>
+          <p>기획 단계에서는 단순 진단 결과를 넘어서, 위험도 평가결과와 통제전략, 정책·지침, 마스터플랜까지 후속 설계와 운영으로 연결되는 산출물을 제공합니다.</p>
+        </div>
+        <div class="deliverable-flow">
+          <article class="deliverable-card">
+            <strong>산출물 01</strong>
+            <h3>위험도 평가결과서</h3>
+            <p>진단 단계에서 식별된 위험 수준과 주요 취약요소, 우선 대응이 필요한 영역을 종합적으로 정리해 기획의 기준 자료로 제공합니다.</p>
+          </article>
+          <article class="deliverable-card">
+            <strong>산출물 02</strong>
+            <h3>통제전략 및 적용대책안</h3>
+            <p>대상 시설의 특성과 위험 수준을 반영해 보안구역 설정, 통제 수준, 단계별 대응전략과 적용 대책 방향을 정리합니다.</p>
+          </article>
+          <article class="deliverable-card">
+            <strong>산출물 03</strong>
+            <h3>물리보안 정책서/지침서</h3>
+            <p>법규 및 표준, 운영 요구사항을 반영해 실제 운영 단계에서 적용 가능한 물리보안 정책과 지침 체계를 문서화합니다.</p>
+          </article>
+          <article class="deliverable-card">
+            <strong>산출물 04</strong>
+            <h3>물리보안 마스터플랜</h3>
+            <p>설계, 구축, 운영으로 이어지는 중장기 물리보안 프레임과 단계별 실행 로드맵을 종합적으로 제안합니다.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="content-inner">
+        <div class="section-heading">
+          <h2>개 요</h2>
+          <p>마스터플랜은 취약점 진단 결과를 바탕으로 평가 결과를 연결하고, 요구사항을 정리하며, 설계와 운영으로 이어질 실행 로드맵을 수립하는 단계입니다.</p>
+        </div>
+        <div class="overview-grid">
+          <div class="overview-visual">
+            <img class="overview-image"
+              src="https://cdn.imweb.me/thumbnail/20260424/e31987ebf543f.png" alt="마스터플래닝 개요 이미지">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="content-inner">
+        <div class="section-heading">
+          <h2>수립 프로세스</h2>
+          <p>기획 단계는 진단 결과와 요구사항을 정리하고, 통제 기준과 마스터플랜 방향으로 연결하는 흐름으로 구성됩니다.</p>
+        </div>
+        <div class="process-flow">
+          <article class="process-card">
+            <div class="process-no">01. 진단 결과 정리</div>
+            <div class="process-body">
+              <h3>위험평가 결과 및 핵심 취약요소 검토</h3>
+              <p>위험 수준, 주요 자산, 핵심 취약요소, 보완이 필요한 우선 구간을 정리해 기획 범위를 설정합니다.</p>
+            </div>
+          </article>
+          <div class="process-arrow" aria-hidden="true">↓</div>
+          <article class="process-card">
+            <div class="process-no">02. 요구기준 수립</div>
+            <div class="process-body">
+              <h3>법규 / 표준 / 고객 요구사항 반영</h3>
+              <p>대상 사이트에 적용되는 관계 법규와 표준, 고객 요구사항을 반영해 보안 목표 수준을 설정합니다.</p>
+            </div>
+          </article>
+          <div class="process-arrow" aria-hidden="true">↓</div>
+          <article class="process-card">
+            <div class="process-no">03. 통제전략 도출</div>
+            <div class="process-body">
+              <h3>보안 구역 및 통제정책 방향 설정</h3>
+              <p>외곽, 출입, 감시, 운영체계 등 주요 보안 영역별 통제 방향과 우선순위를 설계 전 단계에서 정의합니다.</p>
+            </div>
+          </article>
+          <div class="process-arrow" aria-hidden="true">↓</div>
+          <article class="process-card">
+            <div class="process-no">04. 마스터플랜 수립</div>
+            <div class="process-body">
+              <h3>설계·구축·운영 연계 로드맵 정리</h3>
+              <p>물리보안 설비 및 시스템 설계, 구축, 운영까지 이어지는 중장기 프레임과 단계별 실행 계획을 제안합니다.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-band">
+      <div class="content-inner">
+        <div class="cta-box">
+          <div>
+            <h3>통합적/포괄적인 물리보안 마스터플랜을 수립합니다.</h3>
+            <p>보호대상, 적용 기준, 중장기 투자 방향까지 포함한 기획 범위를 상담을 통해 함께 정리해드립니다.</p>
+          </div>
+          <a class="cta-btn" href="./contactus">상담문의</a>
+        </div>
+      </div>
+    </section>
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PhysicalRecon Design</title>
+  <style>
+    :root {
+      --bg: #020617;
+      --surface: #0f172a;
+      --surface-soft: #18233d;
+      --surface-alt: #111c34;
+      --line: rgba(148, 163, 184, 0.18);
+      --text: #ffffff;
+      --muted: #94a3b8;
+      --brand: #2fd4dc;
+      --button: #2563eb;
+    }
+
+    .pr-design,
+    .pr-design * {
+      box-sizing: border-box;
+      font-family: Arial, sans-serif !important;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+    }
+
+    .pr-design {
+      width: 100%;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    .pr-design a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .pr-design .content-inner {
+      width: 100%;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding-left: 28px;
+      padding-right: 28px;
+    }
+
+    .pr-design .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 24px 0 18px;
+      background: var(--bg);
+    }
+
+    .pr-design .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(47, 212, 220, 0.06) 0%, transparent 65%);
+      pointer-events: none;
+    }
+
+    .pr-design .hero-layout {
+      position: relative;
+      z-index: 1;
+      display: block;
+    }
+
+    .hero-home {
+      position: absolute;
+      top: 0;
+      right: 0;
+      z-index: 2;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 46px;
+      height: 46px;
+      padding: 0;
+      border: 1px solid rgba(148, 163, 184, 0.18);
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.78);
+      color: #f8fafc !important;
+      backdrop-filter: blur(8px);
+      transition: background-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .hero-home:hover {
+      background: rgba(37, 99, 235, 0.88);
+      transform: translateY(-1px);
+    }
+
+    .hero-home svg {
+      width: 20px;
+      height: 20px;
+      stroke: currentColor;
+    }
+
+    .pr-design .hero-intro {
+      max-width: none;
+      padding-left: 24px;
+      border-left: 4px solid rgba(47, 212, 220, 0.78);
+    }
+
+    .pr-design .hero-kicker {
+      display: inline-flex;
+      align-items: center;
+      margin-bottom: 16px;
+      color: #7dd3fc;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .pr-design .hero-title-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .pr-design .hero-title-badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 6px 12px;
+      border: 1px solid rgba(148, 163, 184, 0.2);
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.48);
+      color: #e2e8f0;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .pr-design .hero h1 {
+      margin: 0;
+      font-size: 48px;
+      line-height: 1.12;
+      letter-spacing: -0.04em;
+      font-weight: 800;
+    }
+
+    .pr-design .hero p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1.8;
+      white-space: nowrap;
+    }
+
+    .pr-design .section {
+      padding: 68px 0 0;
+    }
+
+    .pr-design .section-heading {
+      margin-bottom: 30px;
+    }
+
+    .pr-design .section-heading h2 {
+      margin: 0 0 12px;
+      font-size: 38px;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+    }
+
+    .pr-design .section-heading p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.75;
+    }
+
+    .pr-design .deliverable-flow {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .pr-design .deliverable-card {
+      position: relative;
+      padding: 22px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: linear-gradient(180deg, var(--surface) 0%, var(--surface-alt) 100%);
+    }
+
+    .pr-design .deliverable-card:not(:last-child)::after {
+      content: "→";
+      position: absolute;
+      top: 50%;
+      right: -16px;
+      transform: translateY(-50%);
+      color: rgba(148, 163, 184, 0.72);
+      font-size: 22px;
+      font-weight: 800;
+      z-index: 1;
+    }
+
+    .pr-design .deliverable-card strong {
+      display: block;
+      margin-bottom: 10px;
+      color: var(--brand);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .pr-design .deliverable-card h3 {
+      margin: 0 0 8px;
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+    }
+
+    .pr-design .deliverable-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.75;
+    }
+
+    .pr-design .overview-layout {
+      display: grid;
+      grid-template-columns: minmax(320px, 0.92fr) minmax(0, 1.08fr);
+      gap: 24px;
+      align-items: stretch;
+    }
+
+    .pr-design .overview-summary,
+    .pr-design .overview-detail {
+      padding: 24px;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      background: linear-gradient(180deg, var(--surface) 0%, var(--surface-alt) 100%);
+    }
+
+    .pr-design .overview-kicker {
+      display: inline-flex;
+      align-items: center;
+      padding: 6px 12px;
+      margin-bottom: 14px;
+      border-radius: 999px;
+      background: rgba(47, 212, 220, 0.12);
+      color: var(--brand);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .pr-design .overview-summary h3,
+    .pr-design .overview-step h3,
+    .pr-design .overview-conclusion strong {
+      margin: 0;
+      color: #f8fafc;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+    }
+
+    .pr-design .overview-summary h3 {
+      margin-bottom: 14px;
+      font-size: 28px;
+      line-height: 1.35;
+    }
+
+    .pr-design .overview-summary>p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.85;
+    }
+
+    .pr-design .overview-points {
+      display: grid;
+      gap: 14px;
+      margin-top: 20px;
+    }
+
+    .pr-design .overview-point {
+      padding: 16px 18px;
+      border: 1px solid rgba(148, 163, 184, 0.14);
+      border-radius: 16px;
+      background: rgba(8, 17, 33, 0.42);
+    }
+
+    .pr-design .overview-point small {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--brand);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .pr-design .overview-point p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.75;
+    }
+
+    .pr-design .overview-steps {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+
+    .pr-design .overview-step {
+      padding: 18px;
+      border: 1px solid rgba(148, 163, 184, 0.14);
+      border-radius: 16px;
+      background: rgba(8, 17, 33, 0.48);
+    }
+
+    .pr-design .overview-step small {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--brand);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .pr-design .overview-step h3 {
+      margin-bottom: 8px;
+      font-size: 20px;
+    }
+
+    .pr-design .overview-step p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.75;
+    }
+
+    .pr-design .overview-conclusion {
+      padding: 18px 20px;
+      border-left: 4px solid var(--brand);
+      border-radius: 0 16px 16px 0;
+      background: rgba(47, 212, 220, 0.08);
+    }
+
+    .pr-design .overview-conclusion strong {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 18px;
+    }
+
+    .pr-design .overview-conclusion p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.8;
+    }
+
+    .pr-design .tool-layout {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .pr-design .tool-card {
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      background: linear-gradient(180deg, var(--surface) 0%, var(--surface-soft) 100%);
+      padding: 22px;
+    }
+
+    .pr-design .tool-tag {
+      display: inline-flex;
+      align-items: center;
+      padding: 6px 12px;
+      margin-bottom: 14px;
+      border-radius: 999px;
+      background: rgba(47, 212, 220, 0.12);
+      color: var(--brand);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .pr-design .tool-card h3 {
+      margin: 0 0 10px;
+      font-size: 22px;
+      font-weight: 800;
+    }
+
+    .pr-design .tool-image {
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: flex-end;
+      padding: 18px;
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      min-height: 300px;
+      border-radius: 16px;
+      border: 1px solid rgba(148, 163, 184, 0.14);
+      background-color: #081121;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+
+    .pr-design .tool-image::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(2, 6, 23, 0.04) 0%, rgba(2, 6, 23, 0.58) 100%);
+      pointer-events: none;
+    }
+
+    .pr-design .tool-image::after {
+      position: relative;
+      z-index: 1;
+      display: inline-flex;
+      align-items: center;
+      padding: 10px 14px;
+      border-radius: 12px;
+      background: rgba(2, 6, 23, 0.72);
+      border: 1px solid rgba(148, 163, 184, 0.2);
+      color: #e2e8f0;
+      font-size: 14px;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+    }
+
+    .pr-design .tool-image.effectiveness-tool {
+      background-image: url('https://cdn.imweb.me/thumbnail/20260507/6f4cd0dbc09cb.png');
+    }
+
+    .pr-design .tool-image.effectiveness-tool::after {
+      content: "Coverage / Route / Checkpoint";
+    }
+
+    .pr-design .tool-image.design-tool {
+      background-image: url('https://cdn.imweb.me/thumbnail/20260206/0dbae76ea4558.png');
+    }
+
+    .pr-design .tool-image.design-tool::after {
+      content: "DRI / Illumination / CPTED";
+    }
+
+    .pr-design .tool-card p {
+      margin: 14px 0 0;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.8;
+    }
+
+    .pr-design .process-flow {
+      display: grid;
+      gap: 14px;
+    }
+
+    .pr-design .process-card {
+      display: grid;
+      grid-template-columns: 180px minmax(0, 1fr);
+      gap: 18px;
+      align-items: center;
+      padding: 20px 22px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: var(--surface);
+    }
+
+    .pr-design .process-no {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 54px;
+      border-radius: 14px;
+      background: linear-gradient(180deg, rgba(47, 212, 220, 0.14) 0%, rgba(37, 99, 235, 0.16) 100%);
+      color: #dbeafe;
+      font-size: 15px;
+      font-weight: 800;
+    }
+
+    .pr-design .process-body h3 {
+      margin: 0 0 8px;
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+    }
+
+    .pr-design .process-body p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.75;
+    }
+
+    .pr-design .process-arrow {
+      display: flex;
+      justify-content: center;
+      color: rgba(148, 163, 184, 0.7);
+      font-size: 26px;
+      line-height: 1;
+    }
+
+    .pr-design .criteria-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .pr-design .criteria-card {
+      padding: 22px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: linear-gradient(180deg, var(--surface) 0%, var(--surface-alt) 100%);
+    }
+
+    .pr-design .criteria-card h3 {
+      margin: 0 0 12px;
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+    }
+
+    .pr-design .criteria-card ul {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--muted);
+    }
+
+    .pr-design .criteria-card li {
+      margin-bottom: 8px;
+      font-size: 15px;
+      line-height: 1.7;
+    }
+
+    .pr-design .cta-band {
+      padding: 68px 0 84px;
+    }
+
+    .pr-design .cta-box {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      padding: 28px;
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      background: linear-gradient(180deg, var(--surface) 0%, var(--surface-alt) 100%);
+    }
+
+    .pr-design .cta-box h3 {
+      margin: 0 0 8px;
+      font-size: 30px;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+    }
+
+    .pr-design .cta-box p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.75;
+    }
+
+    .pr-design .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 150px;
+      padding: 14px 24px;
+      border-radius: 12px;
+      background: var(--button);
+      color: #ffffff !important;
+      font-size: 16px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    @media (max-width: 1100px) {
+
+      .pr-design .deliverable-flow,
+      .pr-design .overview-layout,
+      .pr-design .tool-layout,
+      .pr-design .criteria-grid,
+      .pr-design .process-card,
+      .pr-design .overview-steps {
+        grid-template-columns: 1fr;
+      }
+
+      .pr-design .deliverable-card:not(:last-child)::after {
+        content: "↓";
+        top: auto;
+        right: 50%;
+        bottom: -18px;
+        transform: translateX(50%);
+      }
+    }
+
+    @media (max-width: 760px) {
+      .hero-home {
+        position: static;
+        margin-bottom: 18px;
+      }
+
+      .pr-design .content-inner {
+        padding-left: 18px;
+        padding-right: 18px;
+      }
+
+      .pr-design .hero {
+        padding-top: 34px;
+      }
+
+      .pr-design .hero h1 {
+        font-size: 38px;
+      }
+
+      .pr-design .hero p {
+        white-space: normal;
+      }
+
+      .pr-design .tool-image {
+        min-height: 220px;
+      }
+
+      .pr-design .cta-box {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="pr-design">
+    <section class="hero">
+      <div class="content-inner">
+        <div class="hero-layout">
+          <a class="hero-home" href="/" aria-label="홈으로">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M3 10.5 12 3l9 7.5"></path>
+              <path d="M5.5 9.5V21h13V9.5"></path>
+              <path d="M10 21v-6h4v6"></path>
+            </svg>
+          </a>
+          <div class="hero-intro">
+            <div class="hero-kicker">Integrated Security Design</div>
+            <div class="hero-title-row">
+              <h1>통합보안설계</h1>
+              <span class="hero-title-badge">Engineering Service</span>
+            </div>
+            <p>진단과 기획에서 도출된 통제 기준을 바탕으로 실제 구축 가능한 도면과 설계문서를 제공합니다.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="content-inner">
+        <div class="section-heading">
+          <h2>주요 산출물</h2>
+          <p>설계 단계에서는 현장에 바로 적용 가능한 도면과 설명 문서, 적합성 분석 및 통제유효성 검증 결과를 중심으로 구체적인 설계 산출물을 제공합니다.</p>
+        </div>
+        <div class="deliverable-flow">
+          <article class="deliverable-card">
+            <strong>산출물 01</strong>
+            <h3>도면</h3>
+            <p>배치도, 계통도, 상세도, 입면도를 포함한 설계도서를 작성하여 현장에 적용 가능한 설계 기준을 도면 형태로 정리합니다.</p>
+          </article>
+          <article class="deliverable-card">
+            <strong>산출물 02</strong>
+            <h3>설계설명서 및 산출내역서</h3>
+            <p>설계 근거와 주요 구성요소, 적용 방향, 예상 물량과 산출 내역을 문서 형태로 정리해 후속 구축과 조달 단계에 연결합니다.</p>
+          </article>
+          <article class="deliverable-card">
+            <strong>산출물 03</strong>
+            <h3>설계 적합성 분석</h3>
+            <p>설계안이 대상 시설의 구조, 운영 여건, 요구사항에 적합한지 분석하여 보완이 필요한 요소와 적용 가능성을 검토합니다.</p>
+          </article>
+          <article class="deliverable-card">
+            <strong>산출물 04</strong>
+            <h3>통제유효성 검증</h3>
+            <p>설계안이 실제 요구되는 통제 성능을 충족하는지 DRI, 조도, CPTED 등 분석 결과를 바탕으로 검증합니다.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="content-inner">
+        <div class="section-heading">
+          <h2>개 요</h2>
+          <p>설계 단계는 진단과 기획에서 정리된 통제 정책을 실제 구축 가능한 도면과 문서로 구체화하는 과정이며, 설치 위치와 시스템 연계, 운영 조건을 함께 반영해 실행 가능한 설계안으로 정리합니다.</p>
+        </div>
+        <div class="overview-layout">
+          <div class="overview-summary">
+            <div class="overview-kicker">Design Framework</div>
+            <h3>통제정책을 현장적용 가능한 설계안으로 전환</h3>
+            <p>피지컬리콘의 설계는 장비를 배치하는 수준에서 끝나지 않고, 현장의 구조와 운영 흐름, 구축 여건을 함께 반영해 실제 시공과 운영 단계로 이어질 수 있는 도면과 설명 문서로 정리됩니다.</p>
+            <div class="overview-points">
+              <article class="overview-point">
+                <small>Control Alignment</small>
+                <p>보안구역, 통제 수준, 운영 요구사항을 기준으로 어떤 설비가 어느 수준까지 적용되어야 하는지 설계 방향을 명확히 정리합니다.</p>
+              </article>
+              <article class="overview-point">
+                <small>Field Applicability</small>
+                <p>현장 구조와 동선, 시야 확보, 설치 조건, 연계 구성을 함께 검토해 실제 구축 가능한 설계 형태로 구체화합니다.</p>
+              </article>
+            </div>
+          </div>
+          <div class="overview-detail">
+            <div class="overview-steps">
+              <article class="overview-step">
+                <small>Step 01</small>
+                <h3>기준 정리</h3>
+                <p>진단과 기획에서 도출된 보호 대상, 통제 우선순위, 법규 및 요구사항을 설계 입력 조건으로 정리합니다.</p>
+              </article>
+              <article class="overview-step">
+                <small>Step 02</small>
+                <h3>도면 구체화</h3>
+                <p>배치도, 계통도, 상세도, 입면도를 통해 장비 위치와 연계 구조, 설치 방식을 현장 기준에 맞게 도식화합니다.</p>
+              </article>
+              <article class="overview-step">
+                <small>Step 03</small>
+                <h3>구축 연계</h3>
+                <p>설계설명서와 물량내역서까지 연결해 조달, 구축, 운영 부서가 동일한 기준으로 활용할 수 있도록 정리합니다.</p>
+              </article>
+            </div>
+            <div class="overview-conclusion">
+              <strong>설계는 분석 결과를 설치 가능한 기준으로 바꾸는 연결 단계입니다</strong>
+              <p>즉, 설계 단계에서는 보안 성능만이 아니라 시공성, 운영성, 향후 확장성까지 함께 고려해 현장에서 바로 적용 가능한 물리보안 체계를 완성합니다.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="content-inner">
+        <div class="section-heading">
+          <h2>설계 Tool</h2>
+          <p>설계 단계에서는 설계안의 적합성과 성능을 함께 검토할 수 있도록 유효성평가 Tool과 설계 분석 Tool을 병행해 활용합니다.</p>
+        </div>
+        <div class="tool-layout">
+          <article class="tool-card">
+            <div class="tool-tag">Design Analysis Tool</div>
+            <h3>설계 분석 Tool</h3>
+            <div class="tool-image design-tool" role="img" aria-label="설계 분석 Tool 이미지"></div>
+            <p>카메라 시야, DRI 분석, 조도 분석, CPTED 검토 등을 통해 설계안의 성능과 환경 적합성을 보완하고 구축 가능성을 높입니다.</p>
+          </article>
+          <article class="tool-card">
+            <div class="tool-tag">Evaluation Tool</div>
+            <h3>설계 평가 Tool</h3>
+            <div class="tool-image effectiveness-tool" role="img" aria-label="유효성평가 Tool 이미지"></div>
+            <p>시설 배치, 접근 동선, 통제 지점, 감시 구역을 시각적으로 분석하여 현재 설계안이 요구되는 통제 수준을 충족하는지 검토합니다.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="content-inner">
+        <div class="section-heading">
+          <h2>설계 프로세스</h2>
+          <p>설계 단계는 기획에서 정의된 통제 정책을 바탕으로 도면 작성, 구축 연계, 최종 설계 적합성 분석까지 이어지는 흐름으로 진행됩니다.</p>
+        </div>
+        <div class="process-flow">
+          <article class="process-card">
+            <div class="process-no">01. 설계 조건 정리</div>
+            <div class="process-body">
+              <h3>통제정책 및 현장 여건 반영</h3>
+              <p>기획 단계에서 정의된 통제정책, 보안구역, 운영 조건을 바탕으로 설계의 기준선을 설정합니다.</p>
+            </div>
+          </article>
+          <div class="process-arrow" aria-hidden="true">↓</div>
+          <article class="process-card">
+            <div class="process-no">02. 도면 작성</div>
+            <div class="process-body">
+              <h3>배치도 / 계통도 / 상세도 / 입면도</h3>
+              <p>장비 배치, 연계 구조, 설치 조건을 구체적으로 반영한 설계도서를 작성합니다.</p>
+            </div>
+          </article>
+          <div class="process-arrow" aria-hidden="true">↓</div>
+          <article class="process-card">
+            <div class="process-no">03. 구축 연계</div>
+            <div class="process-body">
+              <h3>설계설명서 및 산출내역서 정리</h3>
+              <p>후속 조달과 구축 단계에서 바로 활용할 수 있도록 설계 설명 문서와 산출 내역 정보를 정리합니다.</p>
+            </div>
+          </article>
+          <div class="process-arrow" aria-hidden="true">↓</div>
+          <article class="process-card">
+            <div class="process-no">04. 설계 적합성 분석</div>
+            <div class="process-body">
+              <h3>요구사항 및 현장 여건 적합성 검토</h3>
+              <p>설계안이 대상 시설의 구조, 운영 여건, 요구사항에 적합한지 최종 검토하고 보완이 필요한 요소를 분석합니다.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-band">
+      <div class="content-inner">
+        <div class="cta-box">
+          <div>
+            <h3>실제 구축을 위한 상세 설계 도서를 작성합니다.</h3>
+            <p>도면 수준, 분석 항목, 산출물 범위를 상담을 통해 함께 정리해드립니다.</p>
+          </div>
+          <a class="cta-btn" href="./contactus">상담문의</a>
+        </div>
+      </div>
+    </section>
+  </div>
+</body>
+
+</html>

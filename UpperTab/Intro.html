@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PhysicalRecon Intro 2</title>
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@700;800&display=swap");
+
+    :root {
+      --bg: #020617;
+      --surface: #0f172a;
+      --surface-soft: #18233d;
+      --surface-alt: #111c34;
+      --line: rgba(148, 163, 184, 0.18);
+      --text: #ffffff;
+      --muted: #94a3b8;
+      --brand: #2fd4dc;
+      --button: #2563eb;
+    }
+
+    .pr-intro,
+    .pr-intro * {
+      box-sizing: border-box;
+      font-family: Arial, sans-serif !important;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+    }
+
+    .pr-intro {
+      width: 100%;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    .pr-intro a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .pr-intro .content-inner {
+      width: 100%;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding-left: 28px;
+      padding-right: 28px;
+    }
+
+    .pr-intro .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 24px 0 18px;
+      background: var(--bg);
+    }
+
+    .pr-intro .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, rgba(47, 212, 220, 0.06) 0%, transparent 65%),
+        radial-gradient(circle at right top, rgba(37, 99, 235, 0.16), transparent 28%);
+      pointer-events: none;
+    }
+
+    .pr-intro .hero-layout {
+      position: relative;
+      z-index: 1;
+      display: block;
+    }
+
+    .hero-home {
+      position: absolute;
+      top: 0;
+      right: 0;
+      z-index: 2;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 46px;
+      height: 46px;
+      padding: 0;
+      border: 1px solid rgba(148, 163, 184, 0.18);
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.78);
+      color: #f8fafc !important;
+      backdrop-filter: blur(8px);
+      transition: background-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .hero-home:hover {
+      background: rgba(37, 99, 235, 0.88);
+      transform: translateY(-1px);
+    }
+
+    .hero-home svg {
+      width: 20px;
+      height: 20px;
+      stroke: currentColor;
+    }
+
+    .pr-intro .hero-intro {
+      max-width: 1060px;
+      padding-left: 24px;
+      border-left: 4px solid rgba(47, 212, 220, 0.78);
+    }
+
+    .pr-intro .hero-kicker {
+      display: inline-flex;
+      align-items: center;
+      margin-bottom: 16px;
+      color: #7dd3fc;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .pr-intro .hero-title-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .pr-intro .hero-title-badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 6px 12px;
+      border: 1px solid rgba(148, 163, 184, 0.2);
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.48);
+      color: #e2e8f0;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .pr-intro .hero h1 {
+      margin: 0;
+      font-size: 48px;
+      line-height: 1.12;
+      letter-spacing: -0.04em;
+      font-weight: 800;
+    }
+
+    .pr-intro .hero p {
+      margin: 0;
+      max-width: 980px;
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1.8;
+    }
+
+    .pr-intro .section {
+      padding: 68px 0 0;
+    }
+
+    .pr-intro .section-heading {
+      margin-bottom: 30px;
+    }
+
+    .pr-intro .section-heading h2 {
+      margin: 0 0 12px;
+      font-size: 38px;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+    }
+
+    .pr-intro .section-heading p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.75;
+    }
+
+    .pr-intro .mission-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .pr-intro .purpose-panel {
+      position: relative;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 140px minmax(0, 1fr);
+      gap: 26px;
+      align-items: center;
+      padding: 30px 32px;
+      border: 1px solid rgba(47, 212, 220, 0.18);
+      border-radius: 24px;
+      background:
+        radial-gradient(circle at left top, rgba(47, 212, 220, 0.18), transparent 18%),
+        radial-gradient(circle at right center, rgba(37, 99, 235, 0.14), transparent 90%),
+        linear-gradient(135deg, rgba(14, 116, 144, 0.22) 0%, rgba(15, 23, 42, 0.94) 46%, rgba(24, 35, 61, 0.98) 100%);
+      box-shadow: 0 20px 44px rgba(2, 6, 23, 0.22);
+      margin-bottom: 42px;
+    }
+
+    .pr-intro .purpose-panel::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 24px;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+      pointer-events: none;
+    }
+
+    .pr-intro .purpose-mark {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: auto;
+      height: auto;
+      padding: 14px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .pr-intro .purpose-mark img {
+      width: 120px;
+      height: auto;
+      object-fit: contain;
+    }
+
+    .pr-intro .purpose-copy {
+      max-width: 780px;
+    }
+
+    .pr-intro .purpose-copy h2 {
+      margin: 0 0 14px;
+      font-size: 36px;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      line-height: 1.3;
+      text-wrap: balance;
+    }
+
+    .pr-intro .purpose-copy p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.85;
+    }
+
+    .pr-intro .mission-card {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      background: linear-gradient(180deg, var(--surface) 0%, var(--surface-soft) 100%);
+    }
+
+    .pr-intro .mission-card img {
+      display: block;
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      object-fit: cover;
+      background: #081121;
+      border-bottom: 1px solid rgba(148, 163, 184, 0.14);
+    }
+
+    .pr-intro .mission-card-body {
+      padding: 20px 22px 22px;
+    }
+
+    .pr-intro .mission-card strong {
+      display: block;
+      margin-bottom: 10px;
+      color: var(--brand);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .pr-intro .mission-card h3 {
+      margin: 0 0 8px;
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+    }
+
+    .pr-intro .mission-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.75;
+    }
+
+    .pr-intro .mission-quote {
+      margin: 0 0 42px;
+      padding: 28px 32px;
+      border: 1px solid rgba(148, 163, 184, 0.18);
+      border-radius: 24px;
+      background: linear-gradient(180deg, rgba(15, 23, 42, 0.92) 0%, rgba(24, 35, 61, 0.98) 100%);
+      text-align: center;
+    }
+
+    .pr-intro .mission-quote span {
+      display: inline-flex;
+      align-items: center;
+      margin-bottom: 12px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: rgba(148, 163, 184, 0.1);
+      color: #cbd5e1;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .pr-intro .mission-quote strong {
+      display: block;
+      color: #ffffff;
+      font-size: 34px;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      line-height: 1.35;
+    }
+
+    .pr-intro .mission-quote strong {
+      font-family: "Noto Serif KR", serif !important;
+    }
+
+    .pr-intro .overview-layout {
+      display: grid;
+      grid-template-columns: minmax(340px, 0.95fr) minmax(0, 1.05fr);
+      gap: 24px;
+      align-items: stretch;
+    }
+
+    .pr-intro .overview-visual,
+    .pr-intro .overview-copy {
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      background: linear-gradient(180deg, var(--surface) 0%, var(--surface-soft) 100%);
+    }
+
+    .pr-intro .overview-visual {
+      padding: 24px;
+    }
+
+    .pr-intro .overview-copy {
+      padding: 24px;
+    }
+
+    .pr-intro .overview-image {
+      display: block;
+      width: 100%;
+      border-radius: 16px;
+      background: #081121;
+      border: 1px solid rgba(125, 211, 252, 0.22);
+      box-shadow: 0 18px 40px rgba(2, 6, 23, 0.34);
+    }
+
+    .pr-intro .overview-kicker {
+      display: inline-flex;
+      align-items: center;
+      padding: 6px 12px;
+      margin-bottom: 14px;
+      border-radius: 999px;
+      background: rgba(47, 212, 220, 0.12);
+      color: var(--brand);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .pr-intro .overview-copy h3,
+    .pr-intro .overview-step h3,
+    .pr-intro .highlight-box strong {
+      margin: 0;
+      color: #f8fafc;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+    }
+
+    .pr-intro .overview-copy h3 {
+      margin-bottom: 14px;
+      font-size: 28px;
+      line-height: 1.35;
+    }
+
+    .pr-intro .overview-copy > p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.85;
+    }
+
+    .pr-intro .overview-steps {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 20px;
+    }
+
+    .pr-intro .overview-step {
+      padding: 18px;
+      border: 1px solid rgba(148, 163, 184, 0.14);
+      border-radius: 16px;
+      background: rgba(8, 17, 33, 0.48);
+    }
+
+    .pr-intro .overview-step small {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--brand);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .pr-intro .overview-step h3 {
+      margin-bottom: 8px;
+      font-size: 20px;
+    }
+
+    .pr-intro .overview-step p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.75;
+    }
+
+    .pr-intro .highlight-box {
+      margin-top: 20px;
+      padding: 18px 20px;
+      border-left: 4px solid var(--brand);
+      border-radius: 0 16px 16px 0;
+      background: rgba(47, 212, 220, 0.08);
+    }
+
+    .pr-intro .highlight-box strong {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 18px;
+    }
+
+    .pr-intro .highlight-box p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.8;
+    }
+
+    .pr-intro .process-flow {
+      display: grid;
+      gap: 14px;
+    }
+
+    .pr-intro .process-card {
+      display: grid;
+      grid-template-columns: 180px minmax(0, 1fr);
+      gap: 18px;
+      align-items: center;
+      padding: 20px 22px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: var(--surface);
+    }
+
+    .pr-intro .process-no {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 54px;
+      border-radius: 14px;
+      background: linear-gradient(180deg, rgba(47, 212, 220, 0.14) 0%, rgba(37, 99, 235, 0.16) 100%);
+      color: #dbeafe;
+      font-size: 15px;
+      font-weight: 800;
+    }
+
+    .pr-intro .process-body h3 {
+      margin: 0 0 8px;
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+    }
+
+    .pr-intro .process-body p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.75;
+    }
+
+    .pr-intro .process-arrow {
+      display: flex;
+      justify-content: center;
+      color: rgba(148, 163, 184, 0.7);
+      font-size: 26px;
+      line-height: 1;
+    }
+
+    .pr-intro .criteria-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .pr-intro .criteria-card {
+      padding: 22px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: linear-gradient(180deg, var(--surface) 0%, var(--surface-alt) 100%);
+    }
+
+    .pr-intro .criteria-card h3 {
+      margin: 0 0 12px;
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+    }
+
+    .pr-intro .criteria-card p,
+    .pr-intro .criteria-card li {
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.8;
+    }
+
+    .pr-intro .criteria-card ul {
+      margin: 0;
+      padding-left: 18px;
+    }
+
+    .pr-intro .cta-band {
+      padding: 68px 0 84px;
+    }
+
+    .pr-intro .cta-box {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      padding: 28px;
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      background: linear-gradient(180deg, var(--surface) 0%, var(--surface-alt) 100%);
+    }
+
+    .pr-intro .cta-box h3 {
+      margin: 0 0 8px;
+      font-size: 30px;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+    }
+
+    .pr-intro .cta-box p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.75;
+    }
+
+    .pr-intro .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 150px;
+      padding: 14px 24px;
+      border-radius: 12px;
+      background: var(--button);
+      color: #ffffff !important;
+      font-size: 16px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    @media (max-width: 1100px) {
+      .pr-intro .mission-grid,
+      .pr-intro .overview-layout,
+      .pr-intro .criteria-grid,
+      .pr-intro .process-card,
+      .pr-intro .overview-steps {
+        grid-template-columns: 1fr;
+      }
+
+      .pr-intro .purpose-panel {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .hero-home {
+        position: static;
+        margin-bottom: 18px;
+      }
+
+      .pr-intro .content-inner {
+        padding-left: 18px;
+        padding-right: 18px;
+      }
+
+      .pr-intro .hero {
+        padding-top: 34px;
+      }
+
+      .pr-intro .hero h1 {
+        font-size: 38px;
+      }
+
+      .pr-intro .purpose-panel {
+        grid-template-columns: 1fr;
+        justify-items: center;
+        text-align: center;
+        gap: 18px;
+      }
+
+      .pr-intro .cta-box {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="pr-intro">
+    <section class="hero">
+      <div class="content-inner">
+        <div class="hero-layout">
+          <a class="hero-home" href="/" aria-label="홈으로">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M3 10.5 12 3l9 7.5"></path>
+              <path d="M5.5 9.5V21h13V9.5"></path>
+              <path d="M10 21v-6h4v6"></path>
+            </svg>
+          </a>
+          <div class="hero-intro">
+            <div class="hero-kicker">introduction</div>
+            <div class="hero-title-row">
+              <h1>회사소개</h1>
+            </div>
+            <p>(주)피지컬리콘은 위험을 분석하고, 현장에 최적화된 보안체계를 진단/기획/설계/구축하는 전문 기업입니다.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+
+    <section class="section">
+      <div class="content-inner">
+        <div class="purpose-panel">
+          <div class="purpose-mark">
+            <img src="https://cdn.imweb.me/thumbnail/20260430/9844caefea7c0.png" alt="피지컬리콘 회사 로고">
+          </div>
+          <div class="purpose-copy">
+            <h2>우리의 오늘이 당신의 내일을 지킵니다</h2>
+            <p>피지컬리콘은 물리적 공간의 위험을 분석하고, 현장에 맞는 보안 체계를 설계합니다.</br>
+              인명과 자산을 보호하는 통합 보안 솔루션으로 더 안전한 내일을 만들어갑니다.</p>
+          </div>
+        </div>
+        <div class="section-heading">
+          <h2>Our Mission</h2>
+          <p>피지컬리콘은 주요기반시설, 핵심산업기술, 커뮤니티와 일상공간을 보호하는 보안 체계 구현에 기여합니다.</p>
+        </div>
+        <div class="mission-grid">
+          <article class="mission-card">
+            <img src="https://cdn.imweb.me/thumbnail/20260430/0486688bbd54d.png" alt="주요기반시설 보호 미션 이미지">
+            <div class="mission-card-body">
+              <strong>Mission 01</strong>
+                <h3>주요기반시설(CI) 보호</h3>
+                <p>테러와 고강도 위협에 대응하는 물리방호체계 기반의 보호 전략과 기술 적용을 수행합니다.</p>
+            </div>
+          </article>
+          <article class="mission-card">
+            <img src="https://cdn.imweb.me/thumbnail/20260430/0bb22509f8fbc.png" alt="핵심산업기술 보호 미션 이미지">
+            <div class="mission-card-body">
+              <strong>Mission 01</strong>
+                <h3>핵심산업기술 보호</h3>
+                <p>기술유출과 사이버 위협에 대응하는 정보보호체계 기반의 보호 체계 수립을 지원합니다.</p>
+            </div>
+          </article>
+          <article class="mission-card">
+            <img src="https://cdn.imweb.me/thumbnail/20260430/27c6a065944bf.png" alt="커뮤니티 일상공간 보호 미션 이미지">
+            <div class="mission-card-body">
+              <strong>Mission 01</strong>
+                <h3>커뮤니티・일상공간 보호</h3>
+                <p>범죄, 사고, 재해 위험으로부터 시민과 공동체를 보호하는 생활밀착형 안전 환경 조성에 기여합니다.</p>
+            </div>
+          </article>
+        </div>
+        
+      </div>
+
+    </section>
+
+    <section class="cta-band">
+      <div class="content-inner">
+        <div class="cta-box">
+          <div>
+            <h3>피지컬리콘의 목적과 수행 방향을 함께 설명드릴 수 있습니다</h3>
+            <p>회사 소개와 주요 보안 접근 방향을 현재 환경에 맞춰 간결하게 안내해드립니다.</p>
+          </div>
+          <a class="cta-btn" href="./contactus">상담문의</a>
+        </div>
+      </div>
+    </section>
+  </div>
+</body>
+
+</html>

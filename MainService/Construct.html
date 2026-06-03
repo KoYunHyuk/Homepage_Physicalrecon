@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PhysicalRecon Construct</title>
+  <style>
+    :root {
+      --bg: #020617;
+      --surface: #0f172a;
+      --surface-soft: #18233d;
+      --surface-alt: #111c34;
+      --line: rgba(148, 163, 184, 0.18);
+      --text: #ffffff;
+      --muted: #94a3b8;
+      --brand: #2fd4dc;
+      --brand-soft: rgba(47, 212, 220, 0.12);
+      --accent: #f59e0b;
+    }
+
+    .pr-construct,
+    .pr-construct * {
+      box-sizing: border-box;
+      font-family: Arial, sans-serif !important;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+    }
+
+    .pr-construct {
+      width: 100%;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    .pr-construct .content-inner {
+      width: 100%;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding-left: 28px;
+      padding-right: 28px;
+    }
+
+    .pr-construct .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 24px 0 18px;
+      background: var(--bg);
+    }
+
+    .pr-construct .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(47, 212, 220, 0.06) 0%, transparent 65%);
+      pointer-events: none;
+    }
+
+    .pr-construct .hero-layout {
+      position: relative;
+      z-index: 1;
+      display: block;
+    }
+
+    .hero-home {
+      position: absolute;
+      top: 0;
+      right: 0;
+      z-index: 2;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 46px;
+      height: 46px;
+      padding: 0;
+      border: 1px solid rgba(148, 163, 184, 0.18);
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.78);
+      color: #f8fafc !important;
+      backdrop-filter: blur(8px);
+      transition: background-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .hero-home:hover {
+      background: rgba(37, 99, 235, 0.88);
+      transform: translateY(-1px);
+    }
+
+    .hero-home svg {
+      width: 20px;
+      height: 20px;
+      stroke: currentColor;
+    }
+
+    .pr-construct .hero-intro {
+      max-width: none;
+      padding-left: 24px;
+      border-left: 4px solid rgba(47, 212, 220, 0.78);
+    }
+
+    .pr-construct .hero-kicker {
+      display: inline-flex;
+      align-items: center;
+      margin-bottom: 16px;
+      color: #7dd3fc;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .pr-construct .hero-title-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .pr-construct .hero-title-badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 6px 12px;
+      border: 1px solid rgba(148, 163, 184, 0.2);
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.48);
+      color: #e2e8f0;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .pr-construct .hero h1 {
+      margin: 0;
+      font-size: 48px;
+      line-height: 1.12;
+      letter-spacing: -0.04em;
+      font-weight: 800;
+    }
+
+    .pr-construct .hero p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1.8;
+    }
+
+    .pr-construct .section {
+      padding: 68px 0 84px;
+    }
+
+    .pr-construct .section-heading {
+      margin-bottom: 30px;
+    }
+
+    .pr-construct .section-heading h2 {
+      margin: 0 0 12px;
+      font-size: 38px;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+    }
+
+    .pr-construct .section-heading p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.75;
+    }
+
+    .pr-construct .coming-card {
+      width: 100%;
+      max-width: none;
+      padding: 28px;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      background: linear-gradient(180deg, var(--surface) 0%, var(--surface-alt) 100%);
+    }
+
+    .pr-construct .coming-state {
+      display: inline-flex;
+      align-items: center;
+      padding: 6px 12px;
+      margin-bottom: 16px;
+      border-radius: 999px;
+      background: rgba(245, 158, 11, 0.12);
+      color: #fbbf24;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .pr-construct .coming-card h3 {
+      margin: 0 0 12px;
+      font-size: 30px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+    }
+
+    .pr-construct .coming-card p {
+      margin: 0 0 22px;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.85;
+    }
+
+    .pr-construct .coming-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .pr-construct .coming-item {
+      padding: 16px 18px;
+      border: 1px solid rgba(148, 163, 184, 0.14);
+      border-radius: 16px;
+      background: rgba(8, 17, 33, 0.48);
+      color: #e2e8f0;
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .pr-construct .coming-item strong {
+      color: var(--brand);
+      font-weight: 800;
+    }
+
+    @media (max-width: 767px) {
+      .hero-home {
+        position: static;
+        margin-bottom: 18px;
+      }
+
+      .pr-construct .content-inner {
+        padding-left: 18px;
+        padding-right: 18px;
+      }
+
+      .pr-construct .hero h1 {
+        font-size: 36px;
+      }
+
+      .pr-construct .hero p {
+        font-size: 15px;
+      }
+
+      .pr-construct .section-heading h2 {
+        font-size: 30px;
+      }
+
+      .pr-construct .coming-card {
+        padding: 22px 18px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="pr-construct">
+    <section class="hero">
+      <div class="content-inner">
+        <div class="hero-layout">
+          <a class="hero-home" href="/" aria-label="홈으로">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M3 10.5 12 3l9 7.5"></path>
+              <path d="M5.5 9.5V21h13V9.5"></path>
+              <path d="M10 21v-6h4v6"></path>
+            </svg>
+          </a>
+          <div class="hero-intro">
+            <div class="hero-kicker">Construction</div>
+            <div class="hero-title-row">
+              <h1>구축</h1>
+              <span class="hero-title-badge">Planning Stage</span>
+            </div>
+            <p>물리보안 구축 서비스는 현재 세부 범위와 운영 구조를 기획 중이며, 정식 오픈 전 안내용 더미 페이지로 구성되어 있습니다.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="content-inner">
+        <div class="section-heading">
+          <h2>기획 예정</h2>
+          <p>서비스 오픈 전까지 구축 범위와 절차를 이 영역에서 순차적으로 정리할 예정입니다.</p>
+        </div>
+
+        <article class="coming-card">
+          <span class="coming-state">Coming Soon</span>
+          <h3>물리보안 구축 서비스 준비 중</h3>
+          <p>현장 적용 방식, 구축 범위, 단계별 지원 체계를 기준으로 콘텐츠를 정리하고 있으며, 추후 실제 구축 항목과 수행 프로세스를 반영해 확장할 예정입니다.</p>
+          <div class="coming-list">
+            <div class="coming-item"><strong>예정 범위</strong> 현장 구축 절차, 시스템 적용 범위, 프로젝트 운영 흐름</div>
+            <div class="coming-item"><strong>준비 상태</strong> 현재는 안내용 더미 구성만 제공되며 세부 콘텐츠는 추후 반영됩니다.</div>
+          </div>
+        </article>
+      </div>
+    </section>
+  </div>
+</body>
+
+</html>
