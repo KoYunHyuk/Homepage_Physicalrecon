@@ -338,10 +338,29 @@
       line-height: 1.7;
     }
 
-    .pr-education .transfer-box span {
-      color: var(--muted);
+    .pr-education .transfer-box .transfer-notice {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 7px;
+      color: #f87171;
       font-size: 13px;
+      font-weight: 700;
       line-height: 1.7;
+    }
+
+    .pr-education .transfer-box .notice-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2px 8px;
+      border: 1px solid rgba(248, 113, 113, 0.5);
+      border-radius: 999px;
+      background: rgba(248, 113, 113, 0.14);
+      color: #fca5a5;
+      font-size: 11px;
+      font-weight: 800;
+      line-height: 1.5;
     }
 
     .pr-education .detail-toggle {
@@ -561,7 +580,7 @@
               <h1>물리보안 교육</h1>
               <span class="hero-title-badge">Education Service</span>
             </div>
-            <p>실무과정, 표준과정, 외부 출강교육을 목적에 맞게 선택할 수 있도록 핵심 정보만 간결하게 정리했습니다.</p>
+            <p>교육 목적에 맞게 선택할 수 있도록 핵심 정보만 간결하게 정리했습니다.</p>
           </div>
         </div>
       </div>
@@ -576,13 +595,13 @@
 
         <div class="payment-guide">
           <strong>결제 완료 후 인적사항 등록을 진행해주세요</strong>
-          <p>실무과정과 표준과정은 결제링크를 통한 카드결제 또는 계좌이체 중 선택할 수 있으며, 결제 후 인적사항등록 페이지에서 신청 정보를 반드시 작성해주셔야 최종 접수가 완료됩니다.</p>
+          <p>실무과정과 표준과정은 결제링크를 통한 카드결제 또는 계좌이체 중 선택할 수 있으며, 결제 후 인적사항등록 페이지에서 신청 정보를 작성해야 최종 접수가 완료됩니다.</p>
         </div>
 
         <div class="transfer-box">
           <strong>계좌이체 안내</strong>
           <p>예금주 : 주식회사 피지컬리콘<br>우리은행 1005-904-430188</p>
-          <span>계좌이체 후에도 인적사항등록 페이지에서 신청 정보를 작성해주셔야 최종 접수가 완료됩니다.</span>
+          <span class="transfer-notice"><span class="notice-badge">주의</span>계좌이체 후에도 인적사항등록 페이지에서 신청 정보를 작성해주셔야 최종 접수가 완료됩니다.</span>
         </div>
 
         <div class="course-grid">
