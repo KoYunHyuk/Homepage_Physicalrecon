@@ -73,11 +73,17 @@
       display: block;
     }
 
-    .hero-home {
+    .hero-actions {
       position: absolute;
       top: 0;
       right: 0;
       z-index: 2;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .hero-home {
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -101,6 +107,25 @@
       width: 20px;
       height: 20px;
       stroke: currentColor;
+    }
+    .hero-contact {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      height: 46px;
+      padding: 0 20px;
+      border-radius: 999px;
+      background: var(--button);
+      color: #ffffff !important;
+      font-size: 15px;
+      font-weight: 800;
+      white-space: nowrap;
+      transition: background-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .hero-contact:hover {
+      background: #1d4ed8;
+      transform: translateY(-1px);
     }
 
     .pr-intro .hero-intro {
@@ -159,7 +184,7 @@
     }
 
     .pr-intro .section {
-      padding: 68px 0 0;
+      padding: 68px 0 84px;
     }
 
     .pr-intro .section-heading {
@@ -588,51 +613,7 @@
       margin: 0;
       padding-left: 18px;
     }
-
-    .pr-intro .cta-band {
-      padding: 68px 0 84px;
-    }
-
-    .pr-intro .cta-box {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 24px;
-      padding: 28px;
-      border: 1px solid var(--line);
-      border-radius: 24px;
-      background: linear-gradient(180deg, var(--surface) 0%, var(--surface-alt) 100%);
-    }
-
-    .pr-intro .cta-box h3 {
-      margin: 0 0 8px;
-      font-size: 30px;
-      font-weight: 800;
-      letter-spacing: -0.04em;
-    }
-
-    .pr-intro .cta-box p {
-      margin: 0;
-      color: var(--muted);
-      font-size: 15px;
-      line-height: 1.75;
-    }
-
-    .pr-intro .cta-btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-width: 150px;
-      padding: 14px 24px;
-      border-radius: 12px;
-      background: var(--button);
-      color: #ffffff !important;
-      font-size: 16px;
-      font-weight: 800;
-      white-space: nowrap;
-    }
-
-    @media (max-width: 1100px) {
+@media (max-width: 1100px) {
       .pr-intro .mission-grid,
       .pr-intro .overview-layout,
       .pr-intro .criteria-grid,
@@ -678,7 +659,7 @@
     }
 
     @media (max-width: 760px) {
-      .hero-home {
+      .hero-actions {
         position: static;
         margin-bottom: 18px;
       }
@@ -718,12 +699,7 @@
         max-width: 390px;
         max-height: none;
       }
-
-      .pr-intro .cta-box {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-    }
+}
   </style>
 </head>
 
@@ -732,13 +708,16 @@
     <section class="hero">
       <div class="content-inner">
         <div class="hero-layout">
-          <a class="hero-home" href="/" aria-label="홈으로">
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M3 10.5 12 3l9 7.5"></path>
-              <path d="M5.5 9.5V21h13V9.5"></path>
-              <path d="M10 21v-6h4v6"></path>
-            </svg>
-          </a>
+          <div class="hero-actions">
+            <a class="hero-contact" href="./contactus">상담문의</a>
+            <a class="hero-home" href="/" aria-label="홈으로">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M3 10.5 12 3l9 7.5"></path>
+                <path d="M5.5 9.5V21h13V9.5"></path>
+                <path d="M10 21v-6h4v6"></path>
+              </svg>
+            </a>
+          </div>
           <div class="hero-intro">
             <div class="hero-kicker">introduction</div>
             <div class="hero-title-row">
@@ -799,18 +778,6 @@
         
       </div>
 
-    </section>
-
-    <section class="cta-band">
-      <div class="content-inner">
-        <div class="cta-box">
-          <div>
-            <h3>피지컬리콘의 목표와 수행 방향을 함께 설명드릴 수 있습니다</h3>
-            <p>회사 소개와 주요 보안 접근 방향을 현재 환경에 맞춰 간결하게 안내해드립니다</p>
-          </div>
-          <a class="cta-btn" href="./contactus">상담문의</a>
-        </div>
-      </div>
     </section>
   </div>
 </body>
