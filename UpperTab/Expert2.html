@@ -218,226 +218,163 @@
       text-transform: uppercase;
     }
 
-    .pr-expert .org-head {
-      position: relative;
-      grid-column: 1;
-      grid-row: 1;
-      display: grid;
-      justify-items: center;
-      margin-bottom: 28px;
+    .pr-expert .oc {
+      --oc-gap: 3.2%;
+      --oc-line: rgba(47, 212, 220, 0.72);
+      --oc-card-border: rgba(148, 163, 184, 0.28);
+      padding: 20px 5% 28px;
+      background: transparent;
+      color: #f8fafc;
     }
 
-    .pr-expert .org-head::after {
-      content: "";
-      position: absolute;
-      left: 50%;
-      bottom: 0;
-      width: calc(50% + 32px);
-      height: 2px;
-      background: rgba(47, 212, 220, 0.72);
+    .pr-expert .oc-link {
+      width: 2px;
+      height: 32px;
+      margin: 0 auto;
+      background: var(--oc-line);
     }
 
-    .pr-expert .leader-card {
-      width: min(440px, 100%);
-      padding: 16px 20px;
-      border: 1px solid rgba(148, 163, 184, 0.18);
-      border-radius: 12px;
-      background: linear-gradient(180deg, rgba(24, 35, 61, 0.96) 0%, rgba(17, 28, 52, 0.98) 100%);
-      text-align: left;
+    .pr-expert .oc-divider {
+      height: 1px;
+      margin: 16px 0 14px;
+      background: var(--oc-card-border);
     }
 
-    .pr-expert .leader-card small {
+    .pr-expert .oc-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      font-size: 15px;
+      line-height: 1.75;
+    }
+
+    .pr-expert .oc-ceo,
+    .pr-expert .oc-member {
+      padding: 22px 24px 24px;
+      border: 1px solid var(--oc-card-border);
+      border-radius: 16px;
+      background: linear-gradient(180deg, #1b2742 0%, #141e35 100%);
+      color: #cbd5e1;
+    }
+
+    .pr-expert .oc-ceo {
+      width: 43.5%;
+      min-width: 360px;
+      margin: 0 auto;
+    }
+
+    .pr-expert .oc-ceo small {
       display: block;
-      margin-bottom: 5px;
+      margin-bottom: 8px;
       color: var(--brand);
-      font-size: 10px;
+      font-size: 13px;
       font-weight: 800;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
     }
 
-    .pr-expert .leader-card h3 {
-      margin: 0 0 14px;
-      font-size: 22px;
+    .pr-expert .oc-ceo h3,
+    .pr-expert .oc-member h3 {
+      margin: 0 0 12px;
+      color: #7dd3fc;
+      font-size: 24px;
       font-weight: 800;
       letter-spacing: -0.03em;
-      color: #7dd3fc;
     }
 
-    .pr-expert .leader-card p {
+    .pr-expert .oc-ceo p,
+    .pr-expert .oc-member p {
       margin: 0;
-      color: var(--muted);
-      font-size: 12px;
-      line-height: 1.5;
-    }
-
-    .pr-expert .leader-subtitle {
-      margin: 0 0 16px !important;
-      color: #dbeafe !important;
-      font-size: 15px !important;
+      color: #f1f5f9;
+      font-size: 16px;
       font-weight: 700;
-      line-height: 1.6;
     }
 
-    .pr-expert .leader-history {
-      display: grid;
-      gap: 5px;
-      margin: 0;
-      padding: 0;
-      list-style: none;
-      color: #cbd5e1;
-      font-size: 14px;
-      line-height: 1.7;
+    .pr-expert .oc-hub {
+      position: relative;
+      height: 84px;
     }
 
-    .pr-expert .leader-role {
-      color: inherit;
-      font-size: inherit;
-      font-weight: inherit;
-      letter-spacing: inherit;
-      vertical-align: baseline;
+    .pr-expert .oc-hub::before,
+    .pr-expert .oc-hub::after {
+      content: "";
+      position: absolute;
+      background: var(--oc-line);
     }
 
-    .pr-expert .org-connector {
+    .pr-expert .oc-hub::before {
+      top: 0;
+      bottom: 0;
+      left: calc(50% - 1px);
       width: 2px;
-      height: 28px;
-      margin-top: 18px;
-      background: rgba(47, 212, 220, 0.72);
     }
 
-    .pr-expert .org-tree {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(260px, 0.42fr);
-      column-gap: 32px;
-      align-items: start;
-    }
-
-    .pr-expert .team-grid {
-      grid-column: 1;
-      grid-row: 2;
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 22px 24px;
-      position: relative;
-    }
-
-    .pr-expert .team-grid::before {
-      content: "";
-      position: absolute;
-      top: -28px;
-      left: 25%;
-      width: 50%;
-      height: 2px;
-      background: rgba(47, 212, 220, 0.72);
-    }
-
-    .pr-expert .team-column {
-      position: relative;
-      display: grid;
-      gap: 14px;
-      align-content: start;
-    }
-
-    .pr-expert .team-column::before {
-      content: "";
-      position: absolute;
-      top: -28px;
+    .pr-expert .oc-hub::after {
+      top: calc(50% - 1px);
       left: 50%;
-      width: 2px;
-      height: 28px;
-      background: rgba(47, 212, 220, 0.72);
-      transform: translateX(-50%);
+      right: 25%;
+      height: 2px;
     }
 
-    .pr-expert .research-branch {
-      grid-column: 2;
-      grid-row: 1;
-      align-self: end;
-      display: flex;
-      align-items: center;
-      transform: translateY(6px);
-    }
-
-    .pr-expert .research-branch::before {
-      display: none;
-    }
-
-    .pr-expert .research-branch .team-column {
-      width: min(220px, 100%);
-    }
-
-    .pr-expert .research-branch .team-column::before {
-      display: none;
-    }
-
-    .pr-expert .research-branch .member-card {
-      padding: 14px 16px;
-    }
-
-    .pr-expert .research-branch .simple-card {
-      min-height: 60px;
-    }
-
-    .pr-expert .team-title {
-      margin: 0;
-      display: flex;
-      align-items: flex-start;
-      font-size: 22px;
-      font-weight: 800;
-      letter-spacing: -0.04em;
-      color: #f8fafc;
-    }
-
-    .pr-expert .member-card {
-      padding: 20px 20px 18px;
-      border: 1px solid var(--line);
-      border-radius: 20px;
-      background: linear-gradient(180deg, var(--surface) 0%, var(--surface-soft) 100%);
-    }
-
-    .pr-expert .member-card h3 {
-      margin: 0 0 14px;
-      font-size: 22px;
-      font-weight: 800;
-      letter-spacing: -0.03em;
-      color: #7dd3fc;
-    }
-
-    .pr-expert .member-subtitle {
-      margin: 0 0 16px;
-      color: #dbeafe;
-      font-size: 15px;
-      font-weight: 700;
-      line-height: 1.6;
-    }
-
-    .pr-expert .member-history {
-      display: grid;
-      gap: 5px;
-      margin: 0;
-      padding: 0;
-      list-style: none;
-      color: #cbd5e1;
-      font-size: 14px;
-      line-height: 1.7;
-    }
-
-    .pr-expert .simple-card {
+    .pr-expert .oc-dept {
       display: flex;
       align-items: center;
       justify-content: center;
-      min-height: 96px;
+      min-height: 60px;
+      padding: 12px 16px;
+      border: 1px solid rgba(47, 212, 220, 0.55);
+      border-radius: 14px;
+      background: #133244;
+      color: #ffffff;
+      font-size: 19px;
+      font-weight: 800;
       text-align: center;
     }
 
-    .pr-expert .simple-card strong {
-      display: block;
-      color: #f8fafc;
-      font-size: 22px;
-      font-weight: 800;
-      letter-spacing: -0.03em;
+    .pr-expert .oc-hub .oc-dept {
+      position: absolute;
+      top: 50%;
+      right: 0;
+      width: 25%;
+      transform: translateY(-50%);
     }
 
+    .pr-expert .oc-cols {
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-rows: repeat(6, auto);
+      column-gap: var(--oc-gap);
+    }
+
+    .pr-expert .oc-cols::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: calc((100% - var(--oc-gap)) / 4);
+      right: calc((100% - var(--oc-gap)) / 4);
+      height: 2px;
+      background: var(--oc-line);
+    }
+
+    .pr-expert .oc-col {
+      display: grid;
+      grid-row: span 6;
+      grid-template-rows: subgrid;
+    }
+
+    .pr-expert .oc-extra {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 60px;
+      border: 1px solid var(--oc-card-border);
+      border-radius: 14px;
+      background: #0f172a;
+      color: #f8fafc;
+      font-size: 19px;
+      font-weight: 800;
+    }
     .pr-expert .org-copy {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -500,45 +437,57 @@
     }
 
     @media (max-width: 1080px) {
-      .pr-expert .org-copy,
-      .pr-expert .org-tree {
+      .pr-expert .org-copy {
         grid-template-columns: 1fr;
       }
+    }
 
-      .pr-expert .team-grid {
-        grid-template-columns: 1fr;
+    @media (max-width: 760px) {
+      .pr-expert .oc {
+        padding: 24px 16px 28px;
       }
 
-      .pr-expert .team-grid::before,
-      .pr-expert .team-column::before,
-      .pr-expert .org-head::after,
-      .pr-expert .research-branch::before {
+      .pr-expert .oc-ceo {
+        width: 100%;
+        min-width: 0;
+        padding: 20px;
+      }
+
+      .pr-expert .oc-hub {
+        height: auto;
+        padding-top: 32px;
+      }
+
+      .pr-expert .oc-hub::before {
+        bottom: auto;
+        height: 32px;
+      }
+
+      .pr-expert .oc-hub::after,
+      .pr-expert .oc-cols::before {
         display: none;
       }
 
-      .pr-expert .org-head {
-        margin-bottom: 28px;
-      }
-
-      .pr-expert .org-connector {
-        display: none;
-      }
-
-      .pr-expert .org-head {
-        grid-column: 1;
-        grid-row: 1;
-      }
-
-      .pr-expert .team-grid {
-        grid-column: 1;
-        grid-row: 2;
-      }
-
-      .pr-expert .research-branch {
-        grid-column: 1;
-        grid-row: 3;
-        margin-top: 14px;
+      .pr-expert .oc-hub .oc-dept {
+        position: static;
+        width: 100%;
         transform: none;
+      }
+
+      .pr-expert .oc-cols {
+        grid-template-columns: 1fr;
+        grid-template-rows: none;
+        row-gap: 28px;
+      }
+
+      .pr-expert .oc-col {
+        display: flex;
+        flex-direction: column;
+        grid-row: auto;
+      }
+
+      .pr-expert .oc-col + .oc-col > .oc-link:first-child {
+        display: none;
       }
     }
   </style>
@@ -578,62 +527,60 @@
 
         <div class="org-board">
           <div class="org-tag">Organization Chart</div>
-          <div class="org-tree">
-            <div class="org-head">
-              <div class="leader-card">
-                <small>Managing Director</small>
-                <h3>이상희 / <span class="leader-role">CEO</span></h3>
-                <p class="leader-subtitle">Master of Security Management</p>
-                <ul class="leader-history">
-                  <li>융합보안학 박사, 美 PSP</li>
-                  <li>중앙대학교 산업보안학과 겸임교수</li>
-                  <li>국가보안정책위원</li>
-                  <li>前 SK쉴더스 융합보안컨설팅 팀장</li>
-                  <li>前 LG그룹 보안사무국 진단위원</li>
-                </ul>
-              </div>
-              <div class="org-connector"></div>
+          <div class="oc">
+            <div class="oc-ceo">
+              <small>Managing Director</small>
+              <h3>이상희 / CEO</h3>
+              <p>Master of Security Management</p>
+              <div class="oc-divider"></div>
+              <ul class="oc-list">
+                <li>융합보안학 박사, 美 PSP</li>
+                <li>중앙대학교 산업보안학과 겸임교수</li>
+                <li>국가보안정책위원</li>
+                <li>前 SK쉴더스 융합보안컨설팅 팀장</li>
+                <li>前 LG그룹 보안사무국 진단위원</li>
+              </ul>
             </div>
 
-            <div class="team-grid">
-              <div class="team-column">
-                <h3 class="team-title">보안컨설팅사업팀 (3)</h3>
-                <article class="member-card">
+            <div class="oc-hub">
+              <div class="oc-dept">보안연구소(1)</div>
+            </div>
+
+            <div class="oc-cols">
+              <div class="oc-col">
+                <div class="oc-link"></div>
+                <div class="oc-dept">보안컨설팅사업팀(4)</div>
+                <div class="oc-link"></div>
+                <article class="oc-member">
                   <h3>유창현 / Team Leader</h3>
-                  <p class="member-subtitle">Master of Security Consulting (UK)</p>
-                  <ul class="member-history">
+                  <p>Master of Security Consulting (UK)</p>
+                  <div class="oc-divider"></div>
+                  <ul class="oc-list">
                     <li>英 보안관리학 석사, CPOI(IFPO)</li>
-                    <li>ISO TC 292(보안 및 회복력) 전문위원</li>
+                    <li>ISO TC 292 보안·회복력 전문위원</li>
                     <li>前 SK쉴더스 보안컨설턴트</li>
                   </ul>
                 </article>
-                <article class="member-card simple-card">
-                  <strong>+ 2 Consultants</strong>
-                </article>
+                <div class="oc-link"></div>
+                <div class="oc-extra">+ 3 Consultants</div>
               </div>
 
-              <div class="team-column">
-                <h3 class="team-title">보안엔지니어링사업팀 (3)</h3>
-                <article class="member-card">
+              <div class="oc-col">
+                <div class="oc-link"></div>
+                <div class="oc-dept">보안엔지니어링사업팀(2)</div>
+                <div class="oc-link"></div>
+                <article class="oc-member">
                   <h3>황우철 / Team Leader</h3>
-                  <p class="member-subtitle">융합보안학 석사</p>
-                  <ul class="member-history">
-                    <li>CPPG(개인정보관리사)</li>
-                    <li>정보통신특급기술자 / 정보시스템감리원 </li>
-                    <li>前 주식회사카티스 연구팀장</li>
+                  <p>Bachelor of Engineering</p>
+                  <div class="oc-divider"></div>
+                  <ul class="oc-list">
+                    <li>전자계산학 학사, CPPG(개인정보관리사)</li>
+                    <li>정보통신특급기술자 / 정보시스템감리원</li>
+                    <li>前 주식회사 카티스 연구팀장</li>
                   </ul>
                 </article>
-                <article class="member-card simple-card">
-                  <strong>+ 2 Engineer</strong>
-                </article>
-              </div>
-            </div>
-
-            <div class="research-branch">
-              <div class="team-column">
-                <article class="member-card simple-card">
-                  <strong>보안연구소(3)</strong>
-                </article>
+                <div class="oc-link"></div>
+                <div class="oc-extra">+ 1 Engineer</div>
               </div>
             </div>
           </div>
