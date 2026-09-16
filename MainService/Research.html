@@ -415,43 +415,103 @@
     }
 
     .pr-research .project-controls {
-      position: absolute;
-      top: 18px;
-      right: 18px;
-      z-index: 3;
+      position: absolute !important;
+      top: 18px !important;
+      right: 18px !important;
+      z-index: 3 !important;
+      display: flex !important;
+      flex-direction: row !important;
+      align-items: center !important;
+      justify-content: flex-end !important;
+      gap: 10px !important;
+      width: auto !important;
+      max-width: none !important;
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+
+    .pr-research .project-controls > label.project-arrow {
+      display: inline-flex !important;
+      flex: 0 0 auto !important;
+      align-items: center !important;
+      justify-content: center !important;
+      width: 40px !important;
+      min-width: 40px !important;
+      max-width: none !important;
+      height: 40px !important;
+      min-height: 40px !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      border: 1px solid rgba(148, 163, 184, 0.2) !important;
+      border-radius: 999px !important;
+      background: rgba(2, 6, 23, 0.72) !important;
+      color: #e2e8f0 !important;
+      font-size: 22px !important;
+      font-weight: 700 !important;
+      line-height: 1 !important;
+      text-align: center !important;
+      box-shadow: none !important;
+      cursor: pointer;
+      user-select: none;
+      backdrop-filter: blur(10px);
+      transition: background-color 0.2s ease, transform 0.2s ease, opacity 0.2s ease;
+    }
+
+    .pr-research .project-controls > label.project-arrow:hover {
+      background: rgba(47, 212, 220, 0.18) !important;
+      transform: scale(1.05);
+    }
+
+    .pr-research #active-project-1:checked ~ .project-controls .arrow-prev,
+    .pr-research #active-project-2:checked ~ .project-controls .arrow-next {
+      opacity: 0.3;
+      pointer-events: none;
     }
 
     .pr-research .project-dots {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 10px 12px;
-      border: 1px solid rgba(148, 163, 184, 0.16);
-      border-radius: 999px;
-      background: rgba(2, 6, 23, 0.72);
+      display: flex !important;
+      flex-direction: row !important;
+      align-items: center !important;
+      justify-content: center !important;
+      gap: 10px !important;
+      width: auto !important;
+      max-width: none !important;
+      margin: 0 !important;
+      padding: 10px 12px !important;
+      border: 1px solid rgba(148, 163, 184, 0.16) !important;
+      border-radius: 999px !important;
+      background: rgba(2, 6, 23, 0.72) !important;
       backdrop-filter: blur(10px);
     }
 
-    .pr-research .project-dot {
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      background: rgba(148, 163, 184, 0.34);
-      box-shadow: 0 0 0 5px rgba(148, 163, 184, 0.08);
+    .pr-research .project-dots > label.project-dot {
+      display: block !important;
+      flex: 0 0 auto !important;
+      width: 12px !important;
+      min-width: 12px !important;
+      max-width: none !important;
+      height: 12px !important;
+      min-height: 12px !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      border: none !important;
+      border-radius: 50% !important;
+      background: rgba(148, 163, 184, 0.34) !important;
+      box-shadow: 0 0 0 5px rgba(148, 163, 184, 0.08) !important;
+      font-size: 0 !important;
+      line-height: 0 !important;
       cursor: pointer;
       transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
     }
 
-    .pr-research .project-dot:hover {
+    .pr-research .project-dots > label.project-dot:hover {
       transform: scale(1.08);
     }
 
-    .pr-research #upcoming-project-1:checked ~ .project-controls .project-dots label[for="upcoming-project-1"],
-    .pr-research #upcoming-project-2:checked ~ .project-controls .project-dots label[for="upcoming-project-2"],
-    .pr-research #active-project-1:checked ~ .project-controls .project-dots label[for="active-project-1"],
-    .pr-research #active-project-2:checked ~ .project-controls .project-dots label[for="active-project-2"] {
-      background: var(--brand);
-      box-shadow: 0 0 0 5px rgba(47, 212, 220, 0.12);
+    .pr-research #active-project-1:checked ~ .project-controls .project-dots > label[for="active-project-1"],
+    .pr-research #active-project-2:checked ~ .project-controls .project-dots > label[for="active-project-2"] {
+      background: var(--brand) !important;
+      box-shadow: 0 0 0 5px rgba(47, 212, 220, 0.12) !important;
     }
 
     .pr-research .project-head {
@@ -658,7 +718,7 @@
               <h1>연구과제 (R&amp;D)</h1>
               <span class="hero-title-badge">Cunsulting Service</span>
             </div>
-            <p>피지컬리콘은 물리보안 분야 관련 연구과제를 수행하며, 플랫폼 개발 과정에서도 연구개발 과제를 진행합니다.</p>
+            <p>물리보안 분야 및 플랫폼 개발 관련 연구과제를 수행합니다.</p>
           </div>
         </div>
       </div>
@@ -668,7 +728,6 @@
       <div class="content-inner">
         <div class="section-heading">
           <h2>수행 연구과제</h2>
-          <p>본사는 다음과 같은 연구과제를 수행하고 있습니다</p>
         </div>
         <input type="radio" name="project-status" id="status-upcoming">
         <input type="radio" name="project-status" id="status-active" checked>
@@ -778,10 +837,12 @@
               </div>
             </div>
             <div class="project-controls" aria-label="수행중 카드 이동">
+              <label class="project-arrow arrow-prev" for="active-project-1" aria-label="이전 과제">&#8249;</label>
               <div class="project-dots" aria-label="수행중 카드 위치">
                 <label class="project-dot" for="active-project-1" aria-label="첫 번째 카드"></label>
                 <label class="project-dot" for="active-project-2" aria-label="두 번째 카드"></label>
               </div>
+              <label class="project-arrow arrow-next" for="active-project-2" aria-label="다음 과제">&#8250;</label>
             </div>
           </section>
 
