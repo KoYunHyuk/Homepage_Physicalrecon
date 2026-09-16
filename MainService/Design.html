@@ -31,6 +31,7 @@
 
     .pr-design {
       width: 100%;
+      padding-bottom: 84px;
       background: var(--bg);
       color: var(--text);
     }
@@ -69,11 +70,38 @@
       display: block;
     }
 
-    .hero-home {
+    .hero-actions {
       position: absolute;
       top: 0;
       right: 0;
       z-index: 2;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .hero-contact {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      height: 46px;
+      padding: 0 20px;
+      border-radius: 999px;
+      background: var(--button);
+      color: #ffffff !important;
+      font-size: 15px;
+      font-weight: 800;
+      white-space: nowrap;
+      text-decoration: none;
+      transition: background-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .hero-contact:hover {
+      background: #1d4ed8;
+      transform: translateY(-1px);
+    }
+
+    .hero-home {
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -544,49 +572,6 @@
       line-height: 1.7;
     }
 
-    .pr-design .cta-band {
-      padding: 68px 0 84px;
-    }
-
-    .pr-design .cta-box {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 24px;
-      padding: 28px;
-      border: 1px solid var(--line);
-      border-radius: 24px;
-      background: linear-gradient(180deg, var(--surface) 0%, var(--surface-alt) 100%);
-    }
-
-    .pr-design .cta-box h3 {
-      margin: 0 0 8px;
-      font-size: 30px;
-      font-weight: 800;
-      letter-spacing: -0.04em;
-    }
-
-    .pr-design .cta-box p {
-      margin: 0;
-      color: var(--muted);
-      font-size: 15px;
-      line-height: 1.75;
-    }
-
-    .pr-design .cta-btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-width: 150px;
-      padding: 14px 24px;
-      border-radius: 12px;
-      background: var(--button);
-      color: #ffffff !important;
-      font-size: 16px;
-      font-weight: 800;
-      white-space: nowrap;
-    }
-
     @media (max-width: 1100px) {
 
       .pr-design .deliverable-flow,
@@ -608,7 +593,7 @@
     }
 
     @media (max-width: 760px) {
-      .hero-home {
+      .hero-actions {
         position: static;
         margin-bottom: 18px;
       }
@@ -633,11 +618,6 @@
       .pr-design .tool-image {
         min-height: 220px;
       }
-
-      .pr-design .cta-box {
-        flex-direction: column;
-        align-items: flex-start;
-      }
     }
   </style>
 </head>
@@ -647,13 +627,16 @@
     <section class="hero">
       <div class="content-inner">
         <div class="hero-layout">
-          <a class="hero-home" href="/" aria-label="홈으로">
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M3 10.5 12 3l9 7.5"></path>
-              <path d="M5.5 9.5V21h13V9.5"></path>
-              <path d="M10 21v-6h4v6"></path>
-            </svg>
-          </a>
+          <div class="hero-actions">
+            <a class="hero-contact" href="./contactus">상담문의</a>
+            <a class="hero-home" href="/" aria-label="홈으로">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M3 10.5 12 3l9 7.5"></path>
+                <path d="M5.5 9.5V21h13V9.5"></path>
+                <path d="M10 21v-6h4v6"></path>
+              </svg>
+            </a>
+          </div>
           <div class="hero-intro">
             <div class="hero-kicker">Integrated Security Design</div>
             <div class="hero-title-row">
@@ -811,17 +794,6 @@
       </div>
     </section>
 
-    <section class="cta-band">
-      <div class="content-inner">
-        <div class="cta-box">
-          <div>
-            <h3>실제 구축을 위한 상세 설계 도서를 작성합니다</h3>
-            <p>도면 수준, 분석 항목, 산출물 범위를 상담을 통해 함께 정리해드립니다</p>
-          </div>
-          <a class="cta-btn" href="./contactus">상담문의</a>
-        </div>
-      </div>
-    </section>
   </div>
 </body>
 

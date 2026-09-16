@@ -364,18 +364,37 @@
       min-height: 72px;
     }
 
-    .pr-home2 .service-license {
-      min-height: 21px;
-      margin: -4px 0 4px;
-      color: #ef4444c6;
-      font-size: 12px;
-      font-weight: 700;
-      line-height: 1.5;
+    .pr-home2 .license-panel {
+      margin-top: 24px;
+      padding: 18px 22px;
+      border-left: 4px solid var(--brand);
+      border-radius: 0 16px 16px 0;
+      background: rgba(56, 189, 248, 0.08);
     }
 
-    .pr-home2 .service-license.is-placeholder {
-      color: transparent;
-      user-select: none;
+    .pr-home2 .license-panel-title {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--brand);
+      font-size: 17px;
+      font-weight: 800;
+    }
+
+    .pr-home2 .license-line {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px 14px;
+      margin: 0;
+      color: #cbd5e1;
+      font-size: 15px;
+      font-weight: 600;
+      line-height: 1.7;
+    }
+
+    .pr-home2 .license-line span + span::before {
+      content: "·";
+      margin-right: 14px;
+      color: rgba(148, 163, 184, 0.55);
     }
 
     .pr-home2 .subtabs {
@@ -704,6 +723,15 @@
       .pr-home2 .service-grid {
         grid-template-columns: 1fr;
       }
+
+      .pr-home2 .license-line {
+        flex-direction: column;
+        gap: 4px;
+      }
+
+      .pr-home2 .license-line span + span::before {
+        content: none;
+      }
     }
   </style>
 </head>
@@ -744,7 +772,6 @@
               <article class="service-card">
                 <small>Consulting</small>
                 <h3>물리보안 컨설팅</h3>
-                <div class="service-license">정보통신엔지니어링 사업자: 제E-06-002129호</div>
                 <p>물리적 방호 체계를 진단하고 최적의 <br>전략을 수립합니다</p>
                 <div class="subtabs">
                   <a class="subtab is-active" href="./assessment">취약점 진단</a>
@@ -756,7 +783,6 @@
               <article class="service-card">
                 <small>Engineering</small>
                 <h3>물리보안 엔지니어링</h3>
-                <div class="service-license">소프트웨어사업자 등록: B25-317801-001</div>
                 <p>물리보안 설계부터 구축, 유지관리까지<br> 통합 엔지니어링을 제공합니다</p>
                 <div class="subtabs">
                   <a class="subtab is-active" href="./design">통합보안설계</a>
@@ -768,7 +794,6 @@
               <article class="service-card">
                 <small>Platform</small>
                 <h3>플랫폼 개발</h3>
-                <div class="service-license">PTI 특허등록: 제 10-2998087호</div>
                 <p>물리보안 운영 효율화를 위한 플랫폼을<br> 설계하고 개발합니다</p>
                 <div class="subtabs">
                   <a class="subtab is-active" href="./chetam">CHETAM<br>(물리적 위협 인텔리전스)</a>
@@ -780,7 +805,6 @@
               <article class="service-card">
                 <small>Education</small>
                 <h3>물리보안 교육</h3>
-                <div class="service-license is-placeholder">면허번호: 29-1000-0000</div>
                 <p>이론과 실무를 결합한 물리보안 전문<br> 교육을 제공합니다</p>
                 <div class="subtabs">
                   <a class="subtab is-active" href="./education_lecture">물리보안 실무 (2 days)</a>
@@ -788,6 +812,16 @@
                   <a class="subtab is-active" href="./education_lecture">외부 출강교육</a>
                 </div>
               </article>
+            </div>
+
+            <div class="license-panel">
+              <strong class="license-panel-title">등록・특허 현황</strong>
+              <p class="license-line">
+                <span>정보통신엔지니어링사업자 : 제 E-06-002129호</span>
+                <span>소프트웨어사업자 : B25-317801-001</span>
+                <span>정보통신공사업등록 : 제 312791호</span>
+                <span>PTI 특허등록 : 제 10-2998087호</span>
+              </p>
             </div>
           </div>
         </section>
